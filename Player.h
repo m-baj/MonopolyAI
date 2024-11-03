@@ -8,6 +8,8 @@
 #include <vector>
 
 #include "Property.h"
+#include "Trains.h"
+#include "Utilities.h"
 
 
 class Player {
