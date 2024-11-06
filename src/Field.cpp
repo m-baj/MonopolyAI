@@ -14,7 +14,7 @@ std::vector<std::optional<Player*>> Field::getPlayersOnField() const
 {
     std::vector<std::optional<Player*>> playersArr = {};
     auto fieldIdx = this->getFieldIdx();
-    for (auto& player : this->board.getPlayers())
+    for (const auto& player : this->board.getPlayers())
     {
         if (player->getPositionIdx() == fieldIdx)
         {
