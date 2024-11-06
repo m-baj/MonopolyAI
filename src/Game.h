@@ -19,6 +19,7 @@ public:
     bool isOver() const;
     void displayMenu(RoundState round_state) const;
     void drawBoard() const;
+    static void addClassicMonopolyFields(Board& board);
 
     void playTurn();
 

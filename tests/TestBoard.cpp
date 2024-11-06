@@ -5,23 +5,9 @@
 #include <gtest/gtest.h>
 
 #include "../src/Board.h"
+#include "../src/BoardExceptions.h"
 #include "../src/CardField.h"
-
-TEST(TestBoard, CorrectInit)
-{
-    Board board;
-    EXPECT_EQ(1, 1);
-}
-
-TEST(TestBoard, InitAllFields)
-{
-    Board board;
-    board.pushField(std::make_shared<Field>("START", board));
-    board.pushField(std::make_shared<Property>("MEDITER-RANEAN AVENUE", board, 60, 10, 30, Color::BROWN));
-    board.pushField(std::make_shared<CardField>("COMMUNITY CHEST", board));
-    board.pushField(std::make_shared<Property>("BALTIC AVENUE", board, 60, 10, 30, Color::BROWN));
-    EXPECT_EQ(1, 1);
-}
+#include "../src/Game.h"
 
 class TestGetNewPosition : public ::testing::TestWithParam<std::tuple<
     int,
@@ -88,3 +74,37 @@ INSTANTIATE_TEST_CASE_P(
         std::make_tuple(40, 10, 10, false)
     )
 );
+
+TEST(TestBoard, movePlayer)
+{
+    Board board;
+    Game::addClassicMonopolyFields(board);
+    auto player = std::make_unique<Player>("", 1);
+    board.pushPlayer(std::move(player));
+    board.setCurrentPlayerIndex(0);
+    board.movePlayer(1);
+    EXPECT_EQ(board.getCurrentPlayer()->getPositionIdx(), 1);
+    EXPECT_EQ(board.getFields().at(1).get()->getPlayersOnField().size(), 1);
+    EXPECT_EQ(board.getFields().at(1).get()->getPlayersOnField().at(0), board.getPlayers().at(0).get());
+}
+
+TEST(TestBoard, movePlayerMultiplePlayersWrongRoundPhase)
+{
+    Board board;
+    Game::addClassicMonopolyFields(board);
+    auto player0 = std::make_unique<Player>("", 1);
+    auto player1 = std::make_unique<Player>("", 1);
+    board.pushPlayer(std::move(player0));
+    board.pushPlayer(std::move(player1));
+
+    board.setCurrentPlayerIndex(0);
+    board.movePlayer(1);
+
+    EXPECT_EQ(board.getCurrentPlayer()->getPositionIdx(), 1);
+    EXPECT_EQ(board.getFields().at(1).get()->getPlayersOnField().size(), 1);
+    EXPECT_EQ(board.getFields().at(1).get()->getPlayersOnField().at(0), board.getPlayers().at(0).get());
+
+    EXPECT_THROW({
+        board.movePlayer(1);
+    },InvalidMoveException);
+}

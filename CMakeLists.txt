@@ -11,7 +11,7 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-add_executable(MonopolyAITests tests/test.cpp
+add_executable(MonopolyAITests
         src/Property.h
         src/Property.cpp
         src/Field.h
@@ -33,6 +33,8 @@ add_executable(MonopolyAITests tests/test.cpp
         tests/TestPlayer.cpp
         src/Game.cpp
         src/Player.cpp
+        src/BoardExceptions.cpp
+        src/BoardExceptions.h
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
@@ -55,4 +57,7 @@ add_executable(MonopolyAI main.cpp
         src/TaxField.cpp
         src/TaxField.h
         src/Game.cpp
-        src/Player.cpp)
+        src/Player.cpp
+        src/BoardExceptions.cpp
+        src/BoardExceptions.h
+)

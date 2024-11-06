@@ -4,6 +4,7 @@
 
 #include "Board.h"
 
+#include "BoardExceptions.h"
 #include "CardField.h"
 
 Board::Board()
@@ -25,6 +26,11 @@ void Board::pushPlayer(std::unique_ptr<Player> player)
     players.push_back(std::move(player));
 }
 
+void Board::setRoundState(RoundState state)
+{
+    this->roundState = state;
+}
+
 RoundState Board::getRoundState() const
 {
     return this->roundState;
@@ -43,12 +49,18 @@ int Board::rollDice() const
 
 void Board::movePlayer(int steps)
 {
+    if (this->roundState != RoundState::ROLL_DICE)
+    {
+        throw InvalidMoveException("Broken rules! Player wanted to move with round state not being ROLL_DICE");
+    }
+
     auto currentPlayer = this->getCurrentPlayer();
     if(this->willMoveCrossStart(currentPlayer, steps))
     {
         // TODO: Implement passing start
     }
     currentPlayer->setPositionIdx(this->getNewPosition(currentPlayer, steps));
+    this->setRoundState(RoundState::HANDLE_FIELD);
     this->fields[currentPlayer->getPositionIdx()]->onPlayerEnter(currentPlayer);
 }
 

@@ -58,6 +58,7 @@ TEST(TestField, getPlayersOnFieldManyPlayers)
     EXPECT_EQ(field1Players[0].value(), board.getPlayers()[2].get());
     EXPECT_EQ(field1Players[1].value(), board.getPlayers()[3].get());
     board.setCurrentPlayerIndex(0);
+    board.setRoundState(RoundState::ROLL_DICE);
     board.movePlayer(1);
     field0Players = field0->getPlayersOnField();
     field1Players = field1->getPlayersOnField();
@@ -68,6 +69,7 @@ TEST(TestField, getPlayersOnFieldManyPlayers)
     EXPECT_EQ(field1Players[1].value(), board.getPlayers()[2].get());
     EXPECT_EQ(field1Players[2].value(), board.getPlayers()[3].get());
     board.setCurrentPlayerIndex(3);
+    board.setRoundState(RoundState::ROLL_DICE);
     board.movePlayer(1);
     field0Players = field0->getPlayersOnField();
     field1Players = field1->getPlayersOnField();

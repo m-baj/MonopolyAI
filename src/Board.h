@@ -36,6 +36,7 @@ public:
     void setCurrentPlayerIndex(int index);
     void pushField(std::shared_ptr<Field> field);
     void pushPlayer(std::unique_ptr<Player> player);
+    void setRoundState(RoundState state);
 
     void movePlayer(int steps);
 
