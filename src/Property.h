@@ -22,7 +22,7 @@ public:
     Property(const std::string& name, Board& board, int baseBuyPrice, int baseRentPrice, int mortgagePrice, Color color)
         : Field(name, board), baseBuyPrice(baseBuyPrice), baseRentPrice(baseRentPrice), mortgagePrice(mortgagePrice), isMortgaged(false), color(color) {};
     ~Property() override = default;
-    void onPlayerEnter() override {};
+    void onPlayerEnter(Player* player) override {};
     int calculateRentPrice() const {return 2;};
 
 private:

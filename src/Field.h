@@ -8,6 +8,7 @@
 #include <string>
 #include <utility>
 
+class Player;
 
 class Board;
 
@@ -19,7 +20,7 @@ public:
     }
 
     virtual ~Field() = default;
-    virtual void onPlayerEnter() {};
+    virtual void onPlayerEnter(Player* player) {};
 
 protected:
     std::string name;

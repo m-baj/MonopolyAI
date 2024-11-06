@@ -9,8 +9,18 @@
 
 
 class Game {
+public:
+    explicit Game(Board& board)
+        : board(board)
+    {
+    }
+    bool isOver() const;
+
+    void playTurn();
+    void displayMenu(RoundState round_state) const;
+
 private:
-    Board board;
+    Board& board;
 };
 
 

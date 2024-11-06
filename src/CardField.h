@@ -15,7 +15,7 @@ public:
         : Field(name, board)
     {
     }
-    void onPlayerEnter() override {};
+    void onPlayerEnter(Player* player) override {};
 };
 
 

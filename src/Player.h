@@ -18,12 +18,28 @@ public:
         : name(name), money(startMoney)
     {
     }
+
+    std::string getName() const
+    {
+        return this->name;
+    }
+
+    int getPositionIdx() const
+    {
+        return this->positionIdx;
+    }
+
+    void setPositionIdx(int positionIdx)
+    {
+        this->positionIdx = positionIdx;
+    }
 private:
     std::vector<std::shared_ptr<Property>> properties = {};
     std::vector<std::shared_ptr<Utilities>> utilities = {};
     std::vector<std::shared_ptr<Trains>> trains = {};
     int money;
     std::string name;
+    int positionIdx = 0;
 };
 
 
