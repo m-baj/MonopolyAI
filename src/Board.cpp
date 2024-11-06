@@ -10,14 +10,24 @@ Board::Board()
 {
 }
 
-void Board::push_field(std::shared_ptr<Field> field)
+const std::vector<std::unique_ptr<Player>>& Board::getPlayers() const
+{
+    return this->players;
+}
+
+void Board::pushField(std::shared_ptr<Field> field)
 {
     this->fields.push_back(field);
 }
 
-void Board::addPlayer(std::unique_ptr<Player> player)
+void Board::pushPlayer(std::unique_ptr<Player> player)
 {
     players.push_back(std::move(player));
+}
+
+RoundState Board::getRoundState() const
+{
+    return this->roundState;
 }
 
 Player* Board::getCurrentPlayer() const
@@ -42,6 +52,11 @@ void Board::movePlayer(int steps)
     this->fields[currentPlayer->getPositionIdx()]->onPlayerEnter(currentPlayer);
 }
 
+void Board::setCurrentPlayerIndex(int index)
+{
+    this->currentPlayerIndex = index;
+}
+
 bool Board::willMoveCrossStart(Player* player, int steps) const
 {
     return this->getNewPosition(player, steps) < player->getPositionIdx();
@@ -53,4 +68,9 @@ int Board::getNewPosition(Player* player, int steps) const
     int currentPosition = player->getPositionIdx();
     int newPosition = (currentPosition + steps) % fieldsCount;
     return newPosition;
+}
+
+const std::vector<std::shared_ptr<Field>>& Board::getFields() const
+{
+    return this->fields;
 }

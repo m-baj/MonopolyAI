@@ -11,14 +11,13 @@
 class Game {
 public:
     explicit Game(Board& board)
-        : board(board)
-    {
-    }
-    bool isOver() const;
+        : board(board) {};
 
-    void playTurn();
+    bool isOver() const;
     void displayMenu(RoundState round_state) const;
     void drawBoard() const;
+
+    void playTurn();
 
 private:
     Board& board;

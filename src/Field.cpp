@@ -5,6 +5,11 @@
 #include "Field.h"
 #include "Board.h"
 
+std::string Field::getName() const
+{
+    return this->name;
+}
+
 std::vector<std::optional<Player*>> Field::getPlayersOnField() const
 {
     std::vector<std::optional<Player*>> playersArr = {};
@@ -15,10 +20,6 @@ std::vector<std::optional<Player*>> Field::getPlayersOnField() const
         {
             playersArr.emplace_back(player.get());
         }
-    }
-    if (playersArr.empty())
-    {
-        return {};
     }
     return playersArr;
 }

@@ -23,17 +23,17 @@ public:
 
     Player* getCurrentPlayer() const;
     int getNewPosition(Player* player, int steps) const;
-    const std::vector<std::shared_ptr<Field>> &getFields() const {return this->fields;};
-    const std::vector<std::unique_ptr<Player>> &getPlayers() const {return this->players;};
-
-
-    void push_field(std::shared_ptr<Field> field);
-    void addPlayer(std::unique_ptr<Player> player);
-    int rollDice() const;
-    RoundState getRoundState() const {return this->roundState;};
-    void movePlayer(int steps);
+    const std::vector<std::shared_ptr<Field>> &getFields() const;
+    const std::vector<std::unique_ptr<Player>> &getPlayers() const;
     bool willMoveCrossStart(Player* player, int steps) const;
-    void setCurrentPlayerIndex(int index) {this->currentPlayerIndex = index;};
+    int rollDice() const;
+    RoundState getRoundState() const;
+
+    void setCurrentPlayerIndex(int index);
+    void pushField(std::shared_ptr<Field> field);
+    void pushPlayer(std::unique_ptr<Player> player);
+
+    void movePlayer(int steps);
 
 private:
     // TODO: maybe change to other data type

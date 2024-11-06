@@ -16,10 +16,10 @@ TEST(TestBoard, CorrectInit)
 TEST(TestBoard, InitAllFields)
 {
     Board board;
-    board.push_field(std::make_shared<Field>("START", board));
-    board.push_field(std::make_shared<Property>("MEDITER-RANEAN AVENUE", board, 60, 10, 30, Color::BROWN));
-    board.push_field(std::make_shared<CardField>("COMMUNITY CHEST", board));
-    board.push_field(std::make_shared<Property>("BALTIC AVENUE", board, 60, 10, 30, Color::BROWN));
+    board.pushField(std::make_shared<Field>("START", board));
+    board.pushField(std::make_shared<Property>("MEDITER-RANEAN AVENUE", board, 60, 10, 30, Color::BROWN));
+    board.pushField(std::make_shared<CardField>("COMMUNITY CHEST", board));
+    board.pushField(std::make_shared<Property>("BALTIC AVENUE", board, 60, 10, 30, Color::BROWN));
     EXPECT_EQ(1, 1);
 }
 
@@ -36,11 +36,11 @@ TEST_P(TestGetNewPosition, getNewPosition)
     auto [boardSize, prevIdx, steps, expectedIdx] = GetParam();
     for (int i = 0; i < boardSize; i++)
     {
-        board.push_field(std::make_shared<Field>("", board));
+        board.pushField(std::make_shared<Field>("", board));
     }
     auto player = std::make_unique<Player>("", 1);
     player.get()->setPositionIdx(prevIdx);
-    board.addPlayer(std::move(player));
+    board.pushPlayer(std::move(player));
     board.setCurrentPlayerIndex(0);
 
     EXPECT_EQ(board.getNewPosition(board.getCurrentPlayer(), steps), expectedIdx);
@@ -69,11 +69,11 @@ TEST_P(TestWillMoveCrossStart, willMoveCrossStart)
     auto [boardSize, prevIdx, steps, expected] = GetParam();
     for (int i = 0; i < boardSize; i++)
     {
-        board.push_field(std::make_shared<Field>("", board));
+        board.pushField(std::make_shared<Field>("", board));
     }
     auto player = std::make_unique<Player>("", 1);
     player.get()->setPositionIdx(prevIdx);
-    board.addPlayer(std::move(player));
+    board.pushPlayer(std::move(player));
     board.setCurrentPlayerIndex(0);
 
     EXPECT_EQ(board.willMoveCrossStart(board.getCurrentPlayer(), steps), expected);
