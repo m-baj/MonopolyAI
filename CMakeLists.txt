@@ -16,6 +16,9 @@ add_executable(MonopolyAITests tests/test.cpp
         src/Property.cpp
         src/Field.h
         src/Field.cpp
+        src/CardField.cpp
+        src/CardField.h
+        tests/TestCardField.cpp
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
@@ -29,4 +32,6 @@ add_executable(MonopolyAI main.cpp
         "src/Utilities.h"
         main.cpp
         src/Property.cpp
-        src/Field.cpp)
+        src/Field.cpp
+        src/CardField.cpp
+        src/CardField.h)

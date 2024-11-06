@@ -3,6 +3,7 @@
 //
 #include <gtest/gtest.h>
 
+#include "../src/CardField.h"
 #include "../src/Property.h"
 
 TEST(Test, test)
