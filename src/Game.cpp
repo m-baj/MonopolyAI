@@ -28,7 +28,7 @@ void Game::playTurn()
         char choice;
         std::cin >> choice;
 
-        // TODO: Validate choice with current round state
+        // TODO: validate choice with current round state
 
         switch (choice)
         {
@@ -64,10 +64,10 @@ void Game::displayMenu(RoundState round_state) const
 
 void Game::drawBoard() const
 {
-    for (int i = 0; i < board.fields.size(); i++)
+    for (int i = 0; i < board.getFields().size(); i++)
     {
         std::cout << i+1 << ": ";
-        auto& field = board.fields[i];
+        auto& field = board.getFields()[i];
 
         std::cout << "(" << field->getName() << ") ";
         auto players = field->getPlayersOnField();
