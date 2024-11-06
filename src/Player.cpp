@@ -38,3 +38,8 @@ void Player::setPositionIdx(int positionIdx)
 {
     this->positionIdx = positionIdx;
 }
+
+void Player::pushProperty(std::shared_ptr<Property> property)
+{
+    this->properties.push_back(property);
+}

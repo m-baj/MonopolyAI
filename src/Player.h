@@ -25,6 +25,7 @@ public:
     const std::vector<std::shared_ptr<Trains>>& getTrains() const;
 
     void setPositionIdx(int positionIdx);
+    void pushProperty(std::shared_ptr<Property> property);
 
 private:
     std::vector<std::shared_ptr<Property>> properties = {};
