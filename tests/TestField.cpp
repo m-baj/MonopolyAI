@@ -18,8 +18,6 @@ TEST(TestField, getPlayersOnField)
     player->setPositionIdx(0);
     board.pushPlayer(std::move(player));
 
-
-
     EXPECT_EQ(field0->getPlayersOnField()[0].value(), board.getPlayers()[0].get());
     EXPECT_EQ(field1->getPlayersOnField().empty(), true);
     EXPECT_EQ(field0->getPlayersOnField().size(), 1);
@@ -27,6 +25,22 @@ TEST(TestField, getPlayersOnField)
     board.movePlayer(1);
     EXPECT_EQ(field0->getPlayersOnField().empty(), true);
     EXPECT_EQ(field1->getPlayersOnField()[0].value(), board.getPlayers()[0].get());
+}
 
+TEST(TestField, getFieldIdx)
+{
+    Board board;
+    auto field0 = std::make_shared<Field>("", board);
+    auto field1 = std::make_shared<Field>("", board);
+    auto field2 = std::make_shared<Field>("", board);
+    auto field3 = std::make_shared<Field>("", board);
+    board.pushField(field0);
+    board.pushField(field1);
+    board.pushField(field2);
+    board.pushField(field3);
 
+    EXPECT_EQ(field0->getFieldIdx(), 0);
+    EXPECT_EQ(field1->getFieldIdx(), 1);
+    EXPECT_EQ(field2->getFieldIdx(), 2);
+    EXPECT_EQ(field3->getFieldIdx(), 3);
 }
