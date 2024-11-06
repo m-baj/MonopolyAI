@@ -9,10 +9,11 @@
 
 class Field {
 public:
+    explicit Field(std::string name);
     virtual ~Field() = default;
     virtual void onPlayerEnter() = 0;
 
-private:
+protected:
     std::string name;
 };
 

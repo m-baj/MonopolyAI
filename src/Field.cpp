@@ -3,3 +3,10 @@
 //
 
 #include "Field.h"
+
+#include <utility>
+
+Field::Field(std::string name)
+{
+    this->name = std::move(name);
+}
