@@ -14,6 +14,10 @@
 class Player;
 class Board;
 
+/*
+ * Base class for all fields on the board.
+ * Provides helper location-related methods.
+ */
 class Field {
 public:
     explicit Field(const std::string& name, Board& board)

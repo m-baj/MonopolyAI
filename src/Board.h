@@ -16,7 +16,11 @@ enum class RoundState {
     HANDLE_PLAYER_CHOICES,
     END_TURN
 };
-
+/*
+ * Board class is responsible for managing actions caused by players choices.
+ * It performs logic which does not require any user input.
+ * Mapping user input to actions is done in Game class.
+ */
 class Board {
 public:
     Board();
