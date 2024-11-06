@@ -5,11 +5,13 @@
 #ifndef FIELD_H
 #define FIELD_H
 #include <memory>
+#include <optional>
 #include <string>
 #include <utility>
+#include <vector>
+
 
 class Player;
-
 class Board;
 
 class Field {
@@ -21,6 +23,10 @@ public:
 
     virtual ~Field() = default;
     virtual void onPlayerEnter(Player* player) {};
+
+    std::string getName() const { return this->name; };
+    std::vector<std::optional<Player*>> getPlayersOnField() const;
+    int getFieldIdx() const;
 
 protected:
     std::string name;

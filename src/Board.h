@@ -20,12 +20,20 @@ enum class RoundState {
 class Board {
 public:
     Board();
+
+    Player* getCurrentPlayer() const;
+    int getNewPosition(Player* player, int steps) const;
+    const std::vector<std::shared_ptr<Field>> &getFields() const {return this->fields;};
+    const std::vector<std::unique_ptr<Player>> &getPlayers() const {return this->players;};
+
+
     void push_field(std::shared_ptr<Field> field);
     void addPlayer(std::unique_ptr<Player> player);
-    Player* getCurrentPlayer() const;
     int rollDice() const;
     RoundState getRoundState() const {return this->roundState;};
     void movePlayer(int steps);
+    bool willMoveCrossStart(Player* player, int steps) const;
+    void setCurrentPlayerIndex(int index) {this->currentPlayerIndex = index;};
 
 private:
     // TODO: maybe change to other data type
@@ -34,8 +42,8 @@ private:
     int currentPlayerIndex = 0;
     RoundState roundState = RoundState::ROLL_DICE;
 
-    bool willMoveCrossStart(Player* player, int steps) const;
-    int getNewPosition(Player* player, int steps) const;
+
+friend class Game;
 };
 
 

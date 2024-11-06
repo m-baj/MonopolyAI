@@ -2,3 +2,35 @@
 // Created by adrwal on 11/3/24.
 //
 
+#include "Field.h"
+#include "Board.h"
+
+std::vector<std::optional<Player*>> Field::getPlayersOnField() const
+{
+    std::vector<std::optional<Player*>> playersArr = {};
+    auto fieldIdx = this->getFieldIdx();
+    for (auto& player : this->board.getPlayers())
+    {
+        if (player->getPositionIdx() == fieldIdx)
+        {
+            playersArr.emplace_back(player.get());
+        }
+    }
+    if (playersArr.empty())
+    {
+        return {};
+    }
+    return playersArr;
+}
+
+int Field::getFieldIdx() const
+{
+    for (int i = 0; i < this->board.getFields().size(); i++)
+    {
+        if (this->board.getFields()[i].get() == this)
+        {
+            return i;
+        }
+    }
+    return -1;
+}

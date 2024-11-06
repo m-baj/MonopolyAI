@@ -18,6 +18,7 @@ public:
 
     void playTurn();
     void displayMenu(RoundState round_state) const;
+    void drawBoard() const;
 
 private:
     Board& board;

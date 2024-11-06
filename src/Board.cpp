@@ -17,6 +17,7 @@ void Board::push_field(std::shared_ptr<Field> field)
 
 void Board::addPlayer(std::unique_ptr<Player> player)
 {
+    players.push_back(std::move(player));
 }
 
 Player* Board::getCurrentPlayer() const
