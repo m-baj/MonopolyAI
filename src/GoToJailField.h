@@ -9,8 +9,8 @@
 
 class GoToJailField final : public Field{
 public:
-    explicit GoToJailField(const std::string& name)
-        : Field(name)
+    explicit GoToJailField(const std::string& name, Board& board)
+        : Field(name, board)
     {
     }
     void onPlayerEnter() override {};

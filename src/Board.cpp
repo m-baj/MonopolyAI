@@ -3,3 +3,14 @@
 //
 
 #include "Board.h"
+
+#include "CardField.h"
+
+Board::Board()
+{
+}
+
+void Board::push_field(std::shared_ptr<Field> field)
+{
+    this->fields.push_back(field);
+}

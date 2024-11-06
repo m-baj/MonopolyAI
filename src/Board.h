@@ -13,6 +13,8 @@
 
 class Board {
 public:
+    Board();
+    void push_field(std::shared_ptr<Field> field);
 
 private:
     // TODO: maybe change to other data type

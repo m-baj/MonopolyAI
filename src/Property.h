@@ -19,10 +19,11 @@ enum class Color {
 
 class Property final : public Field {
 public:
-    Property(std::string name, int baseBuyPrice, int baseRentPrice, int mortgagePrice, Color color);
+    Property(const std::string& name, Board& board, int baseBuyPrice, int baseRentPrice, int mortgagePrice, Color color)
+        : Field(name, board), baseBuyPrice(baseBuyPrice), baseRentPrice(baseRentPrice), mortgagePrice(mortgagePrice), isMortgaged(false), color(color) {};
     ~Property() override = default;
-    void onPlayerEnter() override;
-    int calculateRentPrice() const;
+    void onPlayerEnter() override {};
+    int calculateRentPrice() const {return 2;};
 
 private:
     int baseBuyPrice;

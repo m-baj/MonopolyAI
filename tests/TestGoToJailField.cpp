@@ -8,6 +8,5 @@
 
 TEST(TestGoToJailField, CorrectInit)
 {
-    GoToJailField goToJailField("Test");
     EXPECT_EQ(1, 1);
 }

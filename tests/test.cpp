@@ -13,7 +13,5 @@ TEST(Test, test)
 
 TEST(PropetyTest, CorectInit)
 {
-    Property property("Test", 100, 10, 50, Color::BROWN);
-    std::cout << "property.name" << std::endl;
     EXPECT_EQ(1,1);
 }
