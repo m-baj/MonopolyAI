@@ -13,15 +13,28 @@
 
 
 class Player {
+public:
+    Player(const std::string& name, int startMoney)
+        : name(name), money(startMoney) {};
+
+    std::string getName() const;
+    int getMoney() const;
+    int getPositionIdx() const;
+    const std::vector<std::shared_ptr<Property>>& getProperties() const;
+    const std::vector<std::shared_ptr<Utilities>>& getUtilities() const;
+    const std::vector<std::shared_ptr<Trains>>& getTrains() const;
+
+    void setPositionIdx(int positionIdx);
+    void pushProperty(std::shared_ptr<Property> property);
+
 private:
-    std::vector<std::shared_ptr<Property>> properties;
+    std::vector<std::shared_ptr<Property>> properties = {};
+    std::vector<std::shared_ptr<Utilities>> utilities = {};
+    std::vector<std::shared_ptr<Trains>> trains = {};
     int money;
     std::string name;
-
-    std::vector<std::shared_ptr<Utilities>> utilities;
-    std::vector<std::shared_ptr<Trains>> trains;
+    int positionIdx = 0;
 };
-
 
 
 #endif //PLAYER_H

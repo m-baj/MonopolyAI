@@ -7,10 +7,24 @@
 
 #include "Board.h"
 
-
+/*
+ * Game class is CLI frontend for the game engine.
+ * It is responsible for mapping user input to immediate state-changing actions performed by Board.
+ */
 class Game {
+public:
+    explicit Game(Board& board)
+        : board(board) {};
+
+    bool isOver() const;
+    void displayMenu(RoundState round_state) const;
+    void drawBoard() const;
+    static void addClassicMonopolyFields(Board& board);
+
+    void playTurn();
+
 private:
-    Board board;
+    Board& board;
 };
 
 

@@ -7,8 +7,16 @@
 #include "Field.h"
 
 
-class Utilities: public Field {
+class Player;
+class Board;
 
+class Utilities final : public Field {
+public:
+    Utilities(const std::string& name, Board& board)
+        : Field(name, board)
+    {
+    }
+    void onPlayerEnter(Player* player) override {};
 };
 
 

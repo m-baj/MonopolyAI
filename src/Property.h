@@ -6,11 +6,31 @@
 #define PROPERTY_H
 #include "Field.h"
 
+enum class Color {
+    BROWN,
+    LIGHT_BLUE,
+    PINK,
+    ORANGE,
+    RED,
+    YELLOW,
+    GREEN,
+    BLUE
+};
 
-class Property : public Field {
+class Property final : public Field {
 public:
-    void onPlayerEnter() override;
+    Property(const std::string& name, Board& board, int baseBuyPrice, int baseRentPrice, int mortgagePrice, Color color)
+        : Field(name, board), baseBuyPrice(baseBuyPrice), baseRentPrice(baseRentPrice), mortgagePrice(mortgagePrice), isMortgaged(false), color(color) {};
+    ~Property() override = default;
+    void onPlayerEnter(Player* player) override {};
+    int calculateRentPrice() const {return 2;};
 
+private:
+    int baseBuyPrice;
+    int baseRentPrice;
+    int mortgagePrice;
+    bool isMortgaged;
+    Color color;
 };
 
 
