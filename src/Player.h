@@ -13,13 +13,17 @@
 
 
 class Player {
+public:
+    Player(const std::string& name, int startMoney)
+        : name(name), money(startMoney)
+    {
+    }
 private:
-    std::vector<std::shared_ptr<Property>> properties;
+    std::vector<std::shared_ptr<Property>> properties = {};
+    std::vector<std::shared_ptr<Utilities>> utilities = {};
+    std::vector<std::shared_ptr<Trains>> trains = {};
     int money;
     std::string name;
-
-    std::vector<std::shared_ptr<Utilities>> utilities;
-    std::vector<std::shared_ptr<Trains>> trains;
 };
 
 

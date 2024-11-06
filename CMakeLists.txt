@@ -30,6 +30,7 @@ add_executable(MonopolyAITests tests/test.cpp
         tests/TestUtilitiesField.cpp
         tests/TestTrainsField.cpp
         tests/TestField.cpp
+        tests/TestPlayer.cpp
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
