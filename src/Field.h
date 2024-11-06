@@ -19,7 +19,7 @@ public:
     }
 
     virtual ~Field() = default;
-    virtual void onPlayerEnter() = 0;
+    virtual void onPlayerEnter() {};
 
 protected:
     std::string name;

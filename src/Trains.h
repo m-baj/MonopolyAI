@@ -7,8 +7,13 @@
 #include "Field.h"
 
 
-class Trains : public Field{
-
+class Trains final : public Field{
+public:
+    Trains(const std::string& name, Board& board)
+        : Field(name, board)
+    {
+    }
+    void onPlayerEnter() override{};
 };
 
 
