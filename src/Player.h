@@ -26,6 +26,7 @@ public:
 
     void setPositionIdx(int positionIdx);
     void pushProperty(std::shared_ptr<Property> property);
+    void addMoney(int amount);
 
 private:
     std::vector<std::shared_ptr<Property>> properties = {};

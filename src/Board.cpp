@@ -7,6 +7,8 @@
 #include "BoardExceptions.h"
 #include "CardField.h"
 
+const int CROSSINGSTARTBONUS = 200;
+
 Board::Board()
 {
 }
@@ -57,7 +59,7 @@ void Board::movePlayer(int steps)
     auto currentPlayer = this->getCurrentPlayer();
     if(this->willMoveCrossStart(currentPlayer, steps))
     {
-        // TODO: Implement passing start
+        bank.payMoneyTo(currentPlayer, CROSSINGSTARTBONUS);
     }
     currentPlayer->setPositionIdx(this->getNewPosition(currentPlayer, steps));
     this->setRoundState(RoundState::HANDLE_FIELD);

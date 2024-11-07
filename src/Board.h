@@ -9,6 +9,7 @@
 
 #include "Field.h"
 #include "Player.h"
+#include "Bank.h"
 
 // TODO: Add more states
 enum class RoundState {
@@ -45,6 +46,7 @@ private:
     std::vector<std::unique_ptr<Player>> players = {};
     int currentPlayerIndex = 0;
     RoundState roundState = RoundState::ROLL_DICE;
+    Bank bank;
 };
 
 
