@@ -3,6 +3,8 @@
 //
 
 #include "Player.h"
+#include <algorithm>
+#include "board.h"
 
 std::string Player::getName() const
 {
@@ -73,5 +75,12 @@ void Player::pay(int amount, Player* player)
     {
         // todo: implement logic when player does not have enough money to pay
     }
+}
+
+bool Player::ownsAllPropertiesOf(Color color) const {
+    auto amount = std::count_if(properties.begin(), properties.end(), [color](const auto& property) {
+        return property->getColor() == color;
+    });
+    return amount == COLOR_TO_FIELD_COUNT.at(color);
 }
 

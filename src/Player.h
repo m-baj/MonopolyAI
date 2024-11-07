@@ -31,6 +31,8 @@ public:
     void payTo(Player* player, int amount);
     void payToBank(int amount);
 
+    bool ownsAllPropertiesOf(Color color) const;
+
 private:
     void pay(int amount, Player* player = nullptr);
 
