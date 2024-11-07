@@ -22,10 +22,15 @@ public:
     Property(const std::string& name, Board& board, int baseBuyPrice, int baseRentPrice, int mortgagePrice, Color color)
         : Field(name, board), baseBuyPrice(baseBuyPrice), baseRentPrice(baseRentPrice), mortgagePrice(mortgagePrice), isMortgaged(false), color(color) {};
     ~Property() override = default;
-    void onPlayerEnter(Player* player) override {};
-    int calculateRentPrice() const {return 2;};
+    void onPlayerEnter(Player* player) override;
+    int calculateRentPrice() const;
+    std::optional<Player*> getOwner() const;
 
 private:
+    void handleOwnedProperty(Player* player, Player* owner);
+    void handleUnownedProperty(Player* player);
+
+
     int baseBuyPrice;
     int baseRentPrice;
     int mortgagePrice;
