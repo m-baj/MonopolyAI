@@ -14,7 +14,7 @@ public:
     {
     }
 
-    void onPlayerEnter(Player* player) override {};
+    void onPlayerEnter(Player* player) override;
 };
 
 

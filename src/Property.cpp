@@ -16,7 +16,7 @@ void Property::onPlayerEnter(Player *player) {
 void Property::handleOwnedProperty(Player *player, Player *owner) {
     if (owner != player && !isMortgaged)
     {
-        player->payMoneyTo(owner, calculateRentPrice());
+        player->payTo(owner, calculateRentPrice());
     }
     else if (owner == player && !isMortgaged)
     {

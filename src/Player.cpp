@@ -49,11 +49,25 @@ void Player::addMoney(int amount)
     this->money += amount;
 }
 
-void Player::payMoneyTo(Player *player, int amount) {
+void Player::payTo(Player* player, int amount)
+{
+    pay(amount, player);
+}
+
+void Player::payToBank(int amount)
+{
+    pay(amount);
+}
+
+void Player::pay(int amount, Player* player)
+{
     if (money - amount >= 0)
     {
         money -= amount;
-        player->addMoney(amount);
+        if (player)
+        {
+            player->addMoney(amount);
+        }
     }
     else
     {
@@ -61,14 +75,3 @@ void Player::payMoneyTo(Player *player, int amount) {
     }
 }
 
-void Player::payToBank(int amount)
-{
-    if (money - amount >= 0)
-    {
-        money -= amount;
-    }
-    else
-    {
-
-    }
-}
