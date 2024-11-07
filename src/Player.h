@@ -28,10 +28,12 @@ public:
     void pushProperty(std::shared_ptr<Property> property);
     void addMoney(int amount);
 
-    void payMoneyTo(Player* player, int amount);
+    void payTo(Player* player, int amount);
     void payToBank(int amount);
 
 private:
+    void pay(int amount, Player* player = nullptr);
+
     std::vector<std::shared_ptr<Property>> properties = {};
     std::vector<std::shared_ptr<Utilities>> utilities = {};
     std::vector<std::shared_ptr<Trains>> trains = {};

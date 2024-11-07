@@ -38,6 +38,7 @@ add_executable(MonopolyAITests
         src/Bank.cpp
         tests/TestBank.cpp
         tests/TestProperty.cpp
+        tests/TestTaxFeild.cpp
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
