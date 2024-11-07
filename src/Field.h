@@ -10,7 +10,6 @@
 #include <utility>
 #include <vector>
 
-
 class Player;
 class Board;
 

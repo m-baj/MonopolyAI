@@ -48,3 +48,27 @@ void Player::addMoney(int amount)
 {
     this->money += amount;
 }
+
+void Player::payMoneyTo(Player *player, int amount) {
+    if (money - amount >= 0)
+    {
+        money -= amount;
+        player->addMoney(amount);
+    }
+    else
+    {
+        // todo: implement logic when player does not have enough money to pay
+    }
+}
+
+void Player::payToBank(int amount)
+{
+    if (money - amount >= 0)
+    {
+        money -= amount;
+    }
+    else
+    {
+
+    }
+}

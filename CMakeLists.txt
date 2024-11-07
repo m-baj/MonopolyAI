@@ -37,6 +37,7 @@ add_executable(MonopolyAITests
         src/BoardExceptions.h
         src/Bank.cpp
         tests/TestBank.cpp
+        tests/TestProperty.cpp
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)

@@ -28,6 +28,9 @@ public:
     void pushProperty(std::shared_ptr<Property> property);
     void addMoney(int amount);
 
+    void payMoneyTo(Player* player, int amount);
+    void payToBank(int amount);
+
 private:
     std::vector<std::shared_ptr<Property>> properties = {};
     std::vector<std::shared_ptr<Utilities>> utilities = {};
