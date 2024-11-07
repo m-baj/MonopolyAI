@@ -30,3 +30,10 @@ TEST(TestPlayer, pushProperty)
     EXPECT_EQ(player.getProperties().size(), 1);
     EXPECT_EQ(player.getProperties()[0].get(), property.get());
 }
+
+TEST(TestPlayer, addMoney)
+{
+    Player player("Player", 1000);
+    player.addMoney(300);
+    EXPECT_EQ(player.getMoney(), 1300);
+}

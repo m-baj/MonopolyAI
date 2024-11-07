@@ -43,3 +43,8 @@ void Player::pushProperty(std::shared_ptr<Property> property)
 {
     this->properties.push_back(property);
 }
+
+void Player::addMoney(int amount)
+{
+    this->money += amount;
+}

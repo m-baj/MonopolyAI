@@ -75,6 +75,7 @@ INSTANTIATE_TEST_CASE_P(
     )
 );
 
+
 TEST(TestBoard, movePlayer)
 {
     Board board;
