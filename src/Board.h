@@ -6,10 +6,22 @@
 #define BOARD_H
 #include <memory>
 #include <vector>
+#include <map>
 
 #include "Field.h"
 #include "Player.h"
 #include "Bank.h"
+
+const std::map<Color, int> COLOR_TO_FIELD_COUNT = {
+    {Color::BROWN, 2},
+    {Color::LIGHT_BLUE, 3},
+    {Color::PINK, 3},
+    {Color::ORANGE, 3},
+    {Color::RED, 3},
+    {Color::YELLOW, 3},
+    {Color::GREEN, 3},
+    {Color::BLUE, 2}
+};
 
 // TODO: Add more states
 enum class RoundState {
