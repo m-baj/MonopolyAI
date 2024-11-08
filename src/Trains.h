@@ -4,16 +4,14 @@
 
 #ifndef TRAINS_H
 #define TRAINS_H
-#include "Field.h"
+#include "OwnableField.h"
 
 
-class Trains final : public Field{
+class Trains final : public OwnableField {
 public:
     Trains(const std::string& name, Board& board)
-        : Field(name, board)
-    {
-    }
-    void onPlayerEnter(Player* player) override{};
+        : OwnableField(name, board) {}
+    void onPlayerEnter(Player* player) override;
 };
 
 

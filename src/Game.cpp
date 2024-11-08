@@ -9,6 +9,8 @@
 #include "CardField.h"
 #include "GoToJailField.h"
 #include "TaxField.h"
+#include "Trains.h"
+#include "Utilities.h"
 
 bool Game::isOver() const
 {

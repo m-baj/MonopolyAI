@@ -43,21 +43,7 @@ int Property::calculateRentPrice(Player* owner) const
     return baseRentPrice;
 }
 
-std::optional<Player*> Property::getOwner() const
+Color Property::getColor() const
 {
-    for (const auto& player : board.getPlayers())
-    {
-        for (const auto& property : player->getProperties())
-        {
-            if (property.get() == this)
-            {
-                return player.get();
-            }
-        }
-    }
-    return std::nullopt;
-}
-
-Color Property::getColor() const {
     return color;
 }
