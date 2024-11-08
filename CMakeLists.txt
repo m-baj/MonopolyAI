@@ -38,7 +38,10 @@ add_executable(MonopolyAITests
         src/Bank.cpp
         tests/TestBank.cpp
         tests/TestProperty.cpp
-        tests/TestTaxFeild.cpp
+        src/Trains.cpp
+        src/Trains.h
+        src/OwnableField.cpp
+        src/OwnableField.h
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
@@ -66,4 +69,7 @@ add_executable(MonopolyAI main.cpp
         src/BoardExceptions.h
         src/Bank.h
         src/Bank.cpp
+        src/Trains.cpp
+        src/OwnableField.cpp
+        src/OwnableField.h
 )

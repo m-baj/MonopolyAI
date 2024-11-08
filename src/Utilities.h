@@ -4,16 +4,16 @@
 
 #ifndef UTILITIES_H
 #define UTILITIES_H
-#include "Field.h"
+#include "OwnableField.h"
 
 
 class Player;
 class Board;
 
-class Utilities final : public Field {
+class Utilities final : public OwnableField {
 public:
     Utilities(const std::string& name, Board& board)
-        : Field(name, board)
+        : OwnableField(name, board)
     {
     }
     void onPlayerEnter(Player* player) override {};

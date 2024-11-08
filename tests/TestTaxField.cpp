@@ -1,12 +1,19 @@
 //
-// Created by adrwal on 11/6/24.
+// Created by Maksymilian Baj on 07.11.2024.
 //
-#include <gtest/gtest.h>
 
-#include "../src/GoToJailField.h"
+#include "gtest/gtest.h"
+#include "../src/TaxField.h"
+#include "../src/Board.h"
 
-
-TEST(TestTaxField, CorrectInit)
+TEST(TestOnPlayerEnter, PlayerPaysToBank)
 {
-    EXPECT_EQ(1, 1);
+    Board board;
+    auto taxField = std::make_shared<TaxField>("", board);
+    auto player = std::make_unique<Player>("", 1000);
+    board.pushField(taxField);
+    board.pushPlayer(std::move(player));
+
+    taxField->onPlayerEnter(board.getCurrentPlayer());
+    EXPECT_EQ(board.getCurrentPlayer()->getMoney(), 800);
 }
