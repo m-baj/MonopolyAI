@@ -1,0 +1,35 @@
+name: Run tests and coverage
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build-tests-and-coverage:
+    runs-on: ubuntu-24.04 [Beta]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ninja
+        run: sudo apt install -y ninja-build
+
+      - name: Install latest Cmake
+        uses: lukka/get-cmake@latest
+
+      - name: Build cmake for tests
+        run: |
+          cmake -DCMAKE_BUILD_TYPE=Debug \
+            -DCMAKE_MAKE_PROGRAM=ninja \
+            -G Ninja \
+            -B ./cmake-build-debug
+
+      - name: Build tests
+        run: |
+          cmake --build ./cmake-build-debug \
+            --target MonopolyAITests \
+            -j 10
+
+      - name: Run tests
+        run: ./cmake-build-debug/MonopolyAITests
