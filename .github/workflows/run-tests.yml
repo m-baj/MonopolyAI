@@ -15,6 +15,9 @@ jobs:
       - name: Install Ninja
         run: sudo apt install -y ninja-build
 
+      - name: Install Lcov
+        run: sudo apt install -y lcov
+
       - name: Install latest Cmake
         uses: lukka/get-cmake@latest
 
