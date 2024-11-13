@@ -20,7 +20,7 @@ enum class Color {
 class Property final : public OwnableField {
 public:
     Property(const std::string& name, Board& board, int baseBuyPrice, int baseRentPrice, int mortgagePrice, Color color)
-        : OwnableField(name, board), baseBuyPrice(baseBuyPrice), baseRentPrice(baseRentPrice), mortgagePrice(mortgagePrice), isMortgaged(false), color(color) {};
+        : OwnableField(name, board, baseBuyPrice), baseRentPrice(baseRentPrice), mortgagePrice(mortgagePrice), isMortgaged(false), color(color) {};
     ~Property() override = default;
     void onPlayerEnter(Player* player) override;
     int calculateRentPrice(Player* owner) const;
@@ -30,7 +30,6 @@ private:
     void handleOwnedProperty(Player* player, Player* owner);
     void handleUnownedProperty(Player* player);
 
-    int baseBuyPrice;
     int baseRentPrice;
     int mortgagePrice;
     bool isMortgaged;

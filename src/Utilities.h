@@ -12,10 +12,8 @@ class Board;
 
 class Utilities final : public OwnableField {
 public:
-    Utilities(const std::string& name, Board& board)
-        : OwnableField(name, board)
-    {
-    }
+    Utilities(const std::string& name, Board& board, int baseBuyPrice)
+        : OwnableField(name, board, baseBuyPrice) {}
     void onPlayerEnter(Player* player) override {};
 };
 

@@ -27,8 +27,8 @@ TEST(TestPlayer, pushProperty)
     Player player("Player", 1000);
     auto property = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
     player.pushOwnable(property);
-    EXPECT_EQ(player.getOwnableFields().size(), 1);
-    EXPECT_EQ(player.getOwnableFields()[0].get(), property.get());
+    EXPECT_EQ(player.getOwnedFields().size(), 1);
+    EXPECT_EQ(player.getOwnedFields()[0].get(), property.get());
 }
 
 TEST(TestPlayer, addMoney)
