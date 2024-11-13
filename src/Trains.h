@@ -6,12 +6,14 @@
 #define TRAINS_H
 #include "OwnableField.h"
 
+const int BASE_RENT_FOR_TRAIN = 25;
 
 class Trains final : public OwnableField {
 public:
-    Trains(const std::string& name, Board& board)
-        : OwnableField(name, board) {}
+    Trains(const std::string& name, Board& board, int baseBuyPrice)
+        : OwnableField(name, board, baseBuyPrice) {}
     void onPlayerEnter(Player* player) override;
+    int calculateRentPrice(Player* owner) const;
 };
 
 
