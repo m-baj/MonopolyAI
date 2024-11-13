@@ -8,6 +8,8 @@
 #include <vector>
 #include "OwnableField.h"
 #include "Property.h"
+#include "Utilities.h"
+#include "Trains.h"
 
 
 class Player {
@@ -18,10 +20,12 @@ public:
     std::string getName() const;
     int getMoney() const;
     int getPositionIdx() const;
-    const std::vector<std::shared_ptr<OwnableField>>& getOwnedFields() const;
+    const std::vector<std::shared_ptr<Property>>& getProperties() const;
+    const std::vector<std::shared_ptr<Utilities>>& getUtilities() const;
+    const std::vector<std::shared_ptr<Trains>>& getTrains() const;
 
     void setPositionIdx(int positionIdx);
-    void pushOwnable(std::shared_ptr<OwnableField> ownable);
+    void pushProperty(std::shared_ptr<Property> property);
     void addMoney(int amount);
 
     void payTo(Player* player, int amount);
@@ -31,7 +35,9 @@ public:
 private:
     void pay(int amount, Player* player = nullptr);
 
-    std::vector<std::shared_ptr<OwnableField>> ownedFields;
+    std::vector<std::shared_ptr<Property>> properties = {};
+    std::vector<std::shared_ptr<Utilities>> utilities = {};
+    std::vector<std::shared_ptr<Trains>> trains = {};
     int money;
     std::string name;
     int positionIdx = 0;
