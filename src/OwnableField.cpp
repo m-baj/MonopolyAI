@@ -9,7 +9,7 @@ std::optional<Player*> OwnableField::getOwner() const
 {
     for(const auto& player : this->board.getPlayers())
     {
-        for (const auto& ownableField : player->getOwnableFields())
+        for (const auto& ownableField : player->getOwnedFields())
         {
             if (ownableField.get() == this)
             {
