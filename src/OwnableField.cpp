@@ -7,15 +7,13 @@
 
 std::optional<Player*> OwnableField::getOwner() const
 {
-    for(const auto& player : this->board.getPlayers())
+    if (owner == nullptr)
     {
-        for (const auto& ownableField : player->getOwnedFields())
-        {
-            if (ownableField.get() == this)
-            {
-                return player.get();
-            }
-        }
+        return std::nullopt;
     }
-    return std::nullopt;
+    return owner;
+}
+
+void OwnableField::setOwner(Player *player) {
+    owner = player;
 }

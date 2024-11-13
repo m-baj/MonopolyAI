@@ -12,3 +12,7 @@ void Trains::onPlayerEnter(Player *player) {
         player->payTo(owner.value(), rent);
     }
 }
+
+int Trains::calculateRentPrice(Player *owner) const {
+    return 0;
+}

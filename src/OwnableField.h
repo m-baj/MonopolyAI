@@ -14,6 +14,7 @@ public:
         : Field(name, board), baseBuyPrice(baseBuyPrice) {};
 
     std::optional<Player*> getOwner() const;
+    void setOwner(Player* player);
 
 private:
     int baseBuyPrice;

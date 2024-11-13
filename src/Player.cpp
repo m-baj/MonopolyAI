@@ -21,19 +21,27 @@ int Player::getPositionIdx() const
     return this->positionIdx;
 }
 
-const std::vector<std::shared_ptr<OwnableField>>& Player::getOwnedFields() const
-{
-    return this->ownedFields;
+const std::vector<std::shared_ptr<Property>>& Player::getProperties() const {
+    return this->properties;
 }
+
+const std::vector<std::shared_ptr<Utilities>>& Player::getUtilities() const {
+    return this->utilities;
+}
+
+const std::vector<std::shared_ptr<Trains>>& Player::getTrains() const {
+    return this->trains;
+}
+
 
 void Player::setPositionIdx(int positionIdx)
 {
     this->positionIdx = positionIdx;
 }
 
-void Player::pushOwnable(std::shared_ptr<OwnableField> ownable)
+void Player::pushProperty(std::shared_ptr<Property> property)
 {
-    this->ownedFields.push_back(ownable);
+    this->properties.push_back(property);
 }
 
 void Player::addMoney(int amount)
@@ -68,11 +76,8 @@ void Player::pay(int amount, Player* player)
 }
 
 bool Player::ownsAllPropertiesOf(Color color) const {
-    auto amount = std::count_if(ownedFields.begin(), ownedFields.end(),
-                                [color](const auto& field) {
-        auto property = std::dynamic_pointer_cast<Property>(field);
-        return property && property->getColor() == color;
-    });
-    return amount == COLOR_TO_FIELD_COUNT.at(color);
+    return false;
 }
+
+
 
