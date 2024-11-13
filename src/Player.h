@@ -18,7 +18,7 @@ public:
     std::string getName() const;
     int getMoney() const;
     int getPositionIdx() const;
-    const std::vector<std::shared_ptr<OwnableField>>& getOwnableFields() const;
+    const std::vector<std::shared_ptr<OwnableField>>& getOwnedFields() const;
 
     void setPositionIdx(int positionIdx);
     void pushOwnable(std::shared_ptr<OwnableField> ownable);
@@ -31,7 +31,7 @@ public:
 private:
     void pay(int amount, Player* player = nullptr);
 
-    std::vector<std::shared_ptr<OwnableField>> ownableFields;
+    std::vector<std::shared_ptr<OwnableField>> ownedFields;
     int money;
     std::string name;
     int positionIdx = 0;
