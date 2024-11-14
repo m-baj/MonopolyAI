@@ -33,7 +33,6 @@ const std::vector<std::shared_ptr<Trains>>& Player::getTrains() const {
     return this->trains;
 }
 
-
 void Player::setPositionIdx(int positionIdx)
 {
     this->positionIdx = positionIdx;
@@ -49,25 +48,24 @@ void Player::addMoney(int amount)
     this->money += amount;
 }
 
-void Player::payTo(Player* player, int amount)
+std::optional<Decision> Player::payTo(Player* player, int amount)
 {
-    pay(amount, player);
+    return pay(amount, player);
 }
 
-void Player::payToBank(int amount)
+std::optional<Decision> Player::payToBank(int amount)
 {
-    pay(amount);
+    return pay(amount);
 }
 
-void Player::pay(int amount, Player* player)
+std::optional<Decision> Player::pay(int amount, Player* player)
 {
     if (money - amount >= 0)
     {
         money -= amount;
         if (player)
-        {
             player->addMoney(amount);
-        }
+        return std::nullopt;
     }
     else
     {
@@ -76,7 +74,19 @@ void Player::pay(int amount, Player* player)
 }
 
 bool Player::ownsAllPropertiesOf(Color color) const {
-    return false;
+    int numberOfProperties = 0;
+    for (const auto& property : properties)
+    {
+        if (property->getColor() == color)
+        {
+            numberOfProperties++;
+        }
+    }
+    return numberOfProperties == COLOR_TO_FIELD_COUNT.at(color);
+}
+
+int Player::getNumberOfTrains() const {
+    return trains.size();
 }
 
 
