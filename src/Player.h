@@ -28,12 +28,13 @@ public:
     void pushProperty(std::shared_ptr<Property> property);
     void addMoney(int amount);
 
-    void payTo(Player* player, int amount);
-    void payToBank(int amount);
+    std::optional<Decision> payTo(Player* player, int amount);
+    std::optional<Decision> payToBank(int amount);
     bool ownsAllPropertiesOf(Color color) const;
+    int getNumberOfTrains() const;
 
 private:
-    void pay(int amount, Player* player = nullptr);
+    std::optional<Decision> pay(int amount, Player* player = nullptr);
 
     std::vector<std::shared_ptr<Property>> properties = {};
     std::vector<std::shared_ptr<Utilities>> utilities = {};

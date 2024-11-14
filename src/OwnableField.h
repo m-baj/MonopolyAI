@@ -16,9 +16,9 @@ public:
     std::optional<Player*> getOwner() const;
     void setOwner(Player* player);
 
-private:
-    int baseBuyPrice;
+protected:
     Player* owner = nullptr;
+    int baseBuyPrice;
 };
 
 
