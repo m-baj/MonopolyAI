@@ -5,14 +5,31 @@
 #include "Trains.h"
 #include "Player.h"
 
-void Trains::onPlayerEnter(Player *player) {
-    std::optional<Player *> owner = getOwner();
-    if (owner.has_value() && owner.value() != player) {
-        int rent = calculateRentPrice(owner.value());
-        player->payTo(owner.value(), rent);
+std::optional<Decision> Trains::onPlayerEnter(Player *player) {
+    if (owner && owner != player)
+    {
+        int rent = calculateRentPrice();
+        player->payTo(owner, rent);
+        return std::nullopt;
     }
+    else if (!owner)
+        return handleUnownedTrain(player);
+
+    return std::nullopt;
 }
 
-int Trains::calculateRentPrice(Player *owner) const {
-    return 0;
+std::optional<Decision> Trains::handleUnownedTrain(Player *player) {
+    Decision decision;
+    decision.addChoice(Decision::Choice("Buy trains", [this, player]() {
+        player->payToBank(baseBuyPrice);
+        player->pushTrain(std::make_shared<Trains>(*this));
+        owner = player;
+    }));
+    return decision;
+}
+
+int Trains::calculateRentPrice() const {
+    int trainsOwned = owner->getNumberOfTrains();
+    int multiplier = 1 << (trainsOwned - 1);
+    return BASE_RENT_FOR_TRAIN * multiplier;
 }

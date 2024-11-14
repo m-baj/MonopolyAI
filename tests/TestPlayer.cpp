@@ -57,3 +57,14 @@ TEST(TestPlayerOwnsAllPropertiesOfColor, ownsAllPropertiesOfColorFalse)
     player->pushProperty(property1);
     EXPECT_EQ(player->ownsAllPropertiesOf(Color::BROWN), false);
 }
+
+TEST(TestPlayerGetNumberOfTrains, getNumberOfTrains)
+{
+    Board board;
+    auto player = std::make_unique<Player>("player", 1000);
+    auto train1 = std::make_shared<Trains>("", board, 1);
+    auto train2 = std::make_shared<Trains>("", board, 1);
+    player->pushTrain(train1);
+    player->pushTrain(train2);
+    EXPECT_EQ(player->getNumberOfTrains(), 2);
+}

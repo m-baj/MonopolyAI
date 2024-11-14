@@ -12,8 +12,11 @@ class Trains final : public OwnableField {
 public:
     Trains(const std::string& name, Board& board, int baseBuyPrice)
         : OwnableField(name, board, baseBuyPrice) {}
-    void onPlayerEnter(Player* player) override;
-    int calculateRentPrice(Player* owner) const;
+    std::optional<Decision> onPlayerEnter(Player* player) override;
+    int calculateRentPrice() const;
+
+private:
+    std::optional<Decision> handleUnownedTrain(Player* player);
 };
 
 
