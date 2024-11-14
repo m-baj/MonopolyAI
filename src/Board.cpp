@@ -59,7 +59,7 @@ void Board::movePlayer(int steps)
     auto currentPlayer = this->getCurrentPlayer();
     if(this->willMoveCrossStart(currentPlayer, steps))
     {
-        bank.payMoneyTo(currentPlayer, CROSSING_START_BONUS);
+        currentPlayer->addMoney(CROSSING_START_BONUS);
     }
     currentPlayer->setPositionIdx(this->getNewPosition(currentPlayer, steps));
     this->setRoundState(RoundState::HANDLE_FIELD);

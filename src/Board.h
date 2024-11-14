@@ -10,7 +10,6 @@
 
 #include "Field.h"
 #include "Player.h"
-#include "Bank.h"
 
 const std::map<Color, int> COLOR_TO_FIELD_COUNT = {
     {Color::BROWN, 2},
@@ -58,7 +57,6 @@ private:
     std::vector<std::unique_ptr<Player>> players = {};
     int currentPlayerIndex = 0;
     RoundState roundState = RoundState::ROLL_DICE;
-    Bank bank;
 };
 
 
