@@ -13,7 +13,7 @@ public:
         : Field(name, board)
     {
     }
-    std::optional<Decision> onPlayerEnter(Player* player) override {};
+    std::optional<Decision> onPlayerEnter(Player* player) override {return std::nullopt;};
 
 };
 

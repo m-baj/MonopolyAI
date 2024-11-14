@@ -70,6 +70,7 @@ std::optional<Decision> Player::pay(int amount, Player* player)
     else
     {
         // TODO: implement logic when player does not have enough money to pay
+        return std::nullopt;
     }
 }
 
