@@ -14,7 +14,7 @@ class Utilities final : public OwnableField {
 public:
     Utilities(const std::string& name, Board& board, int baseBuyPrice)
         : OwnableField(name, board, baseBuyPrice) {}
-    void onPlayerEnter(Player* player) override {};
+    std::optional<Decision> onPlayerEnter(Player* player) override {};
 };
 
 
