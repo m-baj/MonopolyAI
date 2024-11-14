@@ -9,6 +9,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include "Decision.h"
 
 class Player;
 class Board;
@@ -28,7 +29,7 @@ public:
     std::vector<std::optional<Player*>> getPlayersOnField() const;
     int getFieldIdx() const;
 
-    virtual void onPlayerEnter(Player* player) {};
+    virtual std::optional<Decision> onPlayerEnter(Player* player) { return std::nullopt; };
 
 protected:
     std::string name;

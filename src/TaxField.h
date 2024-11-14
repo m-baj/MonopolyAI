@@ -14,7 +14,7 @@ public:
     {
     }
 
-    void onPlayerEnter(Player* player) override;
+    std::optional<Decision> onPlayerEnter(Player* player) override ;
 };
 
 

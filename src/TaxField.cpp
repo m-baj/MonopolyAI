@@ -8,7 +8,8 @@ const int TAX_AMOUNT = 200;
 #include "Player.h"
 #include "Board.h"
 
-void TaxField::onPlayerEnter(Player* player)
+std::optional<Decision> TaxField::onPlayerEnter(Player* player)
 {
     player->payToBank(TAX_AMOUNT);
+    return std::nullopt;
 }
