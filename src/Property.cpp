@@ -71,6 +71,7 @@ std::optional<Decision> Property::handleUnownedProperty(Player *player) {
     Decision decision;
     decision.addChoice(Decision::Choice("Buy property", [this, player]() {
         player->payToBank(baseBuyPrice);
+        player->pushProperty(std::make_shared<Property>(*this));
         owner = player;
     }));
     return decision;

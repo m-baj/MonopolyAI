@@ -55,7 +55,4 @@ private:
     bool hasHotel = false;
     Color color;
 };
-
-
-
 #endif //PROPERTY_H

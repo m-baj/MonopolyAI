@@ -90,5 +90,9 @@ int Player::getNumberOfTrains() const {
     return trains.size();
 }
 
+void Player::pushTrain(std::shared_ptr<Trains> train) {
+    trains.push_back(train);
+}
+
 
 

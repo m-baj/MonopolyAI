@@ -169,4 +169,5 @@ TEST(TestOnPlayerEnter, PlayerBuysProperty) {
     choice.action();
     EXPECT_EQ(board.getPlayers()[0]->getMoney(), 1000 - 1);
     EXPECT_EQ(property->getOwner(), board.getPlayers()[0].get());
+    EXPECT_EQ(board.getPlayers()[0]->getProperties().size(), 1);
 }

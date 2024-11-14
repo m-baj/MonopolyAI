@@ -26,6 +26,7 @@ public:
 
     void setPositionIdx(int positionIdx);
     void pushProperty(std::shared_ptr<Property> property);
+    void pushTrain(std::shared_ptr<Trains> train);
     void addMoney(int amount);
 
     std::optional<Decision> payTo(Player* player, int amount);
