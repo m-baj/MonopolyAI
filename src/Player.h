@@ -12,7 +12,15 @@
 #include "Utilities.h"
 
 
-class Player {
+class IBoardObserver {
+public:
+    virtual ~IBoardObserver() = default;
+
+    virtual void handleEvent(const BuyFieldEvent& event) {};
+    virtual void handleEvent(const NotEnoughMoneyEvent& event) {};
+};
+
+class Player: public IBoardObserver {
 public:
     Player(const std::string& name, int startMoney)
         : name(name), money(startMoney) {};
@@ -27,6 +35,8 @@ public:
     void setPositionIdx(int positionIdx);
     void pushProperty(std::shared_ptr<Property> property);
 
+    void handleEvent(const BuyFieldEvent &event) override {};
+
 private:
     std::vector<std::shared_ptr<Property>> properties = {};
     std::vector<std::shared_ptr<Utilities>> utilities = {};
@@ -36,5 +46,9 @@ private:
     int positionIdx = 0;
 };
 
+class AiPlayer: protected Player {
+public:
+    void handleEvent(const BuyFieldEvent &event) override {};
+};
 
 #endif //PLAYER_H

@@ -16,6 +16,10 @@ enum class RoundState {
     HANDLE_FIELD
 };
 
+class GameEvent {};
+class BuyFieldEvent : public GameEvent {};
+class NotEnoughMoneyEvent : public GameEvent {};
+
 /*
  * Board class is responsible for managing actions caused by players choices.
  * It performs logic which does not require any user input.
@@ -39,6 +43,7 @@ public:
     void setRoundState(RoundState state);
 
     void movePlayer(int steps);
+    void notifyPlayer(Player* player, const GameEvent& event);
 
 private:
     std::vector<std::shared_ptr<Field>> fields = {};

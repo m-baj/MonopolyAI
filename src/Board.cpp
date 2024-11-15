@@ -64,6 +64,11 @@ void Board::movePlayer(int steps)
     this->fields[currentPlayer->getPositionIdx()]->onPlayerEnter(currentPlayer);
 }
 
+void Board::notifyPlayer(Player *player, const GameEvent &event) {
+    player->handleEvent(event);
+}
+
+
 void Board::setCurrentPlayerIndex(int index)
 {
     this->currentPlayerIndex = index;

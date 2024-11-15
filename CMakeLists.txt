@@ -35,6 +35,8 @@ add_executable(MonopolyAITests
         src/Player.cpp
         src/BoardExceptions.cpp
         src/BoardExceptions.h
+        src/neat/FitnessEvaluator.cpp
+        src/neat/FitnessEvaluator.h
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
@@ -60,4 +62,6 @@ add_executable(MonopolyAI main.cpp
         src/Player.cpp
         src/BoardExceptions.cpp
         src/BoardExceptions.h
+        src/neat/FitnessEvaluator.cpp
+        src/neat/FitnessEvaluator.h
 )
