@@ -3,8 +3,7 @@
 //
 
 #include "Player.h"
-#include <algorithm>
-#include "board.h"
+#include "Board.h"
 
 std::string Player::getName() const
 {
