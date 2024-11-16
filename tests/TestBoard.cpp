@@ -7,7 +7,7 @@
 #include "../src/Board.h"
 #include "../src/BoardExceptions.h"
 #include "../src/CardField.h"
-#include "../src/Game.h"
+#include "../src/GameCli.h"
 
 class TestGetNewPosition : public ::testing::TestWithParam<std::tuple<
     int,
@@ -79,7 +79,7 @@ INSTANTIATE_TEST_CASE_P(
 TEST(TestBoard, movePlayer)
 {
     Board board;
-    Game::addClassicMonopolyFields(board);
+    GameCli::addClassicMonopolyFields(board);
     auto player = std::make_unique<Player>("", 1);
     board.pushPlayer(std::move(player));
     board.setCurrentPlayerIndex(0);
@@ -92,7 +92,7 @@ TEST(TestBoard, movePlayer)
 TEST(TestBoard, movePlayerMultiplePlayersWrongRoundPhase)
 {
     Board board;
-    Game::addClassicMonopolyFields(board);
+    GameCli::addClassicMonopolyFields(board);
     auto player0 = std::make_unique<Player>("", 1);
     auto player1 = std::make_unique<Player>("", 1);
     board.pushPlayer(std::move(player0));

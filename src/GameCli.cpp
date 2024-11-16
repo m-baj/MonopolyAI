@@ -2,7 +2,7 @@
 // Created by adrwal on 11/3/24.
 //
 
-#include "Game.h"
+#include "GameCli.h"
 
 #include <iostream>
 
@@ -12,20 +12,25 @@
 #include "Trains.h"
 #include "Utilities.h"
 
-bool Game::isOver() const
+Board & Game::getBoard() const {
+    return board;
+}
+
+bool GameCli::isOver() const
 {
     return false;
 }
 
-void Game::playTurn()
+void GameCli::play()
 {
-    Player* player = board.getCurrentPlayer();
+    getBoard().setPlayedGame(this);
+    Player* player = getBoard().getCurrentPlayer();
     std::cout << "Player " << player->getName() << " turn" << std::endl;
     bool endTurn = false;
 
     while (!endTurn)
     {
-        this->displayMenu(board.getRoundState());
+        this->displayMenu(getBoard().getRoundState());
 
         char choice;
         std::cin >> choice;
@@ -36,9 +41,9 @@ void Game::playTurn()
         {
         case '1':
             {
-                auto steps = board.rollDice();
+                auto steps = getBoard().rollDice();
                 std::cout << "Rolled " << steps << std::endl;
-                board.movePlayer(steps);
+                getBoard().movePlayer(steps);
                 break;
             }
         case 'd':
@@ -51,7 +56,7 @@ void Game::playTurn()
     }
 }
 
-void Game::displayMenu(RoundState round_state) const
+void GameCli::displayMenu(RoundState round_state) const
 {
     switch (round_state)
     {
@@ -64,12 +69,12 @@ void Game::displayMenu(RoundState round_state) const
     }
 }
 
-void Game::drawBoard() const
+void GameCli::drawBoard() const
 {
-    for (int i = 0; i < board.getFields().size(); i++)
+    for (int i = 0; i < getBoard().getFields().size(); i++)
     {
         std::cout << i+1 << ": ";
-        auto& field = board.getFields()[i];
+        auto& field = getBoard().getFields()[i];
 
         std::cout << "(" << field->getName() << ") ";
         auto players = field->getPlayersOnField();
@@ -85,7 +90,7 @@ void Game::drawBoard() const
     }
 }
 
-void Game::addClassicMonopolyFields(Board& board)
+void GameCli::addClassicMonopolyFields(Board& board)
 {
     board.pushField(std::make_shared<Field>("START", board));
     board.pushField(std::make_shared<Property>("MEDITERRANEAN AVENUE", board, 60, 10, 30, Color::BROWN));
@@ -127,4 +132,8 @@ void Game::addClassicMonopolyFields(Board& board)
     board.pushField(std::make_shared<Property>("PARK PLACE", board, 350, 100, 200, Color::BLUE));
     board.pushField(std::make_shared<TaxField>("LUXURY TAX", board));
     board.pushField(std::make_shared<Property>("BOARDWALK", board, 400, 100, 200, Color::BLUE));
+}
+
+std::unique_ptr<ChoiceSelection> GameCli::createChoiceSelection(const Decision& decision, const std::string& label) const {
+    return std::make_unique<ConsoleChoiceSelection>(decision, label);
 }

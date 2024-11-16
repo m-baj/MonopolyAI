@@ -31,7 +31,7 @@ add_executable(MonopolyAITests
         tests/TestTrainsField.cpp
         tests/TestField.cpp
         tests/TestPlayer.cpp
-        src/Game.cpp
+        src/GameCli.cpp
         src/Player.cpp
         src/BoardExceptions.cpp
         src/BoardExceptions.h
@@ -42,6 +42,7 @@ add_executable(MonopolyAITests
         src/OwnableField.h
         src/Decision.cpp
         src/Decision.h
+        src/Utilities.cpp
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
@@ -49,7 +50,7 @@ add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
 add_executable(MonopolyAI main.cpp
         src/Board.h
         src/Field.h
-        src/Game.h
+        src/GameCli.h
         src/Player.h
         src/Trains.h
         src/Utilities.h
@@ -63,7 +64,7 @@ add_executable(MonopolyAI main.cpp
         src/Board.cpp
         src/TaxField.cpp
         src/TaxField.h
-        src/Game.cpp
+        src/GameCli.cpp
         src/Player.cpp
         src/BoardExceptions.cpp
         src/BoardExceptions.h
@@ -72,4 +73,5 @@ add_executable(MonopolyAI main.cpp
         src/OwnableField.h
         src/Decision.cpp
         src/Decision.h
+        src/Utilities.cpp
 )

@@ -29,7 +29,11 @@ public:
     std::vector<std::optional<Player*>> getPlayersOnField() const;
     int getFieldIdx() const;
 
-    virtual std::optional<Decision> onPlayerEnter(Player* player) { return std::nullopt; };
+    /*
+     * Method called when player enters the field.
+     * Handles all actions that have to be done with player before he can provide any input.
+     */
+    virtual void onPlayerEnter(Player* player) { return std::nullopt; };
 
 protected:
     std::string name;

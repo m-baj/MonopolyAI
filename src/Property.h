@@ -26,7 +26,7 @@ public:
     Property(const std::string& name, Board& board, int baseBuyPrice, int baseRentPrice, int mortgagePrice, Color color)
         : OwnableField(name, board, baseBuyPrice), baseRentPrice(baseRentPrice), mortgagePrice(mortgagePrice), isMortgaged(false), color(color) {};
     ~Property() override = default;
-    std::optional<Decision> onPlayerEnter(Player* player) override;
+    void onPlayerEnter(Player* player) override;
     int calculateRentPrice() const;
     Color getColor() const;
     void setMortgaged(bool isMortgaged);
@@ -38,15 +38,15 @@ public:
     void setHasHotel(bool hasHotel);
 
 private:
-    std::optional<Decision> handleOwnedProperty(Player* player);
-    std::optional<Decision> handleUnownedProperty(Player* player);
-    std::optional<Decision> handleUpgradableProperty(Player* owner);
+    void handleOwnedProperty(Player* player);
+    // void handleUnownedProperty(Player* player);
+    void handleUpgradableProperty(Player* owner);
 
-    Decision unmortgageDecision(Player* player);
-    void addBuyHouseDecision(Player* player, Decision& decision);
-    void addBuyHotelDecision(Player* player, Decision& decision);
-    void addSellHouseDecision(Player* player, Decision& decision);
-    Decision sellHotelDecision(Player* player);
+    // Decision unmortgageDecision(Player* player);
+    // void addBuyHouseDecision(Player* player, Decision& decision);
+    // void addBuyHotelDecision(Player* player, Decision& decision);
+    // void addSellHouseDecision(Player* player, Decision& decision);
+    // Decision sellHotelDecision(Player* player);
 
     int baseRentPrice;
     int mortgagePrice;

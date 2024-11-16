@@ -11,11 +11,10 @@
 #include "Utilities.h"
 #include "Trains.h"
 
-
 class Player {
 public:
-    Player(const std::string& name, int startMoney)
-        : name(name), money(startMoney) {};
+    Player(const std::string& name, int startMoney, Board& board)
+        : name(name), money(startMoney), board(board) {};
 
     std::string getName() const;
     int getMoney() const;
@@ -28,14 +27,19 @@ public:
     void pushProperty(std::shared_ptr<Property> property);
     void pushTrain(std::shared_ptr<Trains> train);
     void addMoney(int amount);
+    void declareBankruptcy();
 
-    std::optional<Decision> payTo(Player* player, int amount);
-    std::optional<Decision> payToBank(int amount);
+    void payTo(Player* player, int amount);
+    void payToBank(int amount);
     bool ownsAllPropertiesOf(Color color) const;
     int getNumberOfTrains() const;
 
 private:
-    std::optional<Decision> pay(int amount, Player* player = nullptr);
+    /*
+     * Blocks Game loop. Handles deducing money from player.
+     * If player does not have enough money, it handles player's decision to obtain it.
+     */
+    void pay(int amount, Player* player = nullptr);
 
     std::vector<std::shared_ptr<Property>> properties = {};
     std::vector<std::shared_ptr<Utilities>> utilities = {};
@@ -43,6 +47,8 @@ private:
     int money;
     std::string name;
     int positionIdx = 0;
+    Board& board;
+    bool isBankrupt = false;
 };
 
 

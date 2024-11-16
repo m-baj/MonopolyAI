@@ -33,9 +33,17 @@ void Board::setRoundState(RoundState state)
     this->roundState = state;
 }
 
+void Board::setPlayedGame(Game *game) {
+    playedGame = game;
+}
+
 RoundState Board::getRoundState() const
 {
     return this->roundState;
+}
+
+Game* Board::getPlayedGame() const {
+    return playedGame;
 }
 
 Player* Board::getCurrentPlayer() const
@@ -64,6 +72,7 @@ void Board::movePlayer(int steps)
     currentPlayer->setPositionIdx(this->getNewPosition(currentPlayer, steps));
     this->setRoundState(RoundState::HANDLE_FIELD);
     this->fields[currentPlayer->getPositionIdx()]->onPlayerEnter(currentPlayer);
+    this->setRoundState(RoundState::ACCEPT_PLAYER_DECISIONS);
 }
 
 void Board::setCurrentPlayerIndex(int index)

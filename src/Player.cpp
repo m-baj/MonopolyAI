@@ -4,6 +4,7 @@
 
 #include "Player.h"
 #include "Board.h"
+#include "GameCli.h"
 
 std::string Player::getName() const
 {
@@ -47,30 +48,57 @@ void Player::addMoney(int amount)
     this->money += amount;
 }
 
-std::optional<Decision> Player::payTo(Player* player, int amount)
+void Player::declareBankruptcy() {
+    isBankrupt = true;
+}
+
+void Player::payTo(Player* player, int amount)
 {
     return pay(amount, player);
 }
 
-std::optional<Decision> Player::payToBank(int amount)
+void Player::payToBank(int amount)
 {
     return pay(amount);
 }
 
-std::optional<Decision> Player::pay(int amount, Player* player)
+void Player::pay(int amount, Player* player)
 {
-    if (money - amount >= 0)
-    {
-        money -= amount;
-        if (player)
-            player->addMoney(amount);
-        return std::nullopt;
+    bool payed = false;
+    while (!payed) {
+        if (money - amount >= 0)
+        {
+            money -= amount;
+            if (player)
+                player->addMoney(amount);
+            payed = true;
+        }
+        else {
+            Decision decision;
+            // TODO: For each house owned by player, add a choice to sell it
+            // TODO: For each field owned by player, add a choice to mortgage it
+            if (decision.getChoices().empty()) {
+                declareBankruptcy();
+                return;
+            }
+            board.getPlayedGame()
+                ->createChoiceSelection(decision, "You do not have enough money to pay. Choose one of the following options:")
+                ->requireSelection();
+        }
     }
-    else
-    {
-        // TODO: implement logic when player does not have enough money to pay
-        return std::nullopt;
-    }
+
+    // if (money - amount >= 0)
+    // {
+    //     money -= amount;
+    //     if (player)
+    //         player->addMoney(amount);
+    //     return std::nullopt;
+    // }
+    // else
+    // {
+    //     // TODO: implement logic when player does not have enough money to pay
+    //     return std::nullopt;
+    // }
 }
 
 bool Player::ownsAllPropertiesOf(Color color) const {

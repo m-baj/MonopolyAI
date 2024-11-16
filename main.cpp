@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "src/CardField.h"
-#include "src/Game.h"
+#include "src/GameCli.h"
 #include "src/GoToJailField.h"
 #include "src/TaxField.h"
 #include "src/Utilities.h"
@@ -10,7 +10,7 @@
 int main()
 {
     Board board;
-    Game game = Game(board);
+    GameCli game = GameCli(board);
     board.pushField(std::make_shared<Field>("START", board));
     board.pushField(std::make_shared<Property>("MEDITERRANEAN AVENUE", board, 60, 10, 30, Color::BROWN));
     board.pushField(std::make_shared<CardField>("COMMUNITY CHEST", board));
@@ -59,7 +59,7 @@ int main()
 
     while (!game.isOver())
     {
-        game.playTurn();
+        game.play();
     }
     return 0;
 }
