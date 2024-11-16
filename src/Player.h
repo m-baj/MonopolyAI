@@ -22,6 +22,8 @@ public:
     const std::vector<std::shared_ptr<Property>>& getProperties() const;
     const std::vector<std::shared_ptr<Utilities>>& getUtilities() const;
     const std::vector<std::shared_ptr<Trains>>& getTrains() const;
+    bool ownsAllPropertiesOf(Color color) const;
+    int getNumberOfTrains() const;
 
     void setPositionIdx(int positionIdx);
     void pushProperty(std::shared_ptr<Property> property);
@@ -31,8 +33,6 @@ public:
 
     void payTo(Player* player, int amount);
     void payToBank(int amount);
-    bool ownsAllPropertiesOf(Color color) const;
-    int getNumberOfTrains() const;
 
 private:
     /*
