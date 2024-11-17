@@ -3,30 +3,38 @@
 //
 
 #include "Trains.h"
+
+#include "Board.h"
 #include "Player.h"
 
-std::optional<Decision> Trains::onPlayerEnter(Player *player) {
+std::vector<PlayerDecisionOutputs> Trains::onPlayerEnter(Player *player) {
+    std::vector<PlayerDecisionOutputs> decisions = {
+        PlayerDecisionOutputs::SELL_HOUSE,
+        PlayerDecisionOutputs::THROW_DICE,
+        PlayerDecisionOutputs::MORTGAGE_FIELD,
+        PlayerDecisionOutputs::UNMORTGAGE_FIELD
+    };
+
     if (owner && owner != player)
     {
         int rent = calculateRentPrice();
         player->payTo(owner, rent);
-        return std::nullopt;
     }
     else if (!owner)
-        return handleUnownedTrain(player);
+        decisions.push_back(PlayerDecisionOutputs::BUY_FIELD);
 
-    return std::nullopt;
+    return decisions;
 }
 
-std::optional<Decision> Trains::handleUnownedTrain(Player *player) {
-    Decision decision;
-    decision.addChoice(Decision::Choice("Buy trains", [this, player]() {
-        player->payToBank(baseBuyPrice);
-        player->pushTrain(std::make_shared<Trains>(*this));
-        owner = player;
-    }));
-    return decision;
-}
+// std::optional<Decision> Trains::handleUnownedTrain(Player *player) {
+//     Decision decision;
+//     decision.addChoice(Decision::Choice("Buy trains", [this, player]() {
+//         player->payToBank(baseBuyPrice);
+//         player->pushTrain(std::make_shared<Trains>(*this));
+//         owner = player;
+//     }));
+//     return decision;
+// }
 
 int Trains::calculateRentPrice() const {
     int trainsOwned = owner->getNumberOfTrains();

@@ -46,6 +46,11 @@ Game* Board::getPlayedGame() const {
     return playedGame;
 }
 
+std::unique_ptr<ChoiceSelection> Board::createChoiceSelection(const Decision& decision, const std::string& label)
+{
+    if()
+}
+
 Player* Board::getCurrentPlayer() const
 {
     return this->players[this->currentPlayerIndex].get();

@@ -14,7 +14,7 @@ public:
     {
     }
 
-    std::optional<Decision> onPlayerEnter(Player* player) override ;
+    std::vector<PlayerDecisionOutputs> onPlayerEnter(Player* player) override ;
 };
 
 

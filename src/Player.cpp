@@ -74,16 +74,11 @@ void Player::pay(int amount, Player* player)
             payed = true;
         }
         else {
-            Decision decision;
-            // TODO: For each house owned by player, add a choice to sell it
-            // TODO: For each field owned by player, add a choice to mortgage it
-            if (decision.getChoices().empty()) {
-                declareBankruptcy();
-                return;
-            }
-            board.getPlayedGame()
-                ->createChoiceSelection(decision, "You do not have enough money to pay. Choose one of the following options:")
-                ->requireSelection();
+            createDecisionSelector()
+                ->requireSelection(
+                    "You do not have enough money to pay. Sell something",
+                    {PlayerDecisionOutputs::SELL_HOUSE, PlayerDecisionOutputs::MORTGAGE_FIELD}
+                );
         }
     }
 
@@ -99,6 +94,16 @@ void Player::pay(int amount, Player* player)
     //     // TODO: implement logic when player does not have enough money to pay
     //     return std::nullopt;
     // }
+}
+
+std::unique_ptr<DecisionSelector> ConsolePlayer::createDecisionSelector()
+{
+    return std::make_unique<ConsoleDecisionSelector>();
+}
+
+std::unique_ptr<DecisionSelector> AiPlayer::createDecisionSelector()
+{
+    return std::make_unique<AiDecisionSelector>();
 }
 
 bool Player::ownsAllPropertiesOf(Color color) const {

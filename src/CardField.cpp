@@ -6,18 +6,17 @@
 
 #include "Board.h"
 
-std::optional<Decision> CardField::onPlayerEnter(Player *player) {
-    auto decision = this->drawCard(player);
-    if (decision.has_value()) {
-        // TODO: Implement case when drawing carded required some player input. e.g. player don't have enough money.
-    }
-    board.currentPlayerPossibleDecisions.insert(PlayerDecisionOutputs::SELL_HOUSE);
-    board.currentPlayerPossibleDecisions.insert(PlayerDecisionOutputs::MORTGAGE_FIELD);
-    board.currentPlayerPossibleDecisions.insert(PlayerDecisionOutputs::UNMORTGAGE_FIELD);
-    board.currentPlayerPossibleDecisions.insert(PlayerDecisionOutputs::THROW_DICE);
-    return std::nullopt;
+std::vector<PlayerDecisionOutputs> CardField::onPlayerEnter(Player *player) {
+    this->drawCard(player);
+
+    return {
+        PlayerDecisionOutputs::SELL_HOUSE,
+        PlayerDecisionOutputs::MORTGAGE_FIELD,
+        PlayerDecisionOutputs::UNMORTGAGE_FIELD,
+        PlayerDecisionOutputs::THROW_DICE
+    };
 }
 
-std::optional<Decision> CardField::drawCard(Player *player) {
-    return std::nullopt;
+void CardField::drawCard(Player *player) {
+
 }

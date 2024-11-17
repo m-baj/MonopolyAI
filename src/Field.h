@@ -9,6 +9,8 @@
 #include <string>
 #include <utility>
 #include <vector>
+
+#include "Board.h"
 #include "Decision.h"
 
 class Player;
@@ -31,9 +33,18 @@ public:
 
     /*
      * Method called when player enters the field.
-     * Handles all actions that have to be done with player before he can provide any input.
+     * Executes all immediate actions.
+     * Returns decision that can later be made by player.
+     * In some cases, need to prompt player decision immediately. (e.g. when player is out of money)
      */
-    virtual void onPlayerEnter(Player* player) { return std::nullopt; };
+    virtual std::vector<PlayerDecisionOutputs> onPlayerEnter(Player* player)
+    {
+        return {
+            PlayerDecisionOutputs::THROW_DICE,
+            PlayerDecisionOutputs::MORTGAGE_FIELD,
+            PlayerDecisionOutputs::UNMORTGAGE_FIELD
+        };
+    };
 
 protected:
     std::string name;

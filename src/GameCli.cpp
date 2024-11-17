@@ -23,7 +23,7 @@ bool GameCli::isOver() const
 
 void GameCli::play()
 {
-    getBoard().setPlayedGame(this);
+    // getBoard().setPlayedGame(this);
     Player* player = getBoard().getCurrentPlayer();
     std::cout << "Player " << player->getName() << " turn" << std::endl;
     bool endTurn = false;
@@ -134,6 +134,6 @@ void GameCli::addClassicMonopolyFields(Board& board)
     board.pushField(std::make_shared<Property>("BOARDWALK", board, 400, 100, 200, Color::BLUE));
 }
 
-std::unique_ptr<ChoiceSelection> GameCli::createChoiceSelection(const Decision& decision, const std::string& label) const {
-    return std::make_unique<ConsoleChoiceSelection>(decision, label);
-}
+// std::unique_ptr<ChoiceSelection> GameCli::createChoiceSelection(const Decision& decision, const std::string& label) const {
+//     return std::make_unique<ConsoleChoiceSelection>(decision, label);
+// }

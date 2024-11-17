@@ -13,8 +13,10 @@
 
 class Player {
 public:
-    Player(const std::string& name, int startMoney, Board& board)
-        : name(name), money(startMoney), board(board) {};
+    virtual ~Player() = default;
+
+    Player(const std::string& name, int startMoney)
+        : name(name), money(startMoney) {};
 
     std::string getName() const;
     int getMoney() const;
@@ -34,6 +36,8 @@ public:
     void payTo(Player* player, int amount);
     void payToBank(int amount);
 
+    virtual std::unique_ptr<DecisionSelector> createDecisionSelector() = 0;
+
 private:
     /*
      * Blocks Game loop. Handles deducing money from player.
@@ -47,8 +51,30 @@ private:
     int money;
     std::string name;
     int positionIdx = 0;
-    Board& board;
+    // Board& board;
     bool isBankrupt = false;
+};
+
+class ConsolePlayer final : public Player
+{
+public:
+    ConsolePlayer(const std::string& name, int startMoney)
+        : Player(name, startMoney)
+    {
+    }
+
+    std::unique_ptr<DecisionSelector> createDecisionSelector() override;
+};
+
+class AiPlayer final : public Player
+{
+public:
+    AiPlayer(const std::string& name, int startMoney)
+        : Player(name, startMoney)
+    {
+    }
+
+    std::unique_ptr<DecisionSelector> createDecisionSelector() override;
 };
 
 

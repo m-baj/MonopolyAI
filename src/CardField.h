@@ -15,8 +15,8 @@ public:
         : Field(name, board)
     {
     }
-    std::optional<Decision> onPlayerEnter(Player* player) override;
-    std::optional<Decision> drawCard(Player* player);
+    std::vector<PlayerDecisionOutputs> onPlayerEnter(Player* player) override;
+    void drawCard(Player* player);
 };
 
 

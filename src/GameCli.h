@@ -15,8 +15,9 @@ public:
 
     Board& getBoard() const;
 
-    virtual std::unique_ptr<ChoiceSelection> createChoiceSelection(const Decision& decision, const std::string& label) const = 0;
+    // virtual std::unique_ptr<ChoiceSelection> createChoiceSelection(const Decision& decision, const std::string& label) const = 0;
     virtual void play() = 0;
+    virtual bool isOver() const = 0;
 
 private:
     Board& board;
@@ -31,12 +32,12 @@ public:
     explicit GameCli(Board& board)
         : Game(board) {};
 
-    bool isOver() const;
+    bool isOver() const override;
     void displayMenu(RoundState round_state) const;
     void drawBoard() const;
     static void addClassicMonopolyFields(Board& board);
 
-    std::unique_ptr<ChoiceSelection> createChoiceSelection(const Decision& decision, const std::string& label) const override;
+    // std::unique_ptr<ChoiceSelection> createChoiceSelection(const Decision& decision, const std::string& label) const override;
     void play() override;
 };
 

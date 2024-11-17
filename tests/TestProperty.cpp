@@ -35,7 +35,7 @@ TEST(TestOnPlayerEnter, PlayerPaysRent) {
 
 TEST(TestOnPlayerEnter, PlayerUnmortgagesProperty) {
     Board board;
-    auto player = std::make_unique<Player>("player", 1000);
+    auto player = std::make_unique<Player>("player", 1000, board);
     auto property = std::make_shared<Property>("", board, 1, 1, 100, Color::BROWN);
     property->setOwner(player.get());
     property->setMortgaged(true);

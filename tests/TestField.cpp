@@ -14,7 +14,7 @@ TEST(TestField, getPlayersOnField)
     auto field1 = std::make_shared<Field>("", board);
     board.pushField(field0);
     board.pushField(field1);
-    auto player = std::make_unique<Player>("", 1);
+    auto player = std::make_unique<Player>("", 1, board);
     player->setPositionIdx(0);
     board.pushPlayer(std::move(player));
 
@@ -35,10 +35,10 @@ TEST(TestField, getPlayersOnFieldManyPlayers)
     board.pushField(field0);
     board.pushField(field1);
 
-    auto player0 = std::make_unique<Player>("", 1);
-    auto player1 = std::make_unique<Player>("", 1);
-    auto player2 = std::make_unique<Player>("", 1);
-    auto player3 = std::make_unique<Player>("", 1);
+    auto player0 = std::make_unique<Player>("", 1, board);
+    auto player1 = std::make_unique<Player>("", 1, board);
+    auto player2 = std::make_unique<Player>("", 1, board);
+    auto player3 = std::make_unique<Player>("", 1, board);
     player0->setPositionIdx(0);
     player1->setPositionIdx(0);
     player2->setPositionIdx(1);

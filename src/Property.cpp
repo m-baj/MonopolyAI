@@ -7,27 +7,29 @@
 
 const double UNMORTGAGE_INTEREST_MULTIPLIER = 1.1;
 
-void Property::onPlayerEnter(Player *player) {
+std::vector<PlayerDecisionOutputs> Property::onPlayerEnter(Player *player) {
+    std::vector<PlayerDecisionOutputs> decisions = {
+        PlayerDecisionOutputs::SELL_HOUSE,
+        PlayerDecisionOutputs::THROW_DICE,
+        PlayerDecisionOutputs::MORTGAGE_FIELD,
+        PlayerDecisionOutputs::UNMORTGAGE_FIELD
+    };
+
     if (owner) {
-        handleOwnedProperty(player);
+        handleOwnedProperty(player, decisions);
     }
 
-    board.currentPlayerPossibleDecisions.insert(PlayerDecisionOutputs::BUY_FIELD);
-    board.currentPlayerPossibleDecisions.insert(PlayerDecisionOutputs::SELL_HOUSE);
-    board.currentPlayerPossibleDecisions.insert(PlayerDecisionOutputs::THROW_DICE);
-    board.currentPlayerPossibleDecisions.insert(PlayerDecisionOutputs::MORTGAGE_FIELD);
-    board.currentPlayerPossibleDecisions.insert(PlayerDecisionOutputs::UNMORTGAGE_FIELD);
-
+    return decisions;
 }
 
-void Property::handleOwnedProperty(Player *player) {
+void Property::handleOwnedProperty(Player *player, std::vector<PlayerDecisionOutputs> &decisions) {
     if (owner != player && !isMortgaged)    // player has to pay rent to owner
     {
         player->payTo(owner, calculateRentPrice());
     }
     else if (owner == player && !isMortgaged)   // player is the owner
     {
-        return handleUpgradableProperty(player);
+        return handleUpgradableProperty(player, decisions);
     }
     // else if (owner == player && owner->getMoney() >= mortgagePrice) // if player is the owner and property is mortgaged
     // {
@@ -37,12 +39,13 @@ void Property::handleOwnedProperty(Player *player) {
     //     return std::nullopt;
 }
 
-void Property::handleUpgradableProperty(Player *owner)
+void Property::handleUpgradableProperty(Player *owner, std::vector<PlayerDecisionOutputs> &decisions)
 {
     // Decision decision;
     if (numberOfHouses < MAX_NUMBER_OF_HOUSES && owner->getMoney() >= HOUSE_PRICE) // if player can buy a house
     {
-        board.currentPlayerPossibleDecisions.insert(PlayerDecisionOutputs::BUY_HOUSE);
+        decisions.push_back(PlayerDecisionOutputs::BUY_HOUSE);
+        // board.currentPlayerPossibleDecisions.insert(PlayerDecisionOutputs::BUY_HOUSE);
         // addBuyHouseDecision(owner, decision);
     }
     // if (numberOfHouses > 0)
