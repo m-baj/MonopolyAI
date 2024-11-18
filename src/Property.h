@@ -4,22 +4,24 @@
 
 #ifndef PROPERTY_H
 #define PROPERTY_H
+#include "Constants.h"
 #include "OwnableField.h"
 
 const int HOUSE_PRICE = 50;
-const int MAX_NUMBER_OF_HOUSES = 4;
+const int MAX_NUMBER_OF_HOUSES = 5;
 const int HOTEL_PRICE = 250;
 
-enum class Color {
-    BROWN,
-    LIGHT_BLUE,
-    PINK,
-    ORANGE,
-    RED,
-    YELLOW,
-    GREEN,
-    BLUE
-};
+// enum class Color {
+//     BROWN,
+//     LIGHT_BLUE,
+//     PINK,
+//     ORANGE,
+//     RED,
+//     YELLOW,
+//     GREEN,
+//     BLUE
+// };
+class Player;
 
 class Property final : public OwnableField {
 public:
@@ -33,15 +35,19 @@ public:
     int getMortgagePrice() const;
     int getNumberOfHouses() const;
     bool getHasHotel() const;
+    int calculateNextHousePrice() const;
+    bool canBuyThisProperty(Player* player) const;
+    bool canBuyHouseHere(Player* player) const;
 
     void setHasHotel(bool hasHotel);
     void setMortgaged(bool isMortgaged);
-    std::vector<PlayerDecisionOutputs> onPlayerEnter(Player* player) override;
+    void onPlayerEnter(Player* player) override;
+    std::vector<PlayerDecisionOutputs> getFieldDecisions(Player* player) const override;
     void addHouse();
 
 private:
-    void handleOwnedProperty(Player* player, std::vector<PlayerDecisionOutputs> &decisions);
-    void handleUpgradableProperty(Player* owner, std::vector<PlayerDecisionOutputs> &decisions);
+    void handleOwnedProperty(Player* player);
+    void handleUpgradableProperty(Player* owner);
 
     int baseRentPrice;
     int mortgagePrice;

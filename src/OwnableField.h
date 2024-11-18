@@ -5,8 +5,8 @@
 #ifndef MONOPOLYAI_OWNABLEFIELD_H
 #define MONOPOLYAI_OWNABLEFIELD_H
 
-
 #include "Field.h"
+
 
 class OwnableField : public Field {
 public:

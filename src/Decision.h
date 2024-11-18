@@ -8,7 +8,8 @@
 #include <string>
 #include <functional>
 
-#include "Board.h"
+#include "Constants.h"
+
 
 // class Decision {
 // public:
@@ -65,19 +66,25 @@ public:
     virtual ~DecisionSelector() = default;
     DecisionSelector() = default;
 
-    virtual void requireSelection(const std::string &label, const std::vector<PlayerDecisionOutputs> &possibleDecisions) = 0;
+    virtual void requireSelection(const std::string& label,
+                                  const std::vector<PlayerDecisionOutputs>&
+                                  possibleDecisions) = 0;
 };
 
 class ConsoleDecisionSelector final : public DecisionSelector
 {
 public:
-    void requireSelection(const std::string& label, const std::vector<PlayerDecisionOutputs>& possibleDecisions) override;
+    void requireSelection(const std::string& label,
+                          const std::vector<PlayerDecisionOutputs>&
+                          possibleDecisions) override;
 };
 
 class AiDecisionSelector final : public DecisionSelector
 {
 public:
-    void requireSelection(const std::string& label, const std::vector<PlayerDecisionOutputs>& possibleDecisions) override {};
+    void requireSelection(const std::string& label,
+                          const std::vector<PlayerDecisionOutputs>&
+                          possibleDecisions) override {};
 };
 
 #endif //MONOPOLYAI_DECISION_H

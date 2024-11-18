@@ -4,18 +4,14 @@
 
 #ifndef FIELD_H
 #define FIELD_H
-#include <memory>
 #include <optional>
 #include <string>
-#include <utility>
 #include <vector>
 
-#include "Board.h"
-#include "Decision.h"
+#include "Constants.h"
+#include "Player.h"
 
-class Player;
 class Board;
-
 /*
  * Base class for all fields on the board.
  * Provides helper location-related methods.
@@ -37,14 +33,12 @@ public:
      * Returns decision that can later be made by player.
      * In some cases, need to prompt player decision immediately. (e.g. when player is out of money)
      */
-    virtual std::vector<PlayerDecisionOutputs> onPlayerEnter(Player* player)
-    {
-        return {
-            PlayerDecisionOutputs::THROW_DICE,
-            PlayerDecisionOutputs::MORTGAGE_FIELD,
-            PlayerDecisionOutputs::UNMORTGAGE_FIELD
-        };
-    };
+    virtual void onPlayerEnter(Player* player) {};
+
+    virtual std::vector<PlayerDecisionOutputs> getFieldDecisions(Player* player) const;
+    bool canMortgageAnyField(Player* player) const;
+    bool canUnmortgageAnyField(Player* player) const;
+    bool canSellAnyHouse(Player* player) const;
 
 protected:
     std::string name;

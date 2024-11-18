@@ -10,7 +10,7 @@ TEST(TestOnPlayerEnter, PlayerPaysToBank)
 {
     Board board;
     auto taxField = std::make_shared<TaxField>("", board);
-    auto player = std::make_unique<Player>("", 1000, board);
+    auto player = std::make_unique<ConsolePlayer>("", 1000);
     board.pushField(taxField);
     board.pushPlayer(std::move(player));
 

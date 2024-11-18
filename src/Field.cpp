@@ -3,7 +3,10 @@
 //
 
 #include "Field.h"
+
 #include "Board.h"
+#include "Constants.h"
+#include "Player.h"
 
 std::string Field::getName() const
 {
@@ -34,4 +37,42 @@ int Field::getFieldIdx() const
         }
     }
     return -1;
+}
+
+std::vector<PlayerDecisionOutputs> Field::getFieldDecisions(Player* player) const
+{
+    std::vector<PlayerDecisionOutputs> baseDecisions = {PlayerDecisionOutputs::NO_DECISION};
+
+    if(canMortgageAnyField(player))
+    {
+        baseDecisions.push_back(PlayerDecisionOutputs::MORTGAGE_FIELD);
+    }
+    if(canUnmortgageAnyField(player))
+    {
+        baseDecisions.push_back(PlayerDecisionOutputs::UNMORTGAGE_FIELD);
+    }
+    if(canSellAnyHouse(player))
+    {
+        baseDecisions.push_back(PlayerDecisionOutputs::SELL_HOUSE);
+    }
+
+    return baseDecisions;
+}
+
+bool Field::canMortgageAnyField(Player* player) const
+{
+    // TODO
+    return false;
+}
+
+bool Field::canUnmortgageAnyField(Player* player) const
+{
+    // TODO
+    return false;
+}
+
+bool Field::canSellAnyHouse(Player* player) const
+{
+    // TODO
+    return false;
 }

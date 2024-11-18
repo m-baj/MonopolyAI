@@ -5,25 +5,26 @@
 #include "Trains.h"
 
 #include "Board.h"
+#include "Constants.h"
 #include "Player.h"
 
-std::vector<PlayerDecisionOutputs> Trains::onPlayerEnter(Player *player) {
-    std::vector<PlayerDecisionOutputs> decisions = {
-        PlayerDecisionOutputs::SELL_HOUSE,
-        PlayerDecisionOutputs::THROW_DICE,
-        PlayerDecisionOutputs::MORTGAGE_FIELD,
-        PlayerDecisionOutputs::UNMORTGAGE_FIELD
-    };
+void Trains::onPlayerEnter(Player *player) {
+    // std::vector<PlayerDecisionOutputs> decisions = {
+    //     PlayerDecisionOutputs::SELL_HOUSE,
+    //     PlayerDecisionOutputs::THROW_DICE,
+    //     PlayerDecisionOutputs::MORTGAGE_FIELD,
+    //     PlayerDecisionOutputs::UNMORTGAGE_FIELD
+    // };
 
     if (owner && owner != player)
     {
         int rent = calculateRentPrice();
         player->payTo(owner, rent);
     }
-    else if (!owner)
-        decisions.push_back(PlayerDecisionOutputs::BUY_FIELD);
+    // else if (!owner)
+    //     decisions.push_back(PlayerDecisionOutputs::BUY_FIELD);
 
-    return decisions;
+    // return decisions;
 }
 
 // std::optional<Decision> Trains::handleUnownedTrain(Player *player) {
@@ -40,4 +41,12 @@ int Trains::calculateRentPrice() const {
     int trainsOwned = owner->getNumberOfTrains();
     int multiplier = 1 << (trainsOwned - 1);
     return BASE_RENT_FOR_TRAIN * multiplier;
+}
+
+std::vector<PlayerDecisionOutputs> Trains::getFieldDecisions(Player* player) const
+{
+    auto baseDecisions = Field::getFieldDecisions(player);
+
+    if(!owner && player->getMoney() >= baseBuyPrice)
+        baseDecisions.push_back(PlayerDecisionOutputs::BUY_FIELD);
 }

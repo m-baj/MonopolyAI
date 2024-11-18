@@ -3,7 +3,6 @@
 //
 
 #include "OwnableField.h"
-#include "Board.h"
 
 std::optional<Player*> OwnableField::getOwner() const
 {

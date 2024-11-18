@@ -2,9 +2,11 @@
 // Created by adrwal on 11/3/24.
 //
 
+
 #include "Player.h"
-#include "Board.h"
-#include "GameCli.h"
+
+#include "Property.h"
+
 
 std::string Player::getName() const
 {
@@ -50,6 +52,16 @@ void Player::addMoney(int amount)
 
 void Player::declareBankruptcy() {
     isBankrupt = true;
+}
+
+void Player::saveTurnDecision(PlayerDecisionOutputs decision)
+{
+    decisionsMadeThisTurn.push_back(decision);
+}
+
+void Player::clearTurnDecisions()
+{
+    decisionsMadeThisTurn = {};
 }
 
 void Player::payTo(Player* player, int amount)
@@ -120,6 +132,11 @@ bool Player::ownsAllPropertiesOf(Color color) const {
 
 int Player::getNumberOfTrains() const {
     return trains.size();
+}
+
+std::vector<PlayerDecisionOutputs> Player::getMadeTurnDecisions() const
+{
+    return decisionsMadeThisTurn;
 }
 
 void Player::pushTrain(std::shared_ptr<Trains> train) {

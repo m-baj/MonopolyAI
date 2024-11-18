@@ -6,10 +6,12 @@
 #define PLAYER_H
 #include <memory>
 #include <vector>
-#include "OwnableField.h"
-#include "Property.h"
-#include "Utilities.h"
-#include "Trains.h"
+
+#include "Decision.h"
+
+class Trains;
+class Utilities;
+class Property;
 
 class Player {
 public:
@@ -26,12 +28,15 @@ public:
     const std::vector<std::shared_ptr<Trains>>& getTrains() const;
     bool ownsAllPropertiesOf(Color color) const;
     int getNumberOfTrains() const;
+    std::vector<PlayerDecisionOutputs> getMadeTurnDecisions() const;
 
     void setPositionIdx(int positionIdx);
     void pushProperty(std::shared_ptr<Property> property);
     void pushTrain(std::shared_ptr<Trains> train);
     void addMoney(int amount);
     void declareBankruptcy();
+    void saveTurnDecision(PlayerDecisionOutputs decision);
+    void clearTurnDecisions();
 
     void payTo(Player* player, int amount);
     void payToBank(int amount);
@@ -48,6 +53,7 @@ private:
     std::vector<std::shared_ptr<Property>> properties = {};
     std::vector<std::shared_ptr<Utilities>> utilities = {};
     std::vector<std::shared_ptr<Trains>> trains = {};
+    std::vector<PlayerDecisionOutputs> decisionsMadeThisTurn = {};
     int money;
     std::string name;
     int positionIdx = 0;
@@ -62,6 +68,7 @@ public:
         : Player(name, startMoney)
     {
     }
+    ~ConsolePlayer() override = default;
 
     std::unique_ptr<DecisionSelector> createDecisionSelector() override;
 };
@@ -73,6 +80,7 @@ public:
         : Player(name, startMoney)
     {
     }
+    ~AiPlayer() override = default;
 
     std::unique_ptr<DecisionSelector> createDecisionSelector() override;
 };

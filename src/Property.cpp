@@ -3,64 +3,107 @@
 //
 
 #include "Property.h"
-#include "Board.h"
+#include "Player.h"
 
 const double UNMORTGAGE_INTEREST_MULTIPLIER = 1.1;
 
-std::vector<PlayerDecisionOutputs> Property::onPlayerEnter(Player *player) {
-    std::vector<PlayerDecisionOutputs> decisions = {
-        PlayerDecisionOutputs::SELL_HOUSE,
-        PlayerDecisionOutputs::THROW_DICE,
-        PlayerDecisionOutputs::MORTGAGE_FIELD,
-        PlayerDecisionOutputs::UNMORTGAGE_FIELD
-    };
-
-    if (owner) {
-        handleOwnedProperty(player, decisions);
-    }
-
-    return decisions;
-}
-
-void Property::handleOwnedProperty(Player *player, std::vector<PlayerDecisionOutputs> &decisions) {
-    if (owner != player && !isMortgaged)    // player has to pay rent to owner
-    {
+void Property::onPlayerEnter(Player* player) {
+    if (owner && owner != player && !isMortgaged) {    // player has to pay rent to owner
         player->payTo(owner, calculateRentPrice());
     }
-    else if (owner == player && !isMortgaged)   // player is the owner
-    {
-        return handleUpgradableProperty(player, decisions);
-    }
-    // else if (owner == player && owner->getMoney() >= mortgagePrice) // if player is the owner and property is mortgaged
-    // {
-    //     return unmortgageDecision(player);
-    // }
-    // else    // if player is the owner and does not have enough money to unmortgage or property is mortgaged by another player
-    //     return std::nullopt;
 }
 
-void Property::handleUpgradableProperty(Player *owner, std::vector<PlayerDecisionOutputs> &decisions)
+std::vector<PlayerDecisionOutputs> Property::getFieldDecisions(Player* player) const
 {
-    // Decision decision;
-    if (numberOfHouses < MAX_NUMBER_OF_HOUSES && owner->getMoney() >= HOUSE_PRICE) // if player can buy a house
+    auto baseDecisions = Field::getFieldDecisions(player);
+
+    if (canBuyThisProperty(player))
     {
-        decisions.push_back(PlayerDecisionOutputs::BUY_HOUSE);
-        // board.currentPlayerPossibleDecisions.insert(PlayerDecisionOutputs::BUY_HOUSE);
-        // addBuyHouseDecision(owner, decision);
+        baseDecisions.push_back(PlayerDecisionOutputs::BUY_FIELD);
     }
-    // if (numberOfHouses > 0)
-    // {
-    //     addSellHouseDecision(owner, decision);
-    // }
-    // if (numberOfHouses == MAX_NUMBER_OF_HOUSES && owner->getMoney() >= HOTEL_PRICE) // if player can buy a hotel
-    // {
-    //     addBuyHotelDecision(owner, decision);
-    // }
-    // else if (hasHotel)
-    // {
-    //     return sellHotelDecision(owner);
-    // }
-    // return decision;
+    else if (canBuyHouseHere(player))
+    {
+        baseDecisions.push_back(PlayerDecisionOutputs::BUY_HOUSE);
+    }
+    return baseDecisions;
+}
+
+// void Property::handleOwnedProperty(Player *player) {
+//     if (owner != player && !isMortgaged)    // player has to pay rent to owner
+//     {
+//         player->payTo(owner, calculateRentPrice());
+//     }
+//     // else if (owner == player && !isMortgaged)   // player is the owner
+//     // {
+//     //     return handleUpgradableProperty(player);
+//     // }
+//     // else if (owner == player && owner->getMoney() >= mortgagePrice) // if player is the owner and property is mortgaged
+//     // {
+//     //     return unmortgageDecision(player);
+//     // }
+//     // else    // if player is the owner and does not have enough money to unmortgage or property is mortgaged by another player
+//     //     return std::nullopt;
+// }
+
+// void Property::handleUpgradableProperty(Player *owner)
+// {
+//     // Decision decision;
+//     if (numberOfHouses < MAX_NUMBER_OF_HOUSES && owner->getMoney() >= HOUSE_PRICE) // if player can buy a house
+//     {
+//         decisions.push_back(PlayerDecisionOutputs::BUY_HOUSE);
+//         // board.currentPlayerPossibleDecisions.insert(PlayerDecisionOutputs::BUY_HOUSE);
+//         // addBuyHouseDecision(owner, decision);
+//     }
+//     // if (numberOfHouses > 0)
+//     // {
+//     //     addSellHouseDecision(owner, decision);
+//     // }
+//     // if (numberOfHouses == MAX_NUMBER_OF_HOUSES && owner->getMoney() >= HOTEL_PRICE) // if player can buy a hotel
+//     // {
+//     //     addBuyHotelDecision(owner, decision);
+//     // }
+//     // else if (hasHotel)
+//     // {
+//     //     return sellHotelDecision(owner);
+//     // }
+//     // return decision;
+// }
+
+bool Property::canBuyHouseHere(Player* player) const
+{
+    if (owner != player)
+    {
+        return false;
+    }
+    if(isMortgaged)
+    {
+        return false;
+    }
+    if (numberOfHouses == MAX_NUMBER_OF_HOUSES)
+    {
+        return false;
+    }
+    if(calculateNextHousePrice() > player->getMoney())
+    {
+        return false;
+    }
+    // TODO: check if player already bought house this turn
+    // TODO: check if property is newly bought
+    return true;
+}
+
+int Property::calculateNextHousePrice() const
+{
+    if (numberOfHouses < MAX_NUMBER_OF_HOUSES - 1)
+    {
+        return HOUSE_PRICE;
+    }
+    return HOTEL_PRICE;
+}
+
+bool Property::canBuyThisProperty(Player* player) const
+{
+    return !owner && player->getMoney() >= baseBuyPrice;
 }
 
 int Property::calculateRentPrice() const

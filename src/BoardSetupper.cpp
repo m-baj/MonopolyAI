@@ -1,96 +1,18 @@
 //
-// Created by adrwal on 11/3/24.
+// Created by adrwal on 11/17/24.
 //
 
-#include "GameCli.h"
+#include "BoardSetupper.h"
 
-#include <iostream>
-
+#include "Board.h"
 #include "CardField.h"
 #include "GoToJailField.h"
+#include "Property.h"
 #include "TaxField.h"
 #include "Trains.h"
 #include "Utilities.h"
 
-Board & Game::getBoard() const {
-    return board;
-}
-
-bool GameCli::isOver() const
-{
-    return false;
-}
-
-void GameCli::play()
-{
-    // getBoard().setPlayedGame(this);
-    Player* player = getBoard().getCurrentPlayer();
-    std::cout << "Player " << player->getName() << " turn" << std::endl;
-    bool endTurn = false;
-
-    while (!endTurn)
-    {
-        this->displayMenu(getBoard().getRoundState());
-
-        char choice;
-        std::cin >> choice;
-
-        // TODO: validate choice with current round state
-
-        switch (choice)
-        {
-        case '1':
-            {
-                auto steps = getBoard().rollDice();
-                std::cout << "Rolled " << steps << std::endl;
-                getBoard().movePlayer(steps);
-                break;
-            }
-        case 'd':
-            {
-                this->drawBoard();
-                break;
-            }
-        }
-
-    }
-}
-
-void GameCli::displayMenu(RoundState round_state) const
-{
-    switch (round_state)
-    {
-    case RoundState::ROLL_DICE:
-        std::cout << "Time to roll dice" << std::endl;
-        std::cout << "1. Roll dice" << std::endl;
-        std::cout << "d. Display board" << std::endl;
-        break;
-
-    }
-}
-
-void GameCli::drawBoard() const
-{
-    for (int i = 0; i < getBoard().getFields().size(); i++)
-    {
-        std::cout << i+1 << ": ";
-        auto& field = getBoard().getFields()[i];
-
-        std::cout << "(" << field->getName() << ") ";
-        auto players = field->getPlayersOnField();
-        std::cout << "[ ";
-        for (auto& player : players)
-        {
-            if(player.has_value())
-            {
-                std::cout << player.value()->getName() << " ";
-            }
-        }
-        std::cout << "] " << std::endl;
-    }
-}
-
-void GameCli::addClassicMonopolyFields(Board& board)
+void BoardSetupCreator::createClassicBoard(Board& board)
 {
     board.pushField(std::make_shared<Field>("START", board));
     board.pushField(std::make_shared<Property>("MEDITERRANEAN AVENUE", board, 60, 10, 30, Color::BROWN));
@@ -133,7 +55,3 @@ void GameCli::addClassicMonopolyFields(Board& board)
     board.pushField(std::make_shared<TaxField>("LUXURY TAX", board));
     board.pushField(std::make_shared<Property>("BOARDWALK", board, 400, 100, 200, Color::BLUE));
 }
-
-// std::unique_ptr<ChoiceSelection> GameCli::createChoiceSelection(const Decision& decision, const std::string& label) const {
-//     return std::make_unique<ConsoleChoiceSelection>(decision, label);
-// }
