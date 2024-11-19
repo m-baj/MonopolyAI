@@ -57,7 +57,6 @@ private:
     int money;
     std::string name;
     int positionIdx = 0;
-    // Board& board;
     bool isBankrupt = false;
 };
 

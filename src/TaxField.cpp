@@ -11,11 +11,4 @@ const int TAX_AMOUNT = 200;
 void TaxField::onPlayerEnter(Player* player)
 {
     player->payToBank(TAX_AMOUNT);
-
-    // return {
-    //     PlayerDecisionOutputs::SELL_HOUSE,
-    //     PlayerDecisionOutputs::THROW_DICE,
-    //     PlayerDecisionOutputs::MORTGAGE_FIELD,
-    //     PlayerDecisionOutputs::UNMORTGAGE_FIELD,
-    // };
 }

@@ -29,33 +29,10 @@ void Board::pushPlayer(std::unique_ptr<Player> player)
     players.push_back(std::move(player));
 }
 
-// void Board::setRoundState(RoundState state)
-// {
-//     this->roundState = state;
-// }
-
-// void Board::setPlayedGame(Game *game) {
-//     playedGame = game;
-// }
-//
-// RoundState Board::getRoundState() const
-// {
-//     return this->roundState;
-// }
-
 Field* Board::getSteppedOnField() const
 {
     return this->fields[this->getCurrentPlayer()->getPositionIdx()].get();
 }
-
-// Game* Board::getPlayedGame() const {
-//     return playedGame;
-// }
-
-// std::unique_ptr<ChoiceSelection> Board::createChoiceSelection(const Decision& decision, const std::string& label)
-// {
-//     if()
-// }
 
 Player* Board::getCurrentPlayer() const
 {
@@ -70,26 +47,18 @@ int Board::rollDice() const
 
 void Board::movePlayer(int steps)
 {
-    // if (this->roundState != RoundState::WAIT_FOR_ROLL_DICE)
-    // {
-    //     throw InvalidMoveException("Broken rules! Player wanted to move with round state not being ROLL_DICE");
-    // }
-
     auto currentPlayer = this->getCurrentPlayer();
     if(this->willMoveCrossStart(currentPlayer, steps))
     {
         currentPlayer->addMoney(CROSSING_START_BONUS);
     }
     currentPlayer->setPositionIdx(this->getNewPosition(currentPlayer, steps));
-    // this->setRoundState(RoundState::HANDLE_FIELD);
     this->fields[currentPlayer->getPositionIdx()]->onPlayerEnter(currentPlayer);
-    // this->setRoundState(RoundState::ACCEPT_PLAYER_DECISIONS);
 }
 
 void Board::nextPlayer()
 {
     currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-    // this->setRoundState(RoundState::WAIT_FOR_ROLL_DICE);
 }
 
 void Board::setCurrentPlayerIndex(int index)

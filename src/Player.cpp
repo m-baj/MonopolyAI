@@ -93,19 +93,6 @@ void Player::pay(int amount, Player* player)
                 );
         }
     }
-
-    // if (money - amount >= 0)
-    // {
-    //     money -= amount;
-    //     if (player)
-    //         player->addMoney(amount);
-    //     return std::nullopt;
-    // }
-    // else
-    // {
-    //     // TODO: implement logic when player does not have enough money to pay
-    //     return std::nullopt;
-    // }
 }
 
 std::unique_ptr<DecisionSelector> ConsolePlayer::createDecisionSelector()

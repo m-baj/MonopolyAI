@@ -11,16 +11,6 @@ const int HOUSE_PRICE = 50;
 const int MAX_NUMBER_OF_HOUSES = 5;
 const int HOTEL_PRICE = 250;
 
-// enum class Color {
-//     BROWN,
-//     LIGHT_BLUE,
-//     PINK,
-//     ORANGE,
-//     RED,
-//     YELLOW,
-//     GREEN,
-//     BLUE
-// };
 class Player;
 
 class Property final : public OwnableField {

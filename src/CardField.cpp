@@ -7,13 +7,6 @@
 
 void CardField::onPlayerEnter(Player* player) {
     this->drawCard(player);
-
-    // return {
-    //     PlayerDecisionOutputs::SELL_HOUSE,
-    //     PlayerDecisionOutputs::MORTGAGE_FIELD,
-    //     PlayerDecisionOutputs::UNMORTGAGE_FIELD,
-    //     PlayerDecisionOutputs::THROW_DICE
-    // };
 }
 
 void CardField::drawCard(Player *player) {
