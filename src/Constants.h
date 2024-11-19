@@ -41,4 +41,13 @@ const std::map<Color, int> COLOR_TO_FIELD_COUNT = {
     {Color::BLUE, 2}
 };
 
+const int BASE_RENT_FOR_TRAIN = 25;
+const int CROSSING_START_BONUS = 200;
+const double UNMORTGAGE_INTEREST_MULTIPLIER = 1.1;
+const int HOUSE_PRICE = 50;
+const int MAX_NUMBER_OF_HOUSES = 5;
+// TODO: Remove hotel, replace it with 5th house
+const int HOTEL_PRICE = 250;
+const int TAX_AMOUNT = 200;
+
 #endif //CONSTANTS_H

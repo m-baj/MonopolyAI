@@ -8,8 +8,6 @@
 #include "CardField.h"
 #include "Player.h"
 
-const int CROSSING_START_BONUS = 200;
-
 Board::Board()
 {
 }

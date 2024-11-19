@@ -7,12 +7,10 @@
 #include "Constants.h"
 #include "OwnableField.h"
 
-const int HOUSE_PRICE = 50;
-const int MAX_NUMBER_OF_HOUSES = 5;
-const int HOTEL_PRICE = 250;
 
 class Player;
 
+// TODO: Remove hotel, replace it with 5th house
 class Property final : public OwnableField {
 public:
     Property(const std::string& name, Board& board, int baseBuyPrice, int baseRentPrice, int mortgagePrice, Color color)

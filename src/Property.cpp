@@ -5,7 +5,6 @@
 #include "Property.h"
 #include "Player.h"
 
-const double UNMORTGAGE_INTEREST_MULTIPLIER = 1.1;
 
 void Property::onPlayerEnter(Player* player) {
     if (owner && owner != player && !isMortgaged) {    // player has to pay rent to owner
