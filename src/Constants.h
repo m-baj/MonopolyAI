@@ -13,6 +13,7 @@ enum class PlayerDecisionOutputs {
     BUY_HOUSE, // Buy on property that player is currently on. Buying hotel can be done by buying 5th house.
     SELL_HOUSE, // Sell any house built by player, anywhere. Selling hotel can be done by selling 5th house.
     BAIL_JAIL, // Pay bail to get out of jail
+    JAIL_DICE_ROLL, // Roll dice to get out of jail
     USE_GET_OUT_OF_JAIL_CARD, // Use get out of jail card to get out of jail
     NO_DECISION, // No decision to be made, next player
     THROW_DICE, // Throw dice to move, automatically done by AI.

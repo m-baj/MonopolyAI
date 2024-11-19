@@ -43,10 +43,3 @@ int Trains::calculateRentPrice() const {
     return BASE_RENT_FOR_TRAIN * multiplier;
 }
 
-std::vector<PlayerDecisionOutputs> Trains::getFieldDecisions(Player* player) const
-{
-    auto baseDecisions = Field::getFieldDecisions(player);
-
-    if(!owner && player->getMoney() >= baseBuyPrice)
-        baseDecisions.push_back(PlayerDecisionOutputs::BUY_FIELD);
-}

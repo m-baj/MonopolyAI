@@ -36,7 +36,6 @@ public:
     int getNumberOfHouses() const;
     bool getHasHotel() const;
     int calculateNextHousePrice() const;
-    bool canBuyThisProperty(Player* player) const;
     bool canBuyHouseHere(Player* player) const;
 
     void setHasHotel(bool hasHotel);
@@ -46,9 +45,6 @@ public:
     void addHouse();
 
 private:
-    void handleOwnedProperty(Player* player);
-    void handleUpgradableProperty(Player* owner);
-
     int baseRentPrice;
     int mortgagePrice;
     bool isMortgaged;

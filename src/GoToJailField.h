@@ -14,6 +14,8 @@ public:
     {
     }
 
+    std::vector<PlayerDecisionOutputs> getFieldDecisions(Player* player) const override;
+
 };
 
 

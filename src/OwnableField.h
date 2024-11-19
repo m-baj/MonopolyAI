@@ -16,6 +16,8 @@ public:
     std::optional<Player*> getOwner() const;
     void setOwner(Player* player);
 
+    virtual std::vector<PlayerDecisionOutputs> getFieldDecisions(Player* player) const;
+
 protected:
     Player* owner = nullptr;
     int baseBuyPrice;

@@ -14,12 +14,8 @@ public:
         : OwnableField(name, board, baseBuyPrice) {}
 
     int calculateRentPrice() const;
-    std::vector<PlayerDecisionOutputs> getFieldDecisions(Player* player) const override;
 
     void onPlayerEnter(Player* player) override;
-
-// private:
-//     std::optional<Decision> handleUnownedTrain(Player* player);
 };
 
 

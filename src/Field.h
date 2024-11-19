@@ -30,8 +30,7 @@ public:
     /*
      * Method called when player enters the field.
      * Executes all immediate actions.
-     * Returns decision that can later be made by player.
-     * In some cases, need to prompt player decision immediately. (e.g. when player is out of money)
+     * In some cases will call DecisionSelector.requireSelection(). (e.g. when player is out of money)
      */
     virtual void onPlayerEnter(Player* player) {};
 
