@@ -97,12 +97,12 @@ void Player::pay(int amount, Player* player)
 
 std::unique_ptr<DecisionSelector> ConsolePlayer::createDecisionSelector()
 {
-    return std::make_unique<ConsoleDecisionSelector>();
+    return std::make_unique<ConsoleDecisionSelector>(*this);
 }
 
 std::unique_ptr<DecisionSelector> AiPlayer::createDecisionSelector()
 {
-    return std::make_unique<AiDecisionSelector>();
+    return std::make_unique<AiDecisionSelector>(*this);
 }
 
 bool Player::ownsAllPropertiesOf(Color color) const {
