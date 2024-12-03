@@ -3,7 +3,7 @@
 //
 #include <gtest/gtest.h>
 
-#include "../src/CardField.h"
+#include "../src/Fields/CardField.h"
 #include "../src/Board.h"
 
 TEST(TestCardField, CorrectInit)

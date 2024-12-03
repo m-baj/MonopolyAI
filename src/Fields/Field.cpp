@@ -4,9 +4,9 @@
 
 #include "Field.h"
 
-#include "Board.h"
-#include "Constants.h"
-#include "Player.h"
+#include "../Board.h"
+#include "../Constants.h"
+#include "../Player.h"
 
 std::string Field::getName() const
 {

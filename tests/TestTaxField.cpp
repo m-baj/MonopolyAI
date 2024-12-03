@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "../src/TaxField.h"
+#include "../src/Fields/TaxField.h"
 #include "../src/Board.h"
 
 TEST(TestOnPlayerEnter, PlayerPaysToBank)

@@ -5,12 +5,12 @@
 #include "BoardSetupper.h"
 
 #include "Board.h"
-#include "CardField.h"
-#include "GoToJailField.h"
-#include "Property.h"
-#include "TaxField.h"
-#include "Trains.h"
-#include "Utilities.h"
+#include "Fields/CardField.h"
+#include "Fields/GoToJailField.h"
+#include "Fields/Property.h"
+#include "Fields/TaxField.h"
+#include "Fields/Trains.h"
+#include "Fields/Utilities.h"
 
 void BoardSetupCreator::createClassicBoard(Board& board)
 {

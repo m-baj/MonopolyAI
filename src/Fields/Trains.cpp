@@ -4,9 +4,9 @@
 
 #include "Trains.h"
 
-#include "Board.h"
-#include "Constants.h"
-#include "Player.h"
+#include "../Board.h"
+#include "../Constants.h"
+#include "../Player.h"
 
 void Trains::onPlayerEnter(Player *player) {
     if (owner && owner != player)
