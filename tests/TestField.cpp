@@ -3,7 +3,7 @@
 //
 #include <gtest/gtest.h>
 
-#include "../src/Field.h"
+#include "../src/Fields/Field.h"
 #include "../src/Board.h"
 
 

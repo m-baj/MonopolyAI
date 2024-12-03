@@ -3,7 +3,7 @@
 //
 #include <gtest/gtest.h>
 
-#include "../src/Utilities.h"
+#include "../src/Fields/Utilities.h"
 TEST(TestUtilitiesField, CorrectInit)
 {
     EXPECT_EQ(1, 1);

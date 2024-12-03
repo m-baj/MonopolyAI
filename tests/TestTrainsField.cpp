@@ -3,7 +3,7 @@
 //
 #include <gtest/gtest.h>
 
-#include "../src/Trains.h"
+#include "../src/Fields/Trains.h"
 #include "../src/Board.h"
 #include <iostream>
 

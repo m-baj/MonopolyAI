@@ -5,7 +5,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "../src/Field.h"
+#include "../src/Fields/Field.h"
 #include "../src/Board.h"
 #include "../src/BoardSetupper.h"
 #include "../src/Game.h"

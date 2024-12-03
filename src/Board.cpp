@@ -4,7 +4,7 @@
 
 #include "Board.h"
 
-#include "BoardExceptions.h"
+#include "Exceptions/BoardExceptions.h"
 #include "Fields/CardField.h"
 #include "Player.h"
 

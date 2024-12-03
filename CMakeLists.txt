@@ -33,8 +33,8 @@ add_executable(MonopolyAITests
         tests/TestPlayer.cpp
         src/Game.cpp
         src/Player.cpp
-        src/BoardExceptions.cpp
-        src/BoardExceptions.h
+        src/Exceptions/BoardExceptions.cpp
+        src/Exceptions/BoardExceptions.h
         tests/TestProperty.cpp
         src/Fields/Trains.cpp
         src/Fields/Trains.h
@@ -74,8 +74,8 @@ add_executable(MonopolyAI main.cpp
         src/Fields/TaxField.h
         src/Game.cpp
         src/Player.cpp
-        src/BoardExceptions.cpp
-        src/BoardExceptions.h
+        src/Exceptions/BoardExceptions.cpp
+        src/Exceptions/BoardExceptions.h
         src/Fields/Trains.cpp
         src/Fields/OwnableField.cpp
         src/Fields/OwnableField.h

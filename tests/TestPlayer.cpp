@@ -6,8 +6,8 @@
 #include "../src/Board.h"
 #include "../src/Player.h"
 #include "../src/Constants.h"
-#include  "../src/Property.h"
-#include  "../src/Trains.h"
+#include  "../src/Fields/Property.h"
+#include  "../src/Fields/Trains.h"
 
 
 TEST(TestPlayer, InitPlayer)
