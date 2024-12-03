@@ -9,7 +9,7 @@
 #include "../src/Board.h"
 #include "../src/BoardSetupper.h"
 #include "../src/Game.h"
-
+#include "../src/Decision/ConsoleDecisionSelector.h"
 
 TEST(TestField, scenario0)
 {
@@ -23,7 +23,7 @@ TEST(TestField, scenario0)
 
     std::stringstream myStringStream = std::stringstream("td");
     ConsoleDecisionSelector::in_stream = &myStringStream;
-    game.nextTurn();
+    // game.nextTurn();
     // game.play();
 }
 

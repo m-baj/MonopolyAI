@@ -6,6 +6,8 @@
 #include "Player.h"
 
 #include "Property.h"
+#include "Decision/AiDecisionSelector.h"
+#include "Decision/ConsoleDecisionSelector.h"
 
 
 std::string Player::getName() const

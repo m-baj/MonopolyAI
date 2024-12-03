@@ -40,13 +40,17 @@ add_executable(MonopolyAITests
         src/Trains.h
         src/OwnableField.cpp
         src/OwnableField.h
-        src/Decision.cpp
-        src/Decision.h
+        src/Decision/DecisionSelector.cpp
+        src/Decision/DecisionSelector.h
         src/Utilities.cpp
         tests/TestGamesScenarios.cpp
         src/Constants.h
         src/BoardSetupper.cpp
         src/BoardSetupper.h
+        src/Decision/ConsoleDecisionSelector.cpp
+        src/Decision/ConsoleDecisionSelector.h
+        src/Decision/AiDecisionSelector.cpp
+        src/Decision/AiDecisionSelector.h
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
@@ -75,10 +79,14 @@ add_executable(MonopolyAI main.cpp
         src/Trains.cpp
         src/OwnableField.cpp
         src/OwnableField.h
-        src/Decision.cpp
-        src/Decision.h
+        src/Decision/DecisionSelector.cpp
+        src/Decision/DecisionSelector.h
         src/Utilities.cpp
         src/Constants.h
         src/BoardSetupper.cpp
         src/BoardSetupper.h
+        src/Decision/ConsoleDecisionSelector.cpp
+        src/Decision/ConsoleDecisionSelector.h
+        src/Decision/AiDecisionSelector.cpp
+        src/Decision/AiDecisionSelector.h
 )

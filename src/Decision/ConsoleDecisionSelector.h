@@ -1,32 +1,17 @@
 //
-// Created by Maksymilian Baj on 13.11.2024.
+// Created by adrwal on 12/3/24.
 //
 
-#ifndef MONOPOLYAI_DECISION_H
-#define MONOPOLYAI_DECISION_H
-
+#ifndef CONSOLEDECISIONSELECTOR_H
+#define CONSOLEDECISIONSELECTOR_H
 #include <format>
-#include <string>
-#include <functional>
-#include <iostream>
+#include <istream>
+#include <map>
+#include <vector>
 
-#include "Constants.h"
+#include "DecisionSelector.h"
+#include "../Constants.h"
 
-
-class Player;
-
-class DecisionSelector
-{
-public:
-    virtual ~DecisionSelector() = default;
-    explicit DecisionSelector(Player& player) : player_(player) {};
-
-    virtual void requireSelection(const std::string& label,
-                                  const std::vector<PlayerDecisionOutputs>&
-                                  possibleDecisions) = 0;
-private:
-    Player& player_;
-};
 
 namespace ConsoleDecisionSelectorHelpers
 {
@@ -71,16 +56,7 @@ public:
     static std::istream* in_stream;
 };
 
-// std::istream* ConsoleDecisionSelector::in_stream = &std::cin;
 
-class AiDecisionSelector final : public DecisionSelector
-{
-public:
-    explicit AiDecisionSelector(Player& player) : DecisionSelector(player) {};
 
-    void requireSelection(const std::string& label,
-                          const std::vector<PlayerDecisionOutputs>&
-                          possibleDecisions) override {};
-};
 
-#endif //MONOPOLYAI_DECISION_H
+#endif //CONSOLEDECISIONSELECTOR_H

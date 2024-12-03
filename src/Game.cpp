@@ -5,7 +5,7 @@
 #include "Game.h"
 #include "Board.h"
 #include "Constants.h"
-#include "Decision.h"
+#include "./Decision/DecisionSelector.h"
 #include "Field.h"
 #include "Player.h"
 
