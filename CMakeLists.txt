@@ -13,80 +13,80 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(MonopolyAITests
         src/Fields/Property.h
-        src/Fields/Property.cpp
+        src/Fields/Property.cc
         src/Fields/Field.h
-        src/Fields/Field.cpp
-        src/Fields/CardField.cpp
+        src/Fields/Field.cc
+        src/Fields/CardField.cc
         src/Fields/CardField.h
         tests/TestCardField.cpp
-        src/Fields/GoToJailField.cpp
+        src/Fields/GoToJailField.cc
         src/Fields/GoToJailField.h
         tests/TestGoToJailField.cpp
         tests/TestBoard.cpp
-        src/Board.cpp
-        src/Fields/TaxField.cpp
+        src/Board.cc
+        src/Fields/TaxField.cc
         src/Fields/TaxField.h
         tests/TestTaxField.cpp
         tests/TestUtilitiesField.cpp
         tests/TestTrainsField.cpp
         tests/TestField.cpp
         tests/TestPlayer.cpp
-        src/Game.cpp
-        src/Player.cpp
-        src/Exceptions/BoardExceptions.cpp
+        src/Game.cc
+        src/Player.cc
+        src/Exceptions/BoardExceptions.cc
         src/Exceptions/BoardExceptions.h
         tests/TestProperty.cpp
-        src/Fields/Trains.cpp
+        src/Fields/Trains.cc
         src/Fields/Trains.h
-        src/Fields/OwnableField.cpp
+        src/Fields/OwnableField.cc
         src/Fields/OwnableField.h
-        src/Decision/DecisionSelector.cpp
+        src/Decision/DecisionSelector.cc
         src/Decision/DecisionSelector.h
-        src/Fields/Utilities.cpp
+        src/Fields/Utilities.cc
         tests/TestGamesScenarios.cpp
         src/Constants.h
-        src/BoardSetupper.cpp
+        src/BoardSetupper.cc
         src/BoardSetupper.h
-        src/Decision/ConsoleDecisionSelector.cpp
+        src/Decision/ConsoleDecisionSelector.cc
         src/Decision/ConsoleDecisionSelector.h
-        src/Decision/AiDecisionSelector.cpp
+        src/Decision/AiDecisionSelector.cc
         src/Decision/AiDecisionSelector.h
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
 
-add_executable(MonopolyAI main.cpp
+add_executable(MonopolyAI main.cc
         src/Board.h
         src/Fields/Field.h
         src/Game.h
         src/Player.h
         src/Fields/Trains.h
         src/Fields/Utilities.h
-        main.cpp
-        src/Fields/Property.cpp
-        src/Fields/Field.cpp
-        src/Fields/CardField.cpp
+        main.cc
+        src/Fields/Property.cc
+        src/Fields/Field.cc
+        src/Fields/CardField.cc
         src/Fields/CardField.h
-        src/Fields/GoToJailField.cpp
+        src/Fields/GoToJailField.cc
         src/Fields/GoToJailField.h
-        src/Board.cpp
-        src/Fields/TaxField.cpp
+        src/Board.cc
+        src/Fields/TaxField.cc
         src/Fields/TaxField.h
-        src/Game.cpp
-        src/Player.cpp
-        src/Exceptions/BoardExceptions.cpp
+        src/Game.cc
+        src/Player.cc
+        src/Exceptions/BoardExceptions.cc
         src/Exceptions/BoardExceptions.h
-        src/Fields/Trains.cpp
-        src/Fields/OwnableField.cpp
+        src/Fields/Trains.cc
+        src/Fields/OwnableField.cc
         src/Fields/OwnableField.h
-        src/Decision/DecisionSelector.cpp
+        src/Decision/DecisionSelector.cc
         src/Decision/DecisionSelector.h
-        src/Fields/Utilities.cpp
+        src/Fields/Utilities.cc
         src/Constants.h
-        src/BoardSetupper.cpp
+        src/BoardSetupper.cc
         src/BoardSetupper.h
-        src/Decision/ConsoleDecisionSelector.cpp
+        src/Decision/ConsoleDecisionSelector.cc
         src/Decision/ConsoleDecisionSelector.h
-        src/Decision/AiDecisionSelector.cpp
+        src/Decision/AiDecisionSelector.cc
         src/Decision/AiDecisionSelector.h
 )
