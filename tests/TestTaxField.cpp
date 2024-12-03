@@ -2,12 +2,11 @@
 // Created by Maksymilian Baj on 07.11.2024.
 //
 
-#include "gtest/gtest.h"
-#include "../src/Fields/TaxField.h"
 #include "../src/Board.h"
+#include "../src/Fields/TaxField.h"
+#include "gtest/gtest.h"
 
-TEST(TestOnPlayerEnter, PlayerPaysToBank)
-{
+TEST(TestOnPlayerEnter, PlayerPaysToBank) {
     Board board;
     auto taxField = std::make_shared<TaxField>("", board);
     auto player = std::make_unique<ConsolePlayer>("", 1000);

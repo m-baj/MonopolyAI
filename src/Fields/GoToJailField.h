@@ -8,17 +8,14 @@
 #include "Field.h"
 
 
-class GoToJailField final : public Field{
+class GoToJailField final : public Field {
 public:
     explicit GoToJailField(const std::string& name, Board& board)
-        : Field(name, board)
-    {
+        : Field(name, board) {
     }
 
     std::vector<PlayerDecisionOutputs> getFieldDecisions(Player* player) const override;
-
 };
 
 
-
-#endif //GOTOJAILFIELD_H
+#endif//GOTOJAILFIELD_H

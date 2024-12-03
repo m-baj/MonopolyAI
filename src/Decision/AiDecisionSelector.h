@@ -11,16 +11,14 @@
 #include "DecisionSelector.h"
 
 
-class AiDecisionSelector final : public DecisionSelector
-{
+class AiDecisionSelector final : public DecisionSelector {
 public:
     explicit AiDecisionSelector(Player& player) : DecisionSelector(player) {};
 
     void requireSelection(const std::string& label,
                           const std::vector<PlayerDecisionOutputs>&
-                          possibleDecisions) override {};
+                                  possibleDecisions) override {};
 };
 
 
-
-#endif //AIDECISIONSELECTOR_H
+#endif//AIDECISIONSELECTOR_H

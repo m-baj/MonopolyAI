@@ -23,8 +23,8 @@ public:
 
     Player* getCurrentPlayer() const;
     int getNewPosition(Player* player, int steps) const;
-    const std::vector<std::shared_ptr<Field>> &getFields() const;
-    const std::vector<std::unique_ptr<Player>> &getPlayers() const;
+    const std::vector<std::shared_ptr<Field>>& getFields() const;
+    const std::vector<std::unique_ptr<Player>>& getPlayers() const;
     bool willMoveCrossStart(Player* player, int steps) const;
     int rollDice() const;
     Field* getSteppedOnField() const;
@@ -42,5 +42,4 @@ private:
 };
 
 
-
-#endif //BOARD_H
+#endif//BOARD_H

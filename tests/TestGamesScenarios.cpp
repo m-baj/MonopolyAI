@@ -5,14 +5,13 @@
 #include <iostream>
 #include <sstream>
 
-#include "../src/Fields/Field.h"
 #include "../src/Board.h"
 #include "../src/BoardSetupper.h"
-#include "../src/Game.h"
 #include "../src/Decision/ConsoleDecisionSelector.h"
+#include "../src/Fields/Field.h"
+#include "../src/Game.h"
 
-TEST(TestField, scenario0)
-{
+TEST(TestField, scenario0) {
     Board board;
     Game game(board);
     BoardSetupCreator::createClassicBoard(board);
@@ -26,4 +25,3 @@ TEST(TestField, scenario0)
     // game.nextTurn();
     // game.play();
 }
-

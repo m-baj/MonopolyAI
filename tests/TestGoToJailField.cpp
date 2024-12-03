@@ -6,7 +6,6 @@
 #include "../src/Fields/GoToJailField.h"
 
 
-TEST(TestGoToJailField, CorrectInit)
-{
+TEST(TestGoToJailField, CorrectInit) {
     EXPECT_EQ(1, 1);
 }

@@ -3,40 +3,35 @@
 //
 
 #include "Game.h"
+#include "./Decision/DecisionSelector.h"
 #include "Board.h"
 #include "Constants.h"
-#include "./Decision/DecisionSelector.h"
 #include "Fields/Field.h"
 #include "Player.h"
 
 
-Board & Game::getBoard() const {
+Board& Game::getBoard() const {
     return board;
 }
 
-bool Game::isOver() const
-{
+bool Game::isOver() const {
     return false;
 }
 
-void Game::play()
-{
-    while (!this->isOver())
-    {
+void Game::play() {
+    while (!this->isOver()) {
         this->nextTurn();
     }
 }
 
-void Game::nextTurn()
-{
+void Game::nextTurn() {
     Player* player = getBoard().getCurrentPlayer();
     player->createDecisionSelector()->requireSelection("", {PlayerDecisionOutputs::THROW_DICE});
     auto diceRol = getBoard().rollDice();
     getBoard().movePlayer(diceRol);
 
     std::vector<PlayerDecisionOutputs> remainingDecisions = {};
-    do
-    {
+    do {
         remainingDecisions = getBoard().getSteppedOnField()->getFieldDecisions(player);
         player->createDecisionSelector()->requireSelection("", remainingDecisions);
     } while (!remainingDecisions.empty());

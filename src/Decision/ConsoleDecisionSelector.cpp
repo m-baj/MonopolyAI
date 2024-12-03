@@ -7,16 +7,13 @@
 #include <iostream>
 
 std::istream* ConsoleDecisionSelector::in_stream = &std::cin;
-void ConsoleDecisionSelectorHelpers::printDecisions(const std::vector<PlayerDecisionOutputs>& possibleDecisions)
-{
-    for (auto decision : possibleDecisions)
-    {
+void ConsoleDecisionSelectorHelpers::printDecisions(const std::vector<PlayerDecisionOutputs>& possibleDecisions) {
+    for (auto decision: possibleDecisions) {
         std::cout << DECISION_SELECT_LABEL.at(decision) << std::endl;
     }
 }
 
-std::string ConsoleDecisionSelectorHelpers::receiveInput(std::istream& in)
-{
+std::string ConsoleDecisionSelectorHelpers::receiveInput(std::istream& in) {
     std::cout << "Enter decision: ";
     std::string decision;
     in >> decision;
@@ -26,8 +23,7 @@ std::string ConsoleDecisionSelectorHelpers::receiveInput(std::istream& in)
 
 void ConsoleDecisionSelector::requireSelection(const std::string& label,
                                                const std::vector<PlayerDecisionOutputs>&
-                                               possibleDecisions)
-{
+                                                       possibleDecisions) {
     // TODO: Implement decision selection through console. All decisions in `possibleDecisions` should be handled here, as well as decisions following from them.
     ConsoleDecisionSelectorHelpers::printDecisions(possibleDecisions);
     std::cout << "Enter decision: ";

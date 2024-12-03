@@ -18,5 +18,4 @@ public:
 };
 
 
-
-#endif //TRAINS_H
+#endif//TRAINS_H

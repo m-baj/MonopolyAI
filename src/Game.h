@@ -8,8 +8,7 @@
 #include "Board.h"
 
 
-class Game final
-{
+class Game final {
 public:
     explicit Game(Board& board)
         : board(board) {};
@@ -26,4 +25,4 @@ private:
 };
 
 
-#endif //GAME_H
+#endif//GAME_H

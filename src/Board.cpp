@@ -8,76 +8,62 @@
 #include "Fields/CardField.h"
 #include "Player.h"
 
-Board::Board()
-{
+Board::Board() {
 }
 
-const std::vector<std::unique_ptr<Player>>& Board::getPlayers() const
-{
+const std::vector<std::unique_ptr<Player>>& Board::getPlayers() const {
     return this->players;
 }
 
-void Board::pushField(std::shared_ptr<Field> field)
-{
+void Board::pushField(std::shared_ptr<Field> field) {
     this->fields.push_back(field);
 }
 
-void Board::pushPlayer(std::unique_ptr<Player> player)
-{
+void Board::pushPlayer(std::unique_ptr<Player> player) {
     players.push_back(std::move(player));
 }
 
-Field* Board::getSteppedOnField() const
-{
+Field* Board::getSteppedOnField() const {
     return this->fields[this->getCurrentPlayer()->getPositionIdx()].get();
 }
 
-Player* Board::getCurrentPlayer() const
-{
+Player* Board::getCurrentPlayer() const {
     return this->players[this->currentPlayerIndex].get();
 }
 
 
-int Board::rollDice() const
-{
+int Board::rollDice() const {
     return (std::rand() % 6 + 1) + (std::rand() % 6 + 1);
 }
 
-void Board::movePlayer(int steps)
-{
+void Board::movePlayer(int steps) {
     auto currentPlayer = this->getCurrentPlayer();
-    if(this->willMoveCrossStart(currentPlayer, steps))
-    {
+    if (this->willMoveCrossStart(currentPlayer, steps)) {
         currentPlayer->addMoney(CROSSING_START_BONUS);
     }
     currentPlayer->setPositionIdx(this->getNewPosition(currentPlayer, steps));
     this->fields[currentPlayer->getPositionIdx()]->onPlayerEnter(currentPlayer);
 }
 
-void Board::nextPlayer()
-{
+void Board::nextPlayer() {
     currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 }
 
-void Board::setCurrentPlayerIndex(int index)
-{
+void Board::setCurrentPlayerIndex(int index) {
     this->currentPlayerIndex = index;
 }
 
-bool Board::willMoveCrossStart(Player* player, int steps) const
-{
+bool Board::willMoveCrossStart(Player* player, int steps) const {
     return this->getNewPosition(player, steps) < player->getPositionIdx();
 }
 
-int Board::getNewPosition(Player* player, int steps) const
-{
+int Board::getNewPosition(Player* player, int steps) const {
     int fieldsCount = this->fields.size();
     int currentPosition = player->getPositionIdx();
     int newPosition = (currentPosition + steps) % fieldsCount;
     return newPosition;
 }
 
-const std::vector<std::shared_ptr<Field>>& Board::getFields() const
-{
+const std::vector<std::shared_ptr<Field>>& Board::getFields() const {
     return this->fields;
 }

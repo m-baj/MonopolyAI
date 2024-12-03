@@ -3,12 +3,11 @@
 //
 #include <gtest/gtest.h>
 
-#include "../src/Fields/Field.h"
 #include "../src/Board.h"
+#include "../src/Fields/Field.h"
 
 
-TEST(TestField, getPlayersOnField)
-{
+TEST(TestField, getPlayersOnField) {
     Board board;
     auto field0 = std::make_shared<Field>("", board);
     auto field1 = std::make_shared<Field>("", board);
@@ -27,8 +26,7 @@ TEST(TestField, getPlayersOnField)
     EXPECT_EQ(field1->getPlayersOnField()[0].value(), board.getPlayers()[0].get());
 }
 
-TEST(TestField, getPlayersOnFieldManyPlayers)
-{
+TEST(TestField, getPlayersOnFieldManyPlayers) {
     Board board;
     auto field0 = std::make_shared<Field>("", board);
     auto field1 = std::make_shared<Field>("", board);
@@ -79,11 +77,9 @@ TEST(TestField, getPlayersOnFieldManyPlayers)
     EXPECT_EQ(field0Players[1].value(), board.getPlayers()[3].get());
     EXPECT_EQ(field1Players[0].value(), board.getPlayers()[0].get());
     EXPECT_EQ(field1Players[1].value(), board.getPlayers()[2].get());
-
 }
 
-TEST(TestField, getFieldIdx)
-{
+TEST(TestField, getFieldIdx) {
     Board board;
     auto field0 = std::make_shared<Field>("", board);
     auto field1 = std::make_shared<Field>("", board);

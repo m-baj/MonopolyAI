@@ -4,28 +4,25 @@
 #include <gtest/gtest.h>
 
 #include "../src/Board.h"
-#include "../src/Player.h"
 #include "../src/Constants.h"
-#include  "../src/Fields/Property.h"
-#include  "../src/Fields/Trains.h"
+#include "../src/Fields/Property.h"
+#include "../src/Fields/Trains.h"
+#include "../src/Player.h"
 
 
-TEST(TestPlayer, InitPlayer)
-{
+TEST(TestPlayer, InitPlayer) {
     ConsolePlayer player("Player", 1000);
     EXPECT_EQ(player.getName(), "Player");
     EXPECT_EQ(player.getMoney(), 1000);
 }
 
-TEST(TestPlayer, SetPosition)
-{
+TEST(TestPlayer, SetPosition) {
     ConsolePlayer player("Player", 1000);
     player.setPositionIdx(1);
     EXPECT_EQ(player.getPositionIdx(), 1);
 }
 
-TEST(TestPlayer, pushProperty)
-{
+TEST(TestPlayer, pushProperty) {
     Board board;
     ConsolePlayer player("Player", 1000);
     auto property = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
@@ -34,15 +31,13 @@ TEST(TestPlayer, pushProperty)
     EXPECT_EQ(player.getProperties()[0].get(), property.get());
 }
 
-TEST(TestPlayer, addMoney)
-{
+TEST(TestPlayer, addMoney) {
     ConsolePlayer player("Player", 1000);
     player.addMoney(300);
     EXPECT_EQ(player.getMoney(), 1300);
 }
 
-TEST(TestPlayerOwnsAllPropertiesOfColor, ownsAllPropertiesOfColor)
-{
+TEST(TestPlayerOwnsAllPropertiesOfColor, ownsAllPropertiesOfColor) {
     Board board;
     auto player = std::make_unique<ConsolePlayer>("player", 1000);
     auto property1 = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
@@ -52,8 +47,7 @@ TEST(TestPlayerOwnsAllPropertiesOfColor, ownsAllPropertiesOfColor)
     EXPECT_EQ(player->ownsAllPropertiesOf(Color::BROWN), true);
 }
 
-TEST(TestPlayerOwnsAllPropertiesOfColor, ownsAllPropertiesOfColorFalse)
-{
+TEST(TestPlayerOwnsAllPropertiesOfColor, ownsAllPropertiesOfColorFalse) {
     Board board;
     auto player = std::make_unique<ConsolePlayer>("player", 1000);
     auto property1 = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
@@ -61,8 +55,7 @@ TEST(TestPlayerOwnsAllPropertiesOfColor, ownsAllPropertiesOfColorFalse)
     EXPECT_EQ(player->ownsAllPropertiesOf(Color::BROWN), false);
 }
 
-TEST(TestPlayerGetNumberOfTrains, getNumberOfTrains)
-{
+TEST(TestPlayerGetNumberOfTrains, getNumberOfTrains) {
     Board board;
     auto player = std::make_unique<ConsolePlayer>("player", 1000);
     auto train1 = std::make_shared<Trains>("", board, 1);

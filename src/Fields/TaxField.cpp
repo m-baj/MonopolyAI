@@ -5,7 +5,6 @@
 #include "TaxField.h"
 #include "../Player.h"
 
-void TaxField::onPlayerEnter(Player* player)
-{
+void TaxField::onPlayerEnter(Player* player) {
     player->payToBank(TAX_AMOUNT);
 }

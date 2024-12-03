@@ -8,12 +8,11 @@
 #include <stdexcept>
 #include <string>
 
-class InvalidMoveException : public std::runtime_error
-{
+class InvalidMoveException : public std::runtime_error {
 public:
     explicit InvalidMoveException(const std::string& message)
         : std::runtime_error(message) {}
 };
 
 
-#endif //BOARDEXCEPTIONS_H
+#endif//BOARDEXCEPTIONS_H

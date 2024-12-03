@@ -2,11 +2,11 @@
 // Created by Maksymilian Baj on 07.11.2024.
 //
 
-#include "gtest/gtest.h"
 #include "../src/Board.h"
-#include "../src/Player.h"
 #include "../src/Constants.h"
 #include "../src/Fields/Property.h"
+#include "../src/Player.h"
+#include "gtest/gtest.h"
 
 TEST(TestGetOwner, OwnerExists) {
     Board board;

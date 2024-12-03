@@ -9,6 +9,5 @@ void CardField::onPlayerEnter(Player* player) {
     this->drawCard(player);
 }
 
-void CardField::drawCard(Player *player) {
-
+void CardField::drawCard(Player* player) {
 }

@@ -3,12 +3,11 @@
 //
 #include <gtest/gtest.h>
 
-#include "../src/Fields/Trains.h"
 #include "../src/Board.h"
+#include "../src/Fields/Trains.h"
 #include <iostream>
 
-TEST(TestCalculateRent, testCalculateRent)
-{
+TEST(TestCalculateRent, testCalculateRent) {
     Board board;
     auto owner = std::make_unique<ConsolePlayer>("owner", 1000);
     auto train1 = std::make_shared<Trains>("", board, 100);

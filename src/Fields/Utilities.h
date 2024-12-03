@@ -15,5 +15,4 @@ public:
 };
 
 
-
-#endif //UTILITIES_H
+#endif//UTILITIES_H

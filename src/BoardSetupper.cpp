@@ -12,8 +12,7 @@
 #include "Fields/Trains.h"
 #include "Fields/Utilities.h"
 
-void BoardSetupCreator::createClassicBoard(Board& board)
-{
+void BoardSetupCreator::createClassicBoard(Board& board) {
     board.pushField(std::make_shared<Field>("START", board));
     board.pushField(std::make_shared<Property>("MEDITERRANEAN AVENUE", board, 60, 10, 30, Color::BROWN));
     board.pushField(std::make_shared<CardField>("COMMUNITY CHEST", board));

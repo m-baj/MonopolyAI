@@ -11,13 +11,11 @@
 class TaxField final : public Field {
 public:
     TaxField(const std::string& name, Board& board)
-        : Field(name, board)
-    {
+        : Field(name, board) {
     }
 
-    void onPlayerEnter(Player* player) override ;
+    void onPlayerEnter(Player* player) override;
 };
 
 
-
-#endif //TAXFIELD_H
+#endif//TAXFIELD_H

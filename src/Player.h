@@ -61,24 +61,20 @@ private:
     bool isBankrupt = false;
 };
 
-class ConsolePlayer final : public Player
-{
+class ConsolePlayer final : public Player {
 public:
     ConsolePlayer(const std::string& name, int startMoney)
-        : Player(name, startMoney)
-    {
+        : Player(name, startMoney) {
     }
     ~ConsolePlayer() override = default;
 
     std::unique_ptr<DecisionSelector> createDecisionSelector() override;
 };
 
-class AiPlayer final : public Player
-{
+class AiPlayer final : public Player {
 public:
     AiPlayer(const std::string& name, int startMoney)
-        : Player(name, startMoney)
-    {
+        : Player(name, startMoney) {
     }
     ~AiPlayer() override = default;
 
@@ -86,4 +82,4 @@ public:
 };
 
 
-#endif //PLAYER_H
+#endif//PLAYER_H

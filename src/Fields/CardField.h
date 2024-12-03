@@ -12,8 +12,7 @@
 class CardField final : public Field {
 public:
     explicit CardField(const std::string& name, Board& board)
-        : Field(name, board)
-    {
+        : Field(name, board) {
     }
     ~CardField() override = default;
 
@@ -22,5 +21,4 @@ public:
 };
 
 
-
-#endif //CARDFIELD_H
+#endif//CARDFIELD_H

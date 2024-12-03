@@ -3,11 +3,10 @@
 //
 #include <gtest/gtest.h>
 
-#include "../src/Fields/CardField.h"
 #include "../src/Board.h"
+#include "../src/Fields/CardField.h"
 
-TEST(TestCardField, CorrectInit)
-{
+TEST(TestCardField, CorrectInit) {
     Board board;
     std::shared_ptr<CardField> cardField = std::make_shared<CardField>("CardField", board);
     board.pushField(cardField);

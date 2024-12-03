@@ -25,4 +25,4 @@ protected:
 };
 
 
-#endif //MONOPOLYAI_OWNABLEFIELD_H
+#endif//MONOPOLYAI_OWNABLEFIELD_H
