@@ -12,7 +12,7 @@
 class OwnableField : public Field {
 public:
     OwnableField(const std::string& name, Board& board, int baseBuyPrice)
-        : Field(name, board), baseBuyPrice(baseBuyPrice) {};
+        : Field(name, board), baseBuyPrice_(baseBuyPrice) {};
 
     std::optional<Player*> getOwner() const;
     void setOwner(Player* player);
@@ -20,8 +20,8 @@ public:
     virtual std::vector<PlayerDecisionOutputs> getFieldDecisions(Player* player) const;
 
 protected:
-    Player* owner = nullptr;
-    int baseBuyPrice;
+    Player* owner_ = nullptr;
+    int baseBuyPrice_;
 };
 
 

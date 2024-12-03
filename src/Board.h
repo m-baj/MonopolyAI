@@ -1,6 +1,6 @@
 //
 // Created by adrwal on 11/3/24.
-// Class representing a game board
+// Class representing a game board_
 //
 
 #ifndef BOARD_H
@@ -12,7 +12,7 @@
 #include "Player.h"
 
 /*
- * Board class is responsible for managing actions caused by players choices.
+ * Board class is responsible for managing actions caused by players_ choices.
  * It performs logic which does not require any user input.
  * Mapping user input to actions is done in Game class.
  */
@@ -36,9 +36,9 @@ public:
     void nextPlayer();
 
 private:
-    std::vector<std::shared_ptr<Field>> fields = {};
-    std::vector<std::unique_ptr<Player>> players = {};
-    int currentPlayerIndex = 0;
+    std::vector<std::shared_ptr<Field>> fields_ = {};
+    std::vector<std::unique_ptr<Player>> players_ = {};
+    int currentPlayerIndex_ = 0;
 };
 
 

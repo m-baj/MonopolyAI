@@ -1,6 +1,6 @@
 //
 // Created by adrwal on 11/17/24.
-// Class responsible for creating a Monopoly board.
+// Class responsible for creating a Monopoly board_.
 //
 
 #ifndef BOARDSETUPPER_H

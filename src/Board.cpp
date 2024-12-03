@@ -12,23 +12,23 @@ Board::Board() {
 }
 
 const std::vector<std::unique_ptr<Player>>& Board::getPlayers() const {
-    return this->players;
+    return this->players_;
 }
 
 void Board::pushField(std::shared_ptr<Field> field) {
-    this->fields.push_back(field);
+    this->fields_.push_back(field);
 }
 
 void Board::pushPlayer(std::unique_ptr<Player> player) {
-    players.push_back(std::move(player));
+    players_.push_back(std::move(player));
 }
 
 Field* Board::getSteppedOnField() const {
-    return this->fields[this->getCurrentPlayer()->getPositionIdx()].get();
+    return this->fields_[this->getCurrentPlayer()->getPositionIdx()].get();
 }
 
 Player* Board::getCurrentPlayer() const {
-    return this->players[this->currentPlayerIndex].get();
+    return this->players_[this->currentPlayerIndex_].get();
 }
 
 
@@ -42,15 +42,15 @@ void Board::movePlayer(int steps) {
         currentPlayer->addMoney(CROSSING_START_BONUS);
     }
     currentPlayer->setPositionIdx(this->getNewPosition(currentPlayer, steps));
-    this->fields[currentPlayer->getPositionIdx()]->onPlayerEnter(currentPlayer);
+    this->fields_[currentPlayer->getPositionIdx()]->onPlayerEnter(currentPlayer);
 }
 
 void Board::nextPlayer() {
-    currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+    currentPlayerIndex_ = (currentPlayerIndex_ + 1) % players_.size();
 }
 
 void Board::setCurrentPlayerIndex(int index) {
-    this->currentPlayerIndex = index;
+    this->currentPlayerIndex_ = index;
 }
 
 bool Board::willMoveCrossStart(Player* player, int steps) const {
@@ -58,12 +58,12 @@ bool Board::willMoveCrossStart(Player* player, int steps) const {
 }
 
 int Board::getNewPosition(Player* player, int steps) const {
-    int fieldsCount = this->fields.size();
+    int fieldsCount = this->fields_.size();
     int currentPosition = player->getPositionIdx();
     int newPosition = (currentPosition + steps) % fieldsCount;
     return newPosition;
 }
 
 const std::vector<std::shared_ptr<Field>>& Board::getFields() const {
-    return this->fields;
+    return this->fields_;
 }

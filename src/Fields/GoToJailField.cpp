@@ -7,6 +7,6 @@
 std::vector<PlayerDecisionOutputs> GoToJailField::getFieldDecisions(Player* player) const {
     std::vector<PlayerDecisionOutputs> decisions = {PlayerDecisionOutputs::JAIL_DICE_ROLL};
     // TODO: Check if player has get out of jail card
-    // TODO: Check if player has enough money to bail
+    // TODO: Check if player has enough money_ to bail
     return decisions;
 }

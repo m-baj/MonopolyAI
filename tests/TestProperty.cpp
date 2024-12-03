@@ -10,7 +10,7 @@
 
 TEST(TestGetOwner, OwnerExists) {
     Board board;
-    auto owner = std::make_unique<ConsolePlayer>("owner", 1000);
+    auto owner = std::make_unique<ConsolePlayer>("owner_", 1000);
     auto property = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
     property->setOwner(owner.get());
     EXPECT_EQ(property->getOwner(), owner.get());
@@ -25,7 +25,7 @@ TEST(TestGetOwner, testOwnerDoesNotExist) {
 TEST(TestOnPlayerEnter, PlayerPaysRent) {
     Board board;
     auto player = std::make_unique<ConsolePlayer>("player", 1000);
-    auto owner = std::make_unique<ConsolePlayer>("owner", 1000);
+    auto owner = std::make_unique<ConsolePlayer>("owner_", 1000);
     auto property = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
     property->setOwner(owner.get());
     board.pushField(property);
@@ -37,47 +37,47 @@ TEST(TestOnPlayerEnter, PlayerPaysRent) {
 }
 
 // TEST(TestOnPlayerEnter, PlayerUnmortgagesProperty) {
-//     Board board;
+//     Board board_;
 //     auto player = std::make_unique<Player>("player", 1000);
-//     auto property = std::make_shared<Property>("", board, 1, 1, 100, Color::BROWN);
+//     auto property = std::make_shared<Property>("", board_, 1, 1, 100, Color::BROWN);
 //     property->setOwner(player.get());
 //     property->setMortgaged(true);
-//     board.pushField(property);
-//     board.pushPlayer(std::move(player));
-//     auto decision = property->onPlayerEnter(board.getCurrentPlayer());
+//     board_.pushField(property);
+//     board_.pushPlayer(std::move(player));
+//     auto decision = property->onPlayerEnter(board_.getCurrentPlayer());
 //     auto choice = decision.value().getChoices()[0];
 //     EXPECT_TRUE(decision.has_value());
 //     EXPECT_EQ(choice.description, "Unmortgage");
 //     choice.action();
 //     EXPECT_FALSE(property->getIsMortgaged());
-//     EXPECT_EQ(board.getPlayers()[0]->getMoney(), int(1000 - 1.1 * property->getMortgagePrice()));
+//     EXPECT_EQ(board_.getPlayers()[0]->getMoney(), int(1000 - 1.1 * property->getMortgagePrice()));
 // }
 //
 // TEST(TestOnPlayerEnter, PlayerBuysHouse) {
-//     Board board;
+//     Board board_;
 //     auto player = std::make_unique<Player>("player", 1000);
-//     auto property = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
+//     auto property = std::make_shared<Property>("", board_, 1, 1, 1, Color::BROWN);
 //     property->setOwner(player.get());
-//     board.pushField(property);
-//     board.pushPlayer(std::move(player));
-//     auto decision = property->onPlayerEnter(board.getCurrentPlayer());
+//     board_.pushField(property);
+//     board_.pushPlayer(std::move(player));
+//     auto decision = property->onPlayerEnter(board_.getCurrentPlayer());
 //     auto choice = decision.value().getChoices()[0];
 //     EXPECT_TRUE(decision.has_value());
 //     EXPECT_EQ(choice.description, "Buy house");
 //     choice.action();
 //     EXPECT_EQ(property->getNumberOfHouses(), 1);
-//     EXPECT_EQ(board.getPlayers()[0]->getMoney(), 1000 - HOUSE_PRICE);
+//     EXPECT_EQ(board_.getPlayers()[0]->getMoney(), 1000 - HOUSE_PRICE);
 // }
 //
 // TEST(TestOnPlayerEnter, PlayerCanBuyOrSellHouse) {
-//     Board board;
+//     Board board_;
 //     auto player = std::make_unique<Player>("player", 1000);
-//     auto property = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
+//     auto property = std::make_shared<Property>("", board_, 1, 1, 1, Color::BROWN);
 //     property->setOwner(player.get());
 //     property->addHouse();
-//     board.pushField(property);
-//     board.pushPlayer(std::move(player));
-//     auto decision = property->onPlayerEnter(board.getCurrentPlayer());
+//     board_.pushField(property);
+//     board_.pushPlayer(std::move(player));
+//     auto decision = property->onPlayerEnter(board_.getCurrentPlayer());
 //     auto choices = decision.value().getChoices();
 //     EXPECT_TRUE(decision.has_value());
 //     EXPECT_EQ(choices.size(), 2);
@@ -86,17 +86,17 @@ TEST(TestOnPlayerEnter, PlayerPaysRent) {
 // }
 //
 // TEST(TestOnPlayerEnter, PlayerCanBuyHotelOrSellHouse) {
-//     Board board;
+//     Board board_;
 //     auto player = std::make_unique<Player>("player", 1000);
-//     auto property = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
+//     auto property = std::make_shared<Property>("", board_, 1, 1, 1, Color::BROWN);
 //     property->setOwner(player.get());
 //     property->addHouse();
 //     property->addHouse();
 //     property->addHouse();
 //     property->addHouse();
-//     board.pushField(property);
-//     board.pushPlayer(std::move(player));
-//     auto decision = property->onPlayerEnter(board.getCurrentPlayer());
+//     board_.pushField(property);
+//     board_.pushPlayer(std::move(player));
+//     auto decision = property->onPlayerEnter(board_.getCurrentPlayer());
 //     auto choices = decision.value().getChoices();
 //     EXPECT_TRUE(decision.has_value());
 //     EXPECT_EQ(choices.size(), 2);
@@ -105,72 +105,72 @@ TEST(TestOnPlayerEnter, PlayerPaysRent) {
 // }
 //
 // TEST(TestOnPlayerEnter, PlayerSellsHouse) {
-//     Board board;
+//     Board board_;
 //     auto player = std::make_unique<Player>("player", 1000);
-//     auto property = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
+//     auto property = std::make_shared<Property>("", board_, 1, 1, 1, Color::BROWN);
 //     property->setOwner(player.get());
 //     property->addHouse();
-//     board.pushField(property);
-//     board.pushPlayer(std::move(player));
-//     auto decision = property->onPlayerEnter(board.getCurrentPlayer());
+//     board_.pushField(property);
+//     board_.pushPlayer(std::move(player));
+//     auto decision = property->onPlayerEnter(board_.getCurrentPlayer());
 //     auto choice = decision.value().getChoices()[1];
 //     EXPECT_TRUE(decision.has_value());
 //     EXPECT_EQ(choice.description, "Sell house");
 //     choice.action();
 //     EXPECT_EQ(property->getNumberOfHouses(), 0);
-//     EXPECT_EQ(board.getPlayers()[0]->getMoney(), 1000 + HOUSE_PRICE);
+//     EXPECT_EQ(board_.getPlayers()[0]->getMoney(), 1000 + HOUSE_PRICE);
 // }
 //
 // TEST(TestOnPlayerEnter, PlayerBuysHotel) {
-//     Board board;
+//     Board board_;
 //     auto player = std::make_unique<Player>("player", 1000);
-//     auto property = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
+//     auto property = std::make_shared<Property>("", board_, 1, 1, 1, Color::BROWN);
 //     property->setOwner(player.get());
 //     property->addHouse();
 //     property->addHouse();
 //     property->addHouse();
 //     property->addHouse();
-//     board.pushField(property);
-//     board.pushPlayer(std::move(player));
-//     auto decision = property->onPlayerEnter(board.getCurrentPlayer());
+//     board_.pushField(property);
+//     board_.pushPlayer(std::move(player));
+//     auto decision = property->onPlayerEnter(board_.getCurrentPlayer());
 //     auto choice = decision.value().getChoices()[1];
 //     EXPECT_TRUE(decision.has_value());
 //     EXPECT_EQ(choice.description, "Buy hotel");
 //     choice.action();
 //     EXPECT_EQ(property->getNumberOfHouses(), 0);
 //     EXPECT_TRUE(property->getHasHotel());
-//     EXPECT_EQ(board.getPlayers()[0]->getMoney(), 1000 - HOTEL_PRICE);
+//     EXPECT_EQ(board_.getPlayers()[0]->getMoney(), 1000 - HOTEL_PRICE);
 // }
 //
 // TEST(TestOnPlayerEnter, PlayerSellsHotel) {
-//     Board board;
+//     Board board_;
 //     auto player = std::make_unique<Player>("player", 1000);
-//     auto property = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
+//     auto property = std::make_shared<Property>("", board_, 1, 1, 1, Color::BROWN);
 //     property->setOwner(player.get());
 //     property->setHasHotel(true);
-//     board.pushField(property);
-//     board.pushPlayer(std::move(player));
-//     auto decision = property->onPlayerEnter(board.getCurrentPlayer());
+//     board_.pushField(property);
+//     board_.pushPlayer(std::move(player));
+//     auto decision = property->onPlayerEnter(board_.getCurrentPlayer());
 //     auto choice = decision.value().getChoices()[0];
 //     EXPECT_TRUE(decision.has_value());
 //     EXPECT_EQ(choice.description, "Sell hotel");
 //     choice.action();
 //     EXPECT_FALSE(property->getHasHotel());
-//     EXPECT_EQ(board.getPlayers()[0]->getMoney(), 1000 + HOTEL_PRICE);
+//     EXPECT_EQ(board_.getPlayers()[0]->getMoney(), 1000 + HOTEL_PRICE);
 // }
 //
 // TEST(TestOnPlayerEnter, PlayerBuysProperty) {
-//     Board board;
+//     Board board_;
 //     auto player = std::make_unique<Player>("player", 1000);
-//     auto property = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
-//     board.pushField(property);
-//     board.pushPlayer(std::move(player));
-//     auto decision = property->onPlayerEnter(board.getCurrentPlayer());
+//     auto property = std::make_shared<Property>("", board_, 1, 1, 1, Color::BROWN);
+//     board_.pushField(property);
+//     board_.pushPlayer(std::move(player));
+//     auto decision = property->onPlayerEnter(board_.getCurrentPlayer());
 //     auto choice = decision.value().getChoices()[0];
 //     EXPECT_TRUE(decision.has_value());
 //     EXPECT_EQ(choice.description, "Buy property");
 //     choice.action();
-//     EXPECT_EQ(board.getPlayers()[0]->getMoney(), 1000 - 1);
-//     EXPECT_EQ(property->getOwner(), board.getPlayers()[0].get());
-//     EXPECT_EQ(board.getPlayers()[0]->getProperties().size(), 1);
+//     EXPECT_EQ(board_.getPlayers()[0]->getMoney(), 1000 - 1);
+//     EXPECT_EQ(property->getOwner(), board_.getPlayers()[0].get());
+//     EXPECT_EQ(board_.getPlayers()[0]->getProperties().size(), 1);
 // }

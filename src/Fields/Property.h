@@ -1,6 +1,6 @@
 //
 // Created by adrwal on 11/3/24.
-// Class representing a property field on the board.
+// Class representing a property field on the board_.
 //
 
 #ifndef PROPERTY_H
@@ -15,7 +15,7 @@ class Player;
 class Property final : public OwnableField {
 public:
     Property(const std::string& name, Board& board, int baseBuyPrice, int baseRentPrice, int mortgagePrice, Color color)
-        : OwnableField(name, board, baseBuyPrice), baseRentPrice(baseRentPrice), mortgagePrice(mortgagePrice), isMortgaged(false), color(color) {};
+        : OwnableField(name, board, baseBuyPrice), baseRentPrice_(baseRentPrice), mortgagePrice_(mortgagePrice), isMortgaged_(false), color_(color) {};
     ~Property() override = default;
 
     int calculateRentPrice() const;
@@ -34,11 +34,11 @@ public:
     void addHouse();
 
 private:
-    int baseRentPrice;
-    int mortgagePrice;
-    bool isMortgaged;
-    int numberOfHouses = 0;
-    bool hasHotel = false;
-    Color color;
+    int baseRentPrice_;
+    int mortgagePrice_;
+    bool isMortgaged_;
+    int numberOfHouses_ = 0;
+    bool hasHotel_ = false;
+    Color color_;
 };
 #endif//PROPERTY_H

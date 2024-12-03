@@ -7,8 +7,8 @@
 
 
 void Property::onPlayerEnter(Player* player) {
-    if (owner && owner != player && !isMortgaged) {// player has to pay rent to owner
-        player->payTo(owner, calculateRentPrice());
+    if (owner_ && owner_ != player && !isMortgaged_) {// player has to pay rent to owner_
+        player->payTo(owner_, calculateRentPrice());
     }
 }
 
@@ -22,13 +22,13 @@ std::vector<PlayerDecisionOutputs> Property::getFieldDecisions(Player* player) c
 }
 
 bool Property::canBuyHouseHere(Player* player) const {
-    if (owner != player) {
+    if (owner_ != player) {
         return false;
     }
-    if (isMortgaged) {
+    if (isMortgaged_) {
         return false;
     }
-    if (numberOfHouses == MAX_NUMBER_OF_HOUSES) {
+    if (numberOfHouses_ == MAX_NUMBER_OF_HOUSES) {
         return false;
     }
     if (calculateNextHousePrice() > player->getMoney()) {
@@ -40,47 +40,47 @@ bool Property::canBuyHouseHere(Player* player) const {
 }
 
 int Property::calculateNextHousePrice() const {
-    if (numberOfHouses < MAX_NUMBER_OF_HOUSES - 1) {
+    if (numberOfHouses_ < MAX_NUMBER_OF_HOUSES - 1) {
         return HOUSE_PRICE;
     }
     return HOTEL_PRICE;
 }
 
 int Property::calculateRentPrice() const {
-    if (owner->ownsAllPropertiesOf(color)) {
-        return baseRentPrice * 2;
+    if (owner_->ownsAllPropertiesOf(color_)) {
+        return baseRentPrice_ * 2;
     }
-    return baseRentPrice;
+    return baseRentPrice_;
 }
 
 Color Property::getColor() const {
-    return color;
+    return color_;
 }
 
 void Property::setMortgaged(bool isMortgaged) {
-    this->isMortgaged = isMortgaged;
+    this->isMortgaged_ = isMortgaged;
 }
 
 bool Property::getIsMortgaged() const {
-    return isMortgaged;
+    return isMortgaged_;
 }
 
 int Property::getMortgagePrice() const {
-    return mortgagePrice;
+    return mortgagePrice_;
 }
 
 int Property::getNumberOfHouses() const {
-    return numberOfHouses;
+    return numberOfHouses_;
 }
 
 void Property::addHouse() {
-    numberOfHouses++;
+    numberOfHouses_++;
 }
 
 bool Property::getHasHotel() const {
-    return hasHotel;
+    return hasHotel_;
 }
 
 void Property::setHasHotel(bool hasHotel) {
-    Property::hasHotel = hasHotel;
+    Property::hasHotel_ = hasHotel;
 }

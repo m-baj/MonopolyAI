@@ -11,51 +11,51 @@
 
 
 std::string Player::getName() const {
-    return this->name;
+    return this->name_;
 }
 
 int Player::getMoney() const {
-    return this->money;
+    return this->money_;
 }
 
 int Player::getPositionIdx() const {
-    return this->positionIdx;
+    return this->positionIdx_;
 }
 
 const std::vector<std::shared_ptr<Property>>& Player::getProperties() const {
-    return this->properties;
+    return this->properties_;
 }
 
 const std::vector<std::shared_ptr<Utilities>>& Player::getUtilities() const {
-    return this->utilities;
+    return this->utilities_;
 }
 
 const std::vector<std::shared_ptr<Trains>>& Player::getTrains() const {
-    return this->trains;
+    return this->trains_;
 }
 
 void Player::setPositionIdx(int positionIdx) {
-    this->positionIdx = positionIdx;
+    this->positionIdx_ = positionIdx;
 }
 
 void Player::pushProperty(std::shared_ptr<Property> property) {
-    this->properties.push_back(property);
+    this->properties_.push_back(property);
 }
 
 void Player::addMoney(int amount) {
-    this->money += amount;
+    this->money_ += amount;
 }
 
 void Player::declareBankruptcy() {
-    isBankrupt = true;
+    isBankrupt_ = true;
 }
 
 void Player::saveTurnDecision(PlayerDecisionOutputs decision) {
-    decisionsMadeThisTurn.push_back(decision);
+    decisionsMadeThisTurn_.push_back(decision);
 }
 
 void Player::clearTurnDecisions() {
-    decisionsMadeThisTurn = {};
+    decisionsMadeThisTurn_ = {};
 }
 
 void Player::payTo(Player* player, int amount) {
@@ -69,15 +69,15 @@ void Player::payToBank(int amount) {
 void Player::pay(int amount, Player* player) {
     bool payed = false;
     while (!payed) {
-        if (money - amount >= 0) {
-            money -= amount;
+        if (money_ - amount >= 0) {
+            money_ -= amount;
             if (player)
                 player->addMoney(amount);
             payed = true;
         } else {
             createDecisionSelector()
                     ->requireSelection(
-                            "You do not have enough money to pay. Sell something",
+                            "You do not have enough money_ to pay. Sell something",
                             {PlayerDecisionOutputs::SELL_HOUSE, PlayerDecisionOutputs::MORTGAGE_FIELD});
         }
     }
@@ -93,7 +93,7 @@ std::unique_ptr<DecisionSelector> AiPlayer::createDecisionSelector() {
 
 bool Player::ownsAllPropertiesOf(Color color) const {
     int numberOfProperties = 0;
-    for (const auto& property: properties) {
+    for (const auto& property: properties_) {
         if (property->getColor() == color) {
             numberOfProperties++;
         }
@@ -102,13 +102,13 @@ bool Player::ownsAllPropertiesOf(Color color) const {
 }
 
 int Player::getNumberOfTrains() const {
-    return trains.size();
+    return trains_.size();
 }
 
 std::vector<PlayerDecisionOutputs> Player::getMadeTurnDecisions() const {
-    return decisionsMadeThisTurn;
+    return decisionsMadeThisTurn_;
 }
 
 void Player::pushTrain(std::shared_ptr<Trains> train) {
-    trains.push_back(train);
+    trains_.push_back(train);
 }

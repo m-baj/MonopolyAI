@@ -11,7 +11,7 @@
 class Game final {
 public:
     explicit Game(Board& board)
-        : board(board) {};
+        : board_(board) {};
     ~Game() = default;
 
     Board& getBoard() const;
@@ -21,7 +21,7 @@ public:
     void nextTurn();
 
 private:
-    Board& board;
+    Board& board_;
 };
 
 

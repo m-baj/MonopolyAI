@@ -5,14 +5,14 @@
 #include "OwnableField.h"
 
 std::optional<Player*> OwnableField::getOwner() const {
-    if (owner == nullptr) {
+    if (owner_ == nullptr) {
         return std::nullopt;
     }
-    return owner;
+    return owner_;
 }
 
 void OwnableField::setOwner(Player* player) {
-    owner = player;
+    owner_ = player;
 }
 
 std::vector<PlayerDecisionOutputs> OwnableField::getFieldDecisions(Player* player) const {

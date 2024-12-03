@@ -1,6 +1,6 @@
 //
 // Created by adrwal on 11/3/24.
-// Class representing a field on the board.
+// Class representing a field on the board_.
 //
 
 #ifndef FIELD_H
@@ -14,13 +14,13 @@
 
 class Board;
 /*
- * Base class for all fields on the board.
+ * Base class for all fields_ on the board_.
  * Provides helper location-related methods.
  */
 class Field {
 public:
     explicit Field(const std::string& name, Board& board)
-        : name(name), board(board) {};
+        : name_(name), board_(board) {};
 
     virtual ~Field() = default;
 
@@ -31,7 +31,7 @@ public:
     /*
      * Method called when player enters the field.
      * Executes all immediate actions.
-     * In some cases will call DecisionSelector.requireSelection(). (e.g. when player is out of money)
+     * In some cases will call DecisionSelector.requireSelection(). (e.g. when player is out of money_)
      */
     virtual void onPlayerEnter(Player* player) {};
 
@@ -41,8 +41,8 @@ public:
     bool canSellAnyHouse(Player* player) const;
 
 protected:
-    std::string name;
-    Board& board;
+    std::string name_;
+    Board& board_;
 };
 
 

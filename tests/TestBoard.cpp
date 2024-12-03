@@ -65,34 +65,34 @@ INSTANTIATE_TEST_CASE_P(
 
 // TEST(TestBoard, movePlayer)
 // {
-//     Board board;
-//     GameCli::addClassicMonopolyFields(board);
+//     Board board_;
+//     GameCli::addClassicMonopolyFields(board_);
 //     auto player = std::make_unique<Player>("", 1);
-//     board.pushPlayer(std::move(player));
-//     board.setCurrentPlayerIndex(0);
-//     board.movePlayer(1);
-//     EXPECT_EQ(board.getCurrentPlayer()->getPositionIdx(), 1);
-//     EXPECT_EQ(board.getFields().at(1).get()->getPlayersOnField().size(), 1);
-//     EXPECT_EQ(board.getFields().at(1).get()->getPlayersOnField().at(0), board.getPlayers().at(0).get());
+//     board_.pushPlayer(std::move(player));
+//     board_.setCurrentPlayerIndex(0);
+//     board_.movePlayer(1);
+//     EXPECT_EQ(board_.getCurrentPlayer()->getPositionIdx(), 1);
+//     EXPECT_EQ(board_.getFields().at(1).get()->getPlayersOnField().size(), 1);
+//     EXPECT_EQ(board_.getFields().at(1).get()->getPlayersOnField().at(0), board_.getPlayers().at(0).get());
 // }
 
 // TEST(TestBoard, movePlayerMultiplePlayersWrongRoundPhase)
 // {
-//     Board board;
-//     GameCli::addClassicMonopolyFields(board);
+//     Board board_;
+//     GameCli::addClassicMonopolyFields(board_);
 //     auto player0 = std::make_unique<Player>("", 1);
 //     auto player1 = std::make_unique<Player>("", 1);
-//     board.pushPlayer(std::move(player0));
-//     board.pushPlayer(std::move(player1));
+//     board_.pushPlayer(std::move(player0));
+//     board_.pushPlayer(std::move(player1));
 //
-//     board.setCurrentPlayerIndex(0);
-//     board.movePlayer(1);
+//     board_.setCurrentPlayerIndex(0);
+//     board_.movePlayer(1);
 //
-//     EXPECT_EQ(board.getCurrentPlayer()->getPositionIdx(), 1);
-//     EXPECT_EQ(board.getFields().at(1).get()->getPlayersOnField().size(), 1);
-//     EXPECT_EQ(board.getFields().at(1).get()->getPlayersOnField().at(0), board.getPlayers().at(0).get());
+//     EXPECT_EQ(board_.getCurrentPlayer()->getPositionIdx(), 1);
+//     EXPECT_EQ(board_.getFields().at(1).get()->getPlayersOnField().size(), 1);
+//     EXPECT_EQ(board_.getFields().at(1).get()->getPlayersOnField().at(0), board_.getPlayers().at(0).get());
 //
 //     EXPECT_THROW({
-//         board.movePlayer(1);
+//         board_.movePlayer(1);
 //     },InvalidMoveException);
 // }

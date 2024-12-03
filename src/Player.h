@@ -19,7 +19,7 @@ public:
     virtual ~Player() = default;
 
     Player(const std::string& name, int startMoney)
-        : name(name), money(startMoney) {};
+        : name_(name), money_(startMoney) {};
 
     std::string getName() const;
     int getMoney() const;
@@ -46,19 +46,19 @@ public:
 
 private:
     /*
-     * Blocks Game loop. Handles deducing money from player.
-     * If player does not have enough money, it handles player's decision to obtain it.
+     * Blocks Game loop. Handles deducing money_ from player.
+     * If player does not have enough money_, it handles player's decision to obtain it.
      */
     void pay(int amount, Player* player = nullptr);
 
-    std::vector<std::shared_ptr<Property>> properties = {};
-    std::vector<std::shared_ptr<Utilities>> utilities = {};
-    std::vector<std::shared_ptr<Trains>> trains = {};
-    std::vector<PlayerDecisionOutputs> decisionsMadeThisTurn = {};
-    int money;
-    std::string name;
-    int positionIdx = 0;
-    bool isBankrupt = false;
+    std::vector<std::shared_ptr<Property>> properties_ = {};
+    std::vector<std::shared_ptr<Utilities>> utilities_ = {};
+    std::vector<std::shared_ptr<Trains>> trains_ = {};
+    std::vector<PlayerDecisionOutputs> decisionsMadeThisTurn_ = {};
+    int money_;
+    std::string name_;
+    int positionIdx_ = 0;
+    bool isBankrupt_ = false;
 };
 
 class ConsolePlayer final : public Player {

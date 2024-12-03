@@ -1,6 +1,6 @@
 //
 // Created by adrwal on 11/3/24.
-// class representing a field on the board which is a train station
+// class representing a field on the board_ which is a train station
 //
 
 #ifndef TRAINS_H

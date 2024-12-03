@@ -11,7 +11,7 @@
 
 
 Board& Game::getBoard() const {
-    return board;
+    return board_;
 }
 
 bool Game::isOver() const {
