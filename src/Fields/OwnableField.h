@@ -1,5 +1,6 @@
 //
 // Created by Maksymilian Baj on 08.11.2024.
+// Class representing a filed that can be owned by a player.
 //
 
 #ifndef MONOPOLYAI_OWNABLEFIELD_H

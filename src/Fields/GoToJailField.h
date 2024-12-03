@@ -1,5 +1,6 @@
 //
 // Created by adrwal on 11/6/24.
+// class representing field that sends player to jail
 //
 
 #ifndef GOTOJAILFIELD_H

@@ -1,5 +1,6 @@
 //
 // Created by adrwal on 11/3/24.
+// Class representing a utility field on the board.
 //
 
 #ifndef UTILITIES_H

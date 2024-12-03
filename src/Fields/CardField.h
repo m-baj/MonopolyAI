@@ -1,5 +1,6 @@
 //
 // Created by adrwal on 11/6/24.
+// Represents a field where player draws a card.
 //
 
 #ifndef CARDFIELD_H

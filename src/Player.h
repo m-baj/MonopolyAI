@@ -1,5 +1,6 @@
 //
 // Created by adrwal on 11/3/24.
+// Class representing a player in the game
 //
 
 #ifndef PLAYER_H

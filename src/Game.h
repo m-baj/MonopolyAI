@@ -1,5 +1,6 @@
 //
 // Created by adrwal on 11/3/24.
+// Class containing the main game loop
 //
 
 #ifndef GAME_H

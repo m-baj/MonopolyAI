@@ -1,5 +1,6 @@
 //
 // Created by Maksymilian Baj on 13.11.2024.
+// Class that handles the decision-making process for players
 //
 
 #ifndef MONOPOLYAI_DECISION_H

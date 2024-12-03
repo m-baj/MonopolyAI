@@ -1,5 +1,6 @@
 //
 // Created by adrwal on 11/17/24.
+// File containing all constants used in the game.
 //
 
 #ifndef CONSTANTS_H

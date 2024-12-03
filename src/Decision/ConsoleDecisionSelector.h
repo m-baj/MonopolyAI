@@ -1,5 +1,6 @@
 //
 // Created by adrwal on 12/3/24.
+// class that handles decision made by console player
 //
 
 #ifndef CONSOLEDECISIONSELECTOR_H
