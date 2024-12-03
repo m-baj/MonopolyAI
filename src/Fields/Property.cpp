@@ -3,7 +3,7 @@
 //
 
 #include "Property.h"
-#include "Player.h"
+#include "../Player.h"
 
 
 void Property::onPlayerEnter(Player* player) {

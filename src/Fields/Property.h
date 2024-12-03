@@ -4,7 +4,7 @@
 
 #ifndef PROPERTY_H
 #define PROPERTY_H
-#include "Constants.h"
+#include "../Constants.h"
 #include "OwnableField.h"
 
 

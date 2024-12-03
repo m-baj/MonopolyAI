@@ -5,7 +5,7 @@
 
 #include "Player.h"
 
-#include "Property.h"
+#include "Fields/Property.h"
 #include "Decision/AiDecisionSelector.h"
 #include "Decision/ConsoleDecisionSelector.h"
 

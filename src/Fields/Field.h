@@ -8,8 +8,8 @@
 #include <string>
 #include <vector>
 
-#include "Constants.h"
-#include "Player.h"
+#include "../Constants.h"
+#include "../Player.h"
 
 class Board;
 /*
