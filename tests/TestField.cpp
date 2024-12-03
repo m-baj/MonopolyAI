@@ -14,7 +14,7 @@ TEST(TestField, getPlayersOnField)
     auto field1 = std::make_shared<Field>("", board);
     board.pushField(field0);
     board.pushField(field1);
-    auto player = std::make_unique<Player>("", 1);
+    auto player = std::make_unique<ConsolePlayer>("", 1);
     player->setPositionIdx(0);
     board.pushPlayer(std::move(player));
 
@@ -35,10 +35,10 @@ TEST(TestField, getPlayersOnFieldManyPlayers)
     board.pushField(field0);
     board.pushField(field1);
 
-    auto player0 = std::make_unique<Player>("", 1);
-    auto player1 = std::make_unique<Player>("", 1);
-    auto player2 = std::make_unique<Player>("", 1);
-    auto player3 = std::make_unique<Player>("", 1);
+    auto player0 = std::make_unique<ConsolePlayer>("", 1);
+    auto player1 = std::make_unique<ConsolePlayer>("", 1);
+    auto player2 = std::make_unique<ConsolePlayer>("", 1);
+    auto player3 = std::make_unique<ConsolePlayer>("", 1);
     player0->setPositionIdx(0);
     player1->setPositionIdx(0);
     player2->setPositionIdx(1);
@@ -58,7 +58,7 @@ TEST(TestField, getPlayersOnFieldManyPlayers)
     EXPECT_EQ(field1Players[0].value(), board.getPlayers()[2].get());
     EXPECT_EQ(field1Players[1].value(), board.getPlayers()[3].get());
     board.setCurrentPlayerIndex(0);
-    board.setRoundState(RoundState::ROLL_DICE);
+
     board.movePlayer(1);
     field0Players = field0->getPlayersOnField();
     field1Players = field1->getPlayersOnField();
@@ -69,7 +69,7 @@ TEST(TestField, getPlayersOnFieldManyPlayers)
     EXPECT_EQ(field1Players[1].value(), board.getPlayers()[2].get());
     EXPECT_EQ(field1Players[2].value(), board.getPlayers()[3].get());
     board.setCurrentPlayerIndex(3);
-    board.setRoundState(RoundState::ROLL_DICE);
+
     board.movePlayer(1);
     field0Players = field0->getPlayersOnField();
     field1Players = field1->getPlayersOnField();

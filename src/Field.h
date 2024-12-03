@@ -4,16 +4,14 @@
 
 #ifndef FIELD_H
 #define FIELD_H
-#include <memory>
 #include <optional>
 #include <string>
-#include <utility>
 #include <vector>
-#include "Decision.h"
 
-class Player;
+#include "Constants.h"
+#include "Player.h"
+
 class Board;
-
 /*
  * Base class for all fields on the board.
  * Provides helper location-related methods.
@@ -29,7 +27,17 @@ public:
     std::vector<std::optional<Player*>> getPlayersOnField() const;
     int getFieldIdx() const;
 
-    virtual std::optional<Decision> onPlayerEnter(Player* player) { return std::nullopt; };
+    /*
+     * Method called when player enters the field.
+     * Executes all immediate actions.
+     * In some cases will call DecisionSelector.requireSelection(). (e.g. when player is out of money)
+     */
+    virtual void onPlayerEnter(Player* player) {};
+
+    virtual std::vector<PlayerDecisionOutputs> getFieldDecisions(Player* player) const;
+    bool canMortgageAnyField(Player* player) const;
+    bool canUnmortgageAnyField(Player* player) const;
+    bool canSellAnyHouse(Player* player) const;
 
 protected:
     std::string name;

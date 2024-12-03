@@ -2,9 +2,11 @@
 // Created by adrwal on 11/3/24.
 //
 
+
 #include "Player.h"
-#include <algorithm>
-#include "board.h"
+
+#include "Property.h"
+
 
 std::string Player::getName() const
 {
@@ -48,30 +50,59 @@ void Player::addMoney(int amount)
     this->money += amount;
 }
 
-std::optional<Decision> Player::payTo(Player* player, int amount)
+void Player::declareBankruptcy() {
+    isBankrupt = true;
+}
+
+void Player::saveTurnDecision(PlayerDecisionOutputs decision)
+{
+    decisionsMadeThisTurn.push_back(decision);
+}
+
+void Player::clearTurnDecisions()
+{
+    decisionsMadeThisTurn = {};
+}
+
+void Player::payTo(Player* player, int amount)
 {
     return pay(amount, player);
 }
 
-std::optional<Decision> Player::payToBank(int amount)
+void Player::payToBank(int amount)
 {
     return pay(amount);
 }
 
-std::optional<Decision> Player::pay(int amount, Player* player)
+void Player::pay(int amount, Player* player)
 {
-    if (money - amount >= 0)
-    {
-        money -= amount;
-        if (player)
-            player->addMoney(amount);
-        return std::nullopt;
+    bool payed = false;
+    while (!payed) {
+        if (money - amount >= 0)
+        {
+            money -= amount;
+            if (player)
+                player->addMoney(amount);
+            payed = true;
+        }
+        else {
+            createDecisionSelector()
+                ->requireSelection(
+                    "You do not have enough money to pay. Sell something",
+                    {PlayerDecisionOutputs::SELL_HOUSE, PlayerDecisionOutputs::MORTGAGE_FIELD}
+                );
+        }
     }
-    else
-    {
-        // TODO: implement logic when player does not have enough money to pay
-        return std::nullopt;
-    }
+}
+
+std::unique_ptr<DecisionSelector> ConsolePlayer::createDecisionSelector()
+{
+    return std::make_unique<ConsoleDecisionSelector>();
+}
+
+std::unique_ptr<DecisionSelector> AiPlayer::createDecisionSelector()
+{
+    return std::make_unique<AiDecisionSelector>();
 }
 
 bool Player::ownsAllPropertiesOf(Color color) const {
@@ -88,6 +119,11 @@ bool Player::ownsAllPropertiesOf(Color color) const {
 
 int Player::getNumberOfTrains() const {
     return trains.size();
+}
+
+std::vector<PlayerDecisionOutputs> Player::getMadeTurnDecisions() const
+{
+    return decisionsMadeThisTurn;
 }
 
 void Player::pushTrain(std::shared_ptr<Trains> train) {

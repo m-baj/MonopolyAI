@@ -3,7 +3,6 @@
 //
 
 #include "OwnableField.h"
-#include "Board.h"
 
 std::optional<Player*> OwnableField::getOwner() const
 {
@@ -16,4 +15,11 @@ std::optional<Player*> OwnableField::getOwner() const
 
 void OwnableField::setOwner(Player *player) {
     owner = player;
+}
+
+std::vector<PlayerDecisionOutputs> OwnableField::getFieldDecisions(Player* player) const
+{
+    auto decisions = Field::getFieldDecisions(player);
+    // TODO: Check if field can be bought
+    return decisions;
 }

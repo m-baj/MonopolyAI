@@ -6,8 +6,7 @@
 
 #include "BoardExceptions.h"
 #include "CardField.h"
-
-const int CROSSING_START_BONUS = 200;
+#include "Player.h"
 
 Board::Board()
 {
@@ -28,14 +27,9 @@ void Board::pushPlayer(std::unique_ptr<Player> player)
     players.push_back(std::move(player));
 }
 
-void Board::setRoundState(RoundState state)
+Field* Board::getSteppedOnField() const
 {
-    this->roundState = state;
-}
-
-RoundState Board::getRoundState() const
-{
-    return this->roundState;
+    return this->fields[this->getCurrentPlayer()->getPositionIdx()].get();
 }
 
 Player* Board::getCurrentPlayer() const
@@ -51,19 +45,18 @@ int Board::rollDice() const
 
 void Board::movePlayer(int steps)
 {
-    if (this->roundState != RoundState::ROLL_DICE)
-    {
-        throw InvalidMoveException("Broken rules! Player wanted to move with round state not being ROLL_DICE");
-    }
-
     auto currentPlayer = this->getCurrentPlayer();
     if(this->willMoveCrossStart(currentPlayer, steps))
     {
         currentPlayer->addMoney(CROSSING_START_BONUS);
     }
     currentPlayer->setPositionIdx(this->getNewPosition(currentPlayer, steps));
-    this->setRoundState(RoundState::HANDLE_FIELD);
     this->fields[currentPlayer->getPositionIdx()]->onPlayerEnter(currentPlayer);
+}
+
+void Board::nextPlayer()
+{
+    currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 }
 
 void Board::setCurrentPlayerIndex(int index)

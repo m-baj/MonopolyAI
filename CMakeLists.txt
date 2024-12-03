@@ -42,6 +42,11 @@ add_executable(MonopolyAITests
         src/OwnableField.h
         src/Decision.cpp
         src/Decision.h
+        src/Utilities.cpp
+        tests/TestGamesScenarios.cpp
+        src/Constants.h
+        src/BoardSetupper.cpp
+        src/BoardSetupper.h
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
@@ -72,4 +77,8 @@ add_executable(MonopolyAI main.cpp
         src/OwnableField.h
         src/Decision.cpp
         src/Decision.h
+        src/Utilities.cpp
+        src/Constants.h
+        src/BoardSetupper.cpp
+        src/BoardSetupper.h
 )

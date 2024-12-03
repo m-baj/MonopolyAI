@@ -3,3 +3,12 @@
 //
 
 #include "CardField.h"
+
+
+void CardField::onPlayerEnter(Player* player) {
+    this->drawCard(player);
+}
+
+void CardField::drawCard(Player *player) {
+
+}

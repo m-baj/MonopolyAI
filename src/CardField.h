@@ -4,9 +4,8 @@
 
 #ifndef CARDFIELD_H
 #define CARDFIELD_H
-#include "Field.h"
 
-#include <utility>
+#include "Field.h"
 
 
 class CardField final : public Field {
@@ -15,7 +14,10 @@ public:
         : Field(name, board)
     {
     }
-    std::optional<Decision> onPlayerEnter(Player* player) override {return std::nullopt;};
+    ~CardField() override = default;
+
+    void onPlayerEnter(Player* player) override;
+    void drawCard(Player* player);
 };
 
 

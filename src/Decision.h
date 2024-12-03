@@ -8,21 +8,34 @@
 #include <string>
 #include <functional>
 
-class Decision {
+#include "Constants.h"
+
+
+class DecisionSelector
+{
 public:
-    struct Choice
-    {
-        std::string description;
-        std::function<void()> action;
-    };
+    virtual ~DecisionSelector() = default;
+    DecisionSelector() = default;
 
-    Decision() = default;
-    std::vector<Choice> getChoices() const;
-    void addChoice(const Choice& choice);
-
-private:
-    std::vector<Choice> choices = {};
+    virtual void requireSelection(const std::string& label,
+                                  const std::vector<PlayerDecisionOutputs>&
+                                  possibleDecisions) = 0;
 };
 
+class ConsoleDecisionSelector final : public DecisionSelector
+{
+public:
+    void requireSelection(const std::string& label,
+                          const std::vector<PlayerDecisionOutputs>&
+                          possibleDecisions) override;
+};
+
+class AiDecisionSelector final : public DecisionSelector
+{
+public:
+    void requireSelection(const std::string& label,
+                          const std::vector<PlayerDecisionOutputs>&
+                          possibleDecisions) override {};
+};
 
 #endif //MONOPOLYAI_DECISION_H
