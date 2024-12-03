@@ -3,7 +3,7 @@
 //
 
 #include "TaxField.h"
-#include "Player.h"
+#include "../Player.h"
 
 void TaxField::onPlayerEnter(Player* player)
 {

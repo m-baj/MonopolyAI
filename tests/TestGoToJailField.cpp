@@ -3,7 +3,7 @@
 //
 #include <gtest/gtest.h>
 
-#include "../src/GoToJailField.h"
+#include "../src/Fields/GoToJailField.h"
 
 
 TEST(TestGoToJailField, CorrectInit)
