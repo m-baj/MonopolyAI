@@ -72,38 +72,3 @@ INSTANTIATE_TEST_CASE_P(
         std::make_tuple(40, 10, 10, false)
     )
 );
-
-
-// TEST(TestBoard, movePlayer)
-// {
-//     Board board;
-//     GameCli::addClassicMonopolyFields(board);
-//     auto player = std::make_unique<Player>("", 1);
-//     board.pushPlayer(std::move(player));
-//     board.setCurrentPlayerIndex(0);
-//     board.movePlayer(1);
-//     EXPECT_EQ(board.getCurrentPlayer()->getPositionIdx(), 1);
-//     EXPECT_EQ(board.getFields().at(1).get()->getPlayersOnField().size(), 1);
-//     EXPECT_EQ(board.getFields().at(1).get()->getPlayersOnField().at(0), board.getPlayers().at(0).get());
-// }
-
-// TEST(TestBoard, movePlayerMultiplePlayersWrongRoundPhase)
-// {
-//     Board board;
-//     GameCli::addClassicMonopolyFields(board);
-//     auto player0 = std::make_unique<Player>("", 1);
-//     auto player1 = std::make_unique<Player>("", 1);
-//     board.pushPlayer(std::move(player0));
-//     board.pushPlayer(std::move(player1));
-//
-//     board.setCurrentPlayerIndex(0);
-//     board.movePlayer(1);
-//
-//     EXPECT_EQ(board.getCurrentPlayer()->getPositionIdx(), 1);
-//     EXPECT_EQ(board.getFields().at(1).get()->getPlayersOnField().size(), 1);
-//     EXPECT_EQ(board.getFields().at(1).get()->getPlayersOnField().at(0), board.getPlayers().at(0).get());
-//
-//     EXPECT_THROW({
-//         board.movePlayer(1);
-//     },InvalidMoveException);
-// }
