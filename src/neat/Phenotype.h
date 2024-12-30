@@ -9,28 +9,33 @@
 #include "BaseEdge.h"
 
 namespace NEAT {
-
-    struct Node : public NodeInfo {
-        double value;
-
-        Node(NodeType type, int index, double value) : NodeInfo(type, index), value(value) {}
-    };
-
     enum class EdgeType {
         FORWARD, RECURRENT
     };
 
     struct Edge : public BaseEdge {
-        EdgeType type;
+        EdgeType type = EdgeType::FORWARD;
 
-        Edge(int sourceIdx, int destIdx, double weight, bool isEnabled, EdgeType type) :
-                                                                                         BaseEdge(sourceIdx, destIdx, weight, isEnabled), type(type) {}
+        Edge(int sourceIdx, int destIdx, double weight, bool isEnabled) :
+            BaseEdge(sourceIdx, destIdx, weight, isEnabled) {}
+
+        Edge(BaseEdge edgeInfo, EdgeType type) : BaseEdge(edgeInfo), type(type) {}
+    };
+
+    struct Node : public NodeInfo {
+        double value;
+        std::vector<Edge> incomingEdges;
+
+        Node(NodeType type, int index, double value) : NodeInfo(type, index), value(value) {}
+        Node(NodeInfo nodeInfo, double value) : NodeInfo(nodeInfo), value(value) {}
     };
 
     class Phenotype {
     public:
         explicit Phenotype(const Genotype& genotype);
 
+        std::vector<Node> getNodes() const;
+        std::vector<Edge> getEdges() const;
 
     private:
         std::vector<Node> nodes;

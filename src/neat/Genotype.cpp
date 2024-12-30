@@ -19,3 +19,11 @@ std::vector<NEAT::NodeInfo> NEAT::Genotype::getNodes() const {
 std::vector<NEAT::EdgeInfo> NEAT::Genotype::getEdges() const {
     return edges;
 }
+
+size_t NEAT::Genotype::getNodesCount() const {
+    return nodes.size();
+}
+
+size_t NEAT::Genotype::getEdgesCount() const {
+    return edges.size();
+}

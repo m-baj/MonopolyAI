@@ -23,7 +23,7 @@ namespace NEAT {
         int innovation;
 
         EdgeInfo(int sourceIdx, int destIdx, double weight, bool isEnabled, int innovation) :
-                                                                                              BaseEdge(sourceIdx, destIdx, weight, isEnabled), innovation(innovation) {}
+            BaseEdge(sourceIdx, destIdx, weight, isEnabled), innovation(innovation) {}
     };
 
     class Genotype {
@@ -33,6 +33,8 @@ namespace NEAT {
         void addEdge(EdgeInfo edge);
         std::vector<NodeInfo> getNodes() const;
         std::vector<EdgeInfo> getEdges() const;
+        size_t getNodesCount() const;
+        size_t getEdgesCount() const;
 
     private:
         std::vector<NodeInfo> nodes;

@@ -51,6 +51,11 @@ add_executable(MonopolyAITests
         src/Decision/ConsoleDecisionSelector.h
         src/Decision/AiDecisionSelector.cpp
         src/Decision/AiDecisionSelector.h
+        tests/TestPhenotype.cpp
+        src/neat/Genotype.cpp
+        src/neat/Genotype.h
+        src/neat/Phenotype.cpp
+        src/neat/Phenotype.h
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
