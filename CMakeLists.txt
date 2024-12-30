@@ -89,4 +89,9 @@ add_executable(MonopolyAI main.cpp
         src/Decision/ConsoleDecisionSelector.h
         src/Decision/AiDecisionSelector.cpp
         src/Decision/AiDecisionSelector.h
+        src/neat/Genotype.cpp
+        src/neat/Genotype.h
+        src/neat/Phenotype.cpp
+        src/neat/Phenotype.h
+        src/neat/BaseEdge.h
 )
