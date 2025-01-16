@@ -4,26 +4,32 @@
 
 #include "Genotype.h"
 
-void NEAT::Genotype::addNode(NEAT::NodeInfo node) {
+using namespace NEAT;
+
+void Genotype::addNode(NodeInfo node) {
     nodes.push_back(node);
 }
 
-void NEAT::Genotype::addEdge(NEAT::EdgeInfo edge) {
+void Genotype::addEdge(EdgeInfo edge) {
     edges.push_back(edge);
 }
 
-std::vector<NEAT::NodeInfo> NEAT::Genotype::getNodes() const {
+std::vector<NodeInfo> Genotype::getNodes() const {
     return nodes;
 }
 
-std::vector<NEAT::EdgeInfo> NEAT::Genotype::getEdges() const {
+std::vector<EdgeInfo> Genotype::getEdges() const {
     return edges;
 }
 
-size_t NEAT::Genotype::getNodesCount() const {
+size_t Genotype::getNodesCount() const {
     return nodes.size();
 }
 
-size_t NEAT::Genotype::getEdgesCount() const {
+size_t Genotype::getEdgesCount() const {
     return edges.size();
+}
+
+EdgeInfo& Genotype::getEdge(int idx) {
+    return edges[idx];
 }
