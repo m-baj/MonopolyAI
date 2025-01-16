@@ -56,6 +56,9 @@ add_executable(MonopolyAITests
         src/neat/Genotype.h
         src/neat/Phenotype.cpp
         src/neat/Phenotype.h
+        src/neat/Mutation.cpp
+        src/neat/Mutation.h
+        tests/TestMutation.cpp
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
@@ -99,4 +102,6 @@ add_executable(MonopolyAI main.cpp
         src/neat/Phenotype.cpp
         src/neat/Phenotype.h
         src/neat/BaseEdge.h
+        src/neat/Mutation.cpp
+        src/neat/Mutation.h
 )
