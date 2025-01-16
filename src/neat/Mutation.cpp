@@ -134,21 +134,20 @@ namespace NEAT {
         genotype.addEdge(edge2);
     }
 
-    void Mutation::mutateEnable(Genotype& genotype, HistoricalMarkings& markings) {
-        std::vector<EdgeInfo> potentialEdges;
-        for (EdgeInfo& edge : genotype.getEdges()) {
-            if (!edge.isEnabled) {
-                potentialEdges.push_back(edge);
-            }
-        }
-
-        if (!potentialEdges.empty()) {
-            std::mt19937 rng(std::random_device{}());
-            std::uniform_int_distribution<size_t> dist(0, potentialEdges.size() - 1);
-            size_t idx = dist(rng);
-            EdgeInfo& edge = potentialEdges[idx];
-            edge.isEnabled = true;
+void Mutation::mutateEnable(Genotype& genotype, HistoricalMarkings& markings) {
+    std::vector<EdgeInfo*> potentialEdges;
+    for (EdgeInfo& edge : genotype.getEdges()) {
+        if (!edge.isEnabled) {
+            potentialEdges.push_back(&edge);
         }
     }
+
+    if (!potentialEdges.empty()) {
+        std::mt19937 rng(std::random_device{}());
+        std::uniform_int_distribution<size_t> dist(0, potentialEdges.size() - 1);
+        size_t idx = dist(rng);
+        potentialEdges[idx]->isEnabled = true;
+    }
+}
 
 }// namespace NEAT
