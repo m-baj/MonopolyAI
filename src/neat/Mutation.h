@@ -9,30 +9,20 @@
 
 #include "Genotype.h"
 #include "config.h"
+#include "HistoricalMarkings.h"
 
 namespace NEAT {
-
-    struct Marking {
-        int innovation;
-        int sourceIdx;
-        int destIdx;
-    };
 
     class Mutation {
     public:
         Mutation() = default;
-        void mutateAll(Genotype& genotype);
+        void mutateAll(Genotype& genotype, HistoricalMarkings& markings);
 
-        void mutateEdge(Genotype& genotype);
-        void mutateNode(Genotype& genotype);
-        void mutateEnable(Genotype& genotype) {};
-        void mutateDisable(Genotype& genotype) {};
-        void mutateWeight(Genotype& genotype) {};
-
-    private:
-        int registerMarking(EdgeInfo edge);
-
-        std::vector<Marking> historicalMarkings;
+        void mutateEdge(Genotype& genotype, HistoricalMarkings& markings);
+        void mutateNode(Genotype& genotype, HistoricalMarkings& markings);
+        void mutateEnable(Genotype& genotype, HistoricalMarkings& markings);
+        void mutateDisable(Genotype& genotype, HistoricalMarkings& markings) {};
+        void mutateWeight(Genotype& genotype, HistoricalMarkings& markings) {};
     };
 }// namespace NEAT
 

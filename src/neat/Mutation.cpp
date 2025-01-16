@@ -9,18 +9,7 @@
 
 namespace NEAT {
 
-    int Mutation::registerMarking(NEAT::EdgeInfo edge) {
-        for (const auto& marking : historicalMarkings) {
-            if (marking.sourceIdx == edge.sourceIdx && marking.destIdx == edge.destIdx) {
-                return marking.innovation;
-            }
-        }
-
-        historicalMarkings.emplace_back(historicalMarkings.size(), edge.sourceIdx, edge.destIdx);
-        return historicalMarkings.size() - 1;
-    }
-
-    void Mutation::mutateAll(Genotype& genotype) {
+    void Mutation::mutateAll(Genotype& genotype, HistoricalMarkings& markings) {
         double mutate_node = MUTATE_NODE;
         double mutate_edge = MUTATE_EDGE;
         double mutate_enable = MUTATE_ENABLE;
@@ -34,7 +23,7 @@ namespace NEAT {
         while (p > 0) {
             double roll = dist(rng);
             if (roll < p) {
-                mutateWeight(genotype);
+                mutateWeight(genotype, markings);
             }
             --p;
         }
@@ -43,7 +32,7 @@ namespace NEAT {
         while (p > 0) {
             double roll = dist(rng);
             if (roll < p) {
-                mutateEdge(genotype);
+                mutateEdge(genotype, markings);
             }
             --p;
         }
@@ -52,7 +41,7 @@ namespace NEAT {
         while (p > 0) {
             double roll = dist(rng);
             if (roll < p) {
-                mutateNode(genotype);
+                mutateNode(genotype, markings);
             }
             --p;
         }
@@ -61,7 +50,7 @@ namespace NEAT {
         while (p > 0) {
             double roll = dist(rng);
             if (roll < p) {
-                mutateEnable(genotype);
+                mutateEnable(genotype, markings);
             }
             --p;
         }
@@ -70,13 +59,13 @@ namespace NEAT {
         while (p > 0) {
             double roll = dist(rng);
             if (roll < p) {
-                mutateDisable(genotype);
+                mutateDisable(genotype, markings);
             }
             --p;
         }
     }
 
-    void Mutation::mutateEdge(Genotype& genotype) {
+    void Mutation::mutateEdge(Genotype& genotype, HistoricalMarkings& markings) {
         std::vector<EdgeInfo> potentialEdges;
         for (size_t i = 0; i < genotype.getNodesCount(); ++i) {
             for (size_t j = 0; j < genotype.getNodesCount(); ++j) {
@@ -99,7 +88,10 @@ namespace NEAT {
                 }
 
                 if (!edgeExists) {
-                    potentialEdges.emplace_back(i, j, 1.0, true, historicalMarkings.size());
+                    std::mt19937 rng(std::random_device{}());
+                    std::uniform_real_distribution<double> dist(-1.0, 1.0);
+                    double newWeight = dist(rng);
+                    potentialEdges.emplace_back(i, j, newWeight, true, 0);
                 }
             }
         }
@@ -108,13 +100,55 @@ namespace NEAT {
             std::uniform_int_distribution<size_t> dist(0, potentialEdges.size() - 1);
             size_t idx = dist(rng);
             EdgeInfo mutation = potentialEdges[idx];
-            mutation.innovation = registerMarking(mutation);
+            mutation.innovation = markings.registerMarking(mutation);
             genotype.addEdge(potentialEdges[idx]);
         }
     }
 
-    void Mutation::mutateNode(NEAT::Genotype& genotype) {
+    void Mutation::mutateNode(NEAT::Genotype& genotype, HistoricalMarkings& markings) {
+        if (genotype.getEdgesCount() == 0) {
+            return;
+        }
 
+        std::mt19937 rng(std::random_device{}());
+        std::uniform_int_distribution<size_t> dist(0, genotype.getEdgesCount() - 1);
+        size_t idx = dist(rng);
+        EdgeInfo& edge = genotype.getEdge(idx);
+        if (!edge.isEnabled) {
+            return;
+        }
+
+        edge.isEnabled = false;
+
+        int newNodeIdx = genotype.getNodes()[genotype.getNodesCount() - 1].index + 1;
+
+        NodeInfo newNode(NodeType::HIDDEN, newNodeIdx);
+
+        EdgeInfo edge1(edge.sourceIdx, newNode.index, 1.0, true,0);
+        EdgeInfo edge2(newNode.index, edge.destIdx, edge.weight, true, 0);
+        edge1.innovation = markings.registerMarking(edge1);
+        edge2.innovation = markings.registerMarking(edge2);
+
+        genotype.addNode(newNode);
+        genotype.addEdge(edge1);
+        genotype.addEdge(edge2);
+    }
+
+    void Mutation::mutateEnable(Genotype& genotype, HistoricalMarkings& markings) {
+        std::vector<EdgeInfo> potentialEdges;
+        for (EdgeInfo& edge : genotype.getEdges()) {
+            if (!edge.isEnabled) {
+                potentialEdges.push_back(edge);
+            }
+        }
+
+        if (!potentialEdges.empty()) {
+            std::mt19937 rng(std::random_device{}());
+            std::uniform_int_distribution<size_t> dist(0, potentialEdges.size() - 1);
+            size_t idx = dist(rng);
+            EdgeInfo& edge = potentialEdges[idx];
+            edge.isEnabled = true;
+        }
     }
 
 }// namespace NEAT
