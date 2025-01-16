@@ -36,13 +36,17 @@ namespace NEAT {
 
         std::vector<Node> getNodes() const;
         std::vector<Edge> getEdges() const;
+        std::vector<double> propagate();
+        void setInputValues(const std::vector<double>& inputValues);
 
     private:
         std::vector<Node> nodes;
         std::vector<Edge> edges;
 
-        std::vector<Node> inputNodes;
-        std::vector<Node> outputNodes;
+        std::vector<std::reference_wrapper<Node>> inputNodes;
+        std::vector<std::reference_wrapper<Node>> outputNodes;
+
+        double propagateNode(Node& node);
     };
 }
 
