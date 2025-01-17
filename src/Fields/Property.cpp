@@ -41,8 +41,14 @@ bool Property::canBuyHouseHere(Player* player) const
     {
         return false;
     }
-    // TODO: check if player already bought house this turn
-    // TODO: check if property is newly bought
+    if (std::ranges::find(player->getMadeTurnDecisions(), PlayerDecisionOutputs::BUY_HOUSE) != player->getMadeTurnDecisions().end())
+    {
+        return false;
+    }
+    if (std::ranges::find(player->getMadeTurnDecisions(), PlayerDecisionOutputs::BUY_FIELD) != player->getMadeTurnDecisions().end())
+    {
+        return false;
+    }
     return true;
 }
 
