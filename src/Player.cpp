@@ -2,7 +2,6 @@
 // Created by adrwal on 11/3/24.
 //
 
-
 #include "Player.h"
 
 #include "Fields/Property.h"
@@ -123,7 +122,7 @@ int Player::getNumberOfTrains() const {
     return trains.size();
 }
 
-std::vector<PlayerDecisionOutputs> Player::getMadeTurnDecisions() const
+const std::vector<PlayerDecisionOutputs>& Player::getMadeTurnDecisions() const
 {
     return decisionsMadeThisTurn;
 }

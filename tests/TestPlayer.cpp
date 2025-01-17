@@ -71,3 +71,10 @@ TEST(TestPlayerGetNumberOfTrains, getNumberOfTrains)
     player->pushTrain(train2);
     EXPECT_EQ(player->getNumberOfTrains(), 2);
 }
+
+TEST(TestPlayer, pushCurrentTurnMadeDecisions)
+{
+    ConsolePlayer player("Player", 1000);
+    player.saveTurnDecision(PlayerDecisionOutputs::NO_DECISION);
+    EXPECT_EQ(player.getMadeTurnDecisions().size(), 1);
+}

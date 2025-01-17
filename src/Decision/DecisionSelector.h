@@ -22,7 +22,7 @@ public:
     virtual void requireSelection(const std::string& label,
                                   const std::vector<PlayerDecisionOutputs>&
                                   possibleDecisions) = 0;
-private:
+protected:
     Player& player_;
 };
 

@@ -27,6 +27,20 @@ namespace ConsoleDecisionSelectorHelpers
         {PlayerDecisionOutputs::NO_DECISION, "-"},
         {PlayerDecisionOutputs::THROW_DICE, "td"},
     };
+
+    const std::map<std::string, PlayerDecisionOutputs> STRING_TO_DECISION = {
+        {"bf", PlayerDecisionOutputs::BUY_FIELD},
+        {"mo", PlayerDecisionOutputs::MORTGAGE_FIELD},
+        {"umo", PlayerDecisionOutputs::UNMORTGAGE_FIELD},
+        {"bh", PlayerDecisionOutputs::BUY_HOUSE},
+        {"sh", PlayerDecisionOutputs::SELL_HOUSE},
+        {"bj", PlayerDecisionOutputs::BAIL_JAIL},
+        {"jdr", PlayerDecisionOutputs::JAIL_DICE_ROLL},
+        {"jout", PlayerDecisionOutputs::USE_GET_OUT_OF_JAIL_CARD},
+        {"-", PlayerDecisionOutputs::NO_DECISION},
+        {"td", PlayerDecisionOutputs::THROW_DICE},
+    };
+
     const std::map<PlayerDecisionOutputs, std::string> DECISION_SELECT_LABEL = {
         {PlayerDecisionOutputs::BUY_FIELD, std::format("Type '{}' to buy field", DECISION_TO_STRING.at(PlayerDecisionOutputs::BUY_FIELD))},
         {PlayerDecisionOutputs::MORTGAGE_FIELD, std::format("Type '{}' to mortgage a property", DECISION_TO_STRING.at(PlayerDecisionOutputs::MORTGAGE_FIELD))},
@@ -41,7 +55,7 @@ namespace ConsoleDecisionSelectorHelpers
     };
 
     void printDecisions(const std::vector<PlayerDecisionOutputs>& possibleDecisions);
-    std::string receiveInput(std::istream& in);
+    PlayerDecisionOutputs receiveInput(std::istream& in, const std::vector<PlayerDecisionOutputs>& possibleDecisions);
 }
 
 class ConsoleDecisionSelector final : public DecisionSelector

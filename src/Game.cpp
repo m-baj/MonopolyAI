@@ -31,8 +31,8 @@ void Game::nextTurn()
 {
     Player* player = getBoard().getCurrentPlayer();
     player->createDecisionSelector()->requireSelection("", {PlayerDecisionOutputs::THROW_DICE});
-    auto diceRol = getBoard().rollDice();
-    getBoard().movePlayer(diceRol);
+    auto diceRoll = getBoard().rollDice();
+    getBoard().movePlayer(diceRoll);
 
     std::vector<PlayerDecisionOutputs> remainingDecisions = {};
     do

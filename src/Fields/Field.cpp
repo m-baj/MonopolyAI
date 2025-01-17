@@ -1,8 +1,11 @@
 //
 // Created by adrwal on 11/3/24.
 //
-
+#include <algorithm>
 #include "Field.h"
+#include <iostream>
+#include <algorithm>
+#include <ranges>
 
 #include "../Board.h"
 #include "../Constants.h"
@@ -41,7 +44,17 @@ int Field::getFieldIdx() const
 
 std::vector<PlayerDecisionOutputs> Field::getFieldDecisions(Player* player) const
 {
-    std::vector<PlayerDecisionOutputs> baseDecisions = {PlayerDecisionOutputs::NO_DECISION};
+    std::vector<PlayerDecisionOutputs> baseDecisions = {};
+
+    if (std::ranges::find(
+        player->getMadeTurnDecisions(),
+        PlayerDecisionOutputs::NO_DECISION)
+        != player->getMadeTurnDecisions().end())
+    {
+        return baseDecisions;
+    }
+
+    baseDecisions.push_back(PlayerDecisionOutputs::NO_DECISION);
 
     if(canMortgageAnyField(player))
     {

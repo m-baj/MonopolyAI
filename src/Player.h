@@ -5,6 +5,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include <memory>
+#include <unordered_set>
 #include <vector>
 
 #include "./Decision/DecisionSelector.h"
@@ -28,7 +29,7 @@ public:
     const std::vector<std::shared_ptr<Trains>>& getTrains() const;
     bool ownsAllPropertiesOf(Color color) const;
     int getNumberOfTrains() const;
-    std::vector<PlayerDecisionOutputs> getMadeTurnDecisions() const;
+    const std::vector<PlayerDecisionOutputs>& getMadeTurnDecisions() const;
 
     void setPositionIdx(int positionIdx);
     void pushProperty(std::shared_ptr<Property> property);

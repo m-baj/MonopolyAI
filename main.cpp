@@ -15,7 +15,7 @@ int main()
     board.pushPlayer(std::make_unique<ConsolePlayer>("player2", 1000));
     board.pushPlayer(std::make_unique<ConsolePlayer>("player3", 1000));
 
-    game.nextTurn();
+    game.play();
 
     return 0;
 }
