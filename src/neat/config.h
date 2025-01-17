@@ -16,4 +16,7 @@ const double MUTATE_DISABLE = 0.4;
 const double MUTATE_WEIGHT = 0.8;
 const double MUTATE_NODE = 0.1;
 
+const double PERTURBATION_CHANCE = 0.9;
+const double SHIFT_STEP = 0.1;
+
 #endif//MONOPOLYAI_CONFIG_H
