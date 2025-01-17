@@ -22,6 +22,12 @@ std::vector<EdgeInfo> Genotype::getEdges() const {
     return edges;
 }
 
+std::vector<EdgeInfo>& Genotype::getEdges() {
+    return edges;
+}
+
+
+
 size_t Genotype::getNodesCount() const {
     return nodes.size();
 }

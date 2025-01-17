@@ -21,8 +21,10 @@ namespace NEAT {
         void mutateEdge(Genotype& genotype, HistoricalMarkings& markings);
         void mutateNode(Genotype& genotype, HistoricalMarkings& markings);
         void mutateEnable(Genotype& genotype, HistoricalMarkings& markings);
-        void mutateDisable(Genotype& genotype, HistoricalMarkings& markings) {};
+        void mutateDisable(Genotype& genotype, HistoricalMarkings& markings);
         void mutateWeight(Genotype& genotype, HistoricalMarkings& markings) {};
+    private:
+        void mutateEnableDisable(Genotype& genotype, HistoricalMarkings& markings, bool enable);
     };
 }// namespace NEAT
 

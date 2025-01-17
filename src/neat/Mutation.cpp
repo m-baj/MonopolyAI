@@ -2,6 +2,7 @@
 // Created by Maksymilian Baj on 16.01.2025.
 //
 
+#include <iostream>
 #include <random>
 
 #include "Mutation.h"
@@ -124,7 +125,7 @@ namespace NEAT {
 
         NodeInfo newNode(NodeType::HIDDEN, newNodeIdx);
 
-        EdgeInfo edge1(edge.sourceIdx, newNode.index, 1.0, true,0);
+        EdgeInfo edge1(edge.sourceIdx, newNode.index, 1.0, true, 0);
         EdgeInfo edge2(newNode.index, edge.destIdx, edge.weight, true, 0);
         edge1.innovation = markings.registerMarking(edge1);
         edge2.innovation = markings.registerMarking(edge2);
@@ -134,20 +135,30 @@ namespace NEAT {
         genotype.addEdge(edge2);
     }
 
-void Mutation::mutateEnable(Genotype& genotype, HistoricalMarkings& markings) {
-    std::vector<EdgeInfo*> potentialEdges;
-    for (EdgeInfo& edge : genotype.getEdges()) {
-        if (!edge.isEnabled) {
-            potentialEdges.push_back(&edge);
+    void Mutation::mutateEnableDisable(NEAT::Genotype& genotype, NEAT::HistoricalMarkings& markings, bool enable) {
+        std::vector<EdgeInfo*> potentialEdges;
+        for (EdgeInfo& edge : genotype.getEdges()) {
+            if (edge.isEnabled != enable) {
+                potentialEdges.push_back(&edge);
+                std::cout << &edge << std::endl;
+            }
+        }
+
+        if (!potentialEdges.empty()) {
+            std::mt19937 rng(std::random_device{}());
+            std::uniform_int_distribution<size_t> dist(0, potentialEdges.size() - 1);
+            size_t idx = dist(rng);
+            potentialEdges[idx]->isEnabled = enable;
         }
     }
 
-    if (!potentialEdges.empty()) {
-        std::mt19937 rng(std::random_device{}());
-        std::uniform_int_distribution<size_t> dist(0, potentialEdges.size() - 1);
-        size_t idx = dist(rng);
-        potentialEdges[idx]->isEnabled = true;
+    void Mutation::mutateEnable(Genotype& genotype, HistoricalMarkings& markings) {
+        mutateEnableDisable(genotype, markings, true);
     }
-}
+
+    void Mutation::mutateDisable(NEAT::Genotype& genotype, NEAT::HistoricalMarkings& markings) {
+        mutateEnableDisable(genotype, markings, false);
+    }
+
 
 }// namespace NEAT

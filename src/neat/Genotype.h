@@ -20,7 +20,7 @@ namespace NEAT {
     };
 
     struct EdgeInfo : public BaseEdge {
-        int innovation;
+        int innovation = 0;
 
         EdgeInfo(int sourceIdx, int destIdx, double weight, bool isEnabled, int innovation) :
             BaseEdge(sourceIdx, destIdx, weight, isEnabled), innovation(innovation) {}
@@ -35,6 +35,9 @@ namespace NEAT {
         std::vector<EdgeInfo> getEdges() const;
         size_t getNodesCount() const;
         size_t getEdgesCount() const;
+
+        EdgeInfo& getEdge(int idx);
+        std::vector<EdgeInfo>& getEdges();
 
     private:
         std::vector<NodeInfo> nodes;
