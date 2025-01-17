@@ -65,6 +65,11 @@ void Player::clearTurnDecisions()
     decisionsMadeThisTurn = {};
 }
 
+void Player::resetMadeTurnDecisions()
+{
+    decisionsMadeThisTurn = {};
+}
+
 void Player::payTo(Player* player, int amount)
 {
     return pay(amount, player);

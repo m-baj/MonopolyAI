@@ -38,6 +38,7 @@ public:
     void declareBankruptcy();
     void saveTurnDecision(PlayerDecisionOutputs decision);
     void clearTurnDecisions();
+    void resetMadeTurnDecisions();
 
     void payTo(Player* player, int amount);
     void payToBank(int amount);

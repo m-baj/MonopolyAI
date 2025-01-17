@@ -21,9 +21,11 @@ TEST(TestField, scenario0)
     board.pushPlayer(std::make_unique<ConsolePlayer>("player2", 1000));
     board.pushPlayer(std::make_unique<ConsolePlayer>("player3", 1000));
 
-    std::stringstream myStringStream = std::stringstream("td");
+    std::stringstream myStringStream = std::stringstream("td\n-");
     ConsoleDecisionSelector::in_stream = &myStringStream;
-    // game.nextTurn();
-    // game.play();
+    game.nextTurn();
+
+    EXPECT_EQ(board.getCurrentPlayer(), board.getPlayers()[1].get());
+    EXPECT_EQ(board.getPlayers()[0]->getMadeTurnDecisions().size(), 0);
 }
 

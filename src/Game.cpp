@@ -40,5 +40,6 @@ void Game::nextTurn()
         remainingDecisions = getBoard().getSteppedOnField()->getFieldDecisions(player);
         player->createDecisionSelector()->requireSelection("", remainingDecisions);
     } while (!remainingDecisions.empty());
+    getBoard().getCurrentPlayer()->resetMadeTurnDecisions();
     getBoard().nextPlayer();
 }
