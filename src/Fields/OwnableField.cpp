@@ -17,9 +17,24 @@ void OwnableField::setOwner(Player *player) {
     owner = player;
 }
 
+bool OwnableField::canBuy(Player* player) const
+{
+    if (owner)
+    {
+        return false;
+    }
+    if (player->getMoney() > baseBuyPrice)
+    {
+        return true;
+    }
+}
+
 std::vector<PlayerDecisionOutputs> OwnableField::getFieldDecisions(Player* player) const
 {
     auto decisions = Field::getFieldDecisions(player);
-    // TODO: Check if field can be bought
+    if (canBuy(player))
+    {
+        decisions.push_back(PlayerDecisionOutputs::BUY_FIELD);
+    }
     return decisions;
 }

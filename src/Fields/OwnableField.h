@@ -15,6 +15,7 @@ public:
 
     std::optional<Player*> getOwner() const;
     void setOwner(Player* player);
+    bool canBuy(Player* player) const;
 
     virtual std::vector<PlayerDecisionOutputs> getFieldDecisions(Player* player) const;
 
