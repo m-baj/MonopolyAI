@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <ranges>
 
+#include "Property.h"
 #include "../Board.h"
 #include "../Constants.h"
 #include "../Player.h"
@@ -74,18 +75,42 @@ std::vector<PlayerDecisionOutputs> Field::getFieldDecisions(Player* player) cons
 
 bool Field::canMortgageAnyField(Player* player) const
 {
-    // TODO
+    for (const auto& property : player->getProperties())
+    {
+        if (!property->getIsMortgaged())
+        {
+            return true;
+        }
+    }
+
     return false;
 }
 
 bool Field::canUnmortgageAnyField(Player* player) const
 {
-    // TODO
+    for (const auto& property : player->getProperties())
+    {
+        if (property->getIsMortgaged())
+            continue;
+
+        if (static_cast<int>(property->getMortgagePrice() * UNMORTGAGE_INTEREST_MULTIPLIER) < player->getMoney())
+        {
+            return true;
+        }
+    }
+
     return false;
 }
 
 bool Field::canSellAnyHouse(Player* player) const
 {
-    // TODO
+    for (const auto& property : player->getProperties())
+    {
+        if (property->getNumberOfHouses() > 0)
+        {
+            return true;
+        }
+    }
+
     return false;
 }
