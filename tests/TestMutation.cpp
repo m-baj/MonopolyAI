@@ -22,8 +22,7 @@ TEST(TestMutation, TestMutateEdge)
     HistoricalMarkings markings;
     markings.registerBaseMarkings(2, 1);
 
-    Mutation mutation;
-    mutation.mutateEdge(genotype, markings);
+    mutateEdge(genotype, markings);
 
     EdgeInfo newEdge = genotype.getEdges()[genotype.getEdgesCount() - 1];
     EXPECT_EQ(genotype.getEdgesCount(), 5);
@@ -39,8 +38,7 @@ TEST(TestMutation, TestMutateEdgeFirstEdge) {
     HistoricalMarkings markings;
     markings.registerBaseMarkings(1, 1);
 
-    Mutation mutation;
-    mutation.mutateEdge(genotype, markings);
+    mutateEdge(genotype, markings);
 
     EdgeInfo newEdge = genotype.getEdges()[0];
     EXPECT_EQ(genotype.getEdgesCount(), 1);
@@ -58,8 +56,7 @@ TEST(TestMutation, TestMutateNode) {
     HistoricalMarkings markings;
     markings.registerBaseMarkings(1, 1);
 
-    Mutation mutation;
-    mutation.mutateNode(genotype, markings);
+    mutateNode(genotype, markings);
     EXPECT_EQ(genotype.getNodesCount(), 3);
     EXPECT_EQ(genotype.getEdgesCount(), 3);
     EdgeInfo oldEdge = genotype.getEdges()[0];
@@ -77,10 +74,10 @@ TEST(TestMutation, TestMutateEnable) {
     genotype.addNode(NodeInfo(NodeType::OUTPUT, 1));
     genotype.addEdge(EdgeInfo(0, 1, 1.0, false, 0));
 
-    Mutation mutation;
+
     EdgeInfo& edge = genotype.getEdge(0);
     EXPECT_FALSE(edge.isEnabled);
-    mutation.mutateEnable(genotype);
+    mutateEnable(genotype);
     EXPECT_EQ(genotype.getEdgesCount(), 1);
     EXPECT_TRUE(edge.isEnabled);
 }
@@ -91,10 +88,9 @@ TEST(TestMutation, TestMutateDisable) {
     genotype.addNode(NodeInfo(NodeType::OUTPUT, 1));
     genotype.addEdge(EdgeInfo(0, 1, 1.0, true, 0));
 
-    Mutation mutation;
     EdgeInfo& edge = genotype.getEdge(0);
     EXPECT_TRUE(edge.isEnabled);
-    mutation.mutateDisable(genotype);
+    mutateDisable(genotype);
     EXPECT_EQ(genotype.getEdgesCount(), 1);
     EXPECT_FALSE(edge.isEnabled);
 }
@@ -108,10 +104,9 @@ TEST(TestMutation, TestMutateWeight) {
     HistoricalMarkings markings;
     markings.registerBaseMarkings(1, 1);
 
-    Mutation mutation;
     EdgeInfo& edge = genotype.getEdge(0);
     double oldWeight = edge.weight;
-    mutation.mutateWeight(genotype);
+    mutateWeight(genotype);
     EXPECT_EQ(genotype.getEdgesCount(), 1);
     EXPECT_NE(oldWeight, edge.weight);
 }

@@ -2,18 +2,17 @@
 // Created by Maksymilian Baj on 17.01.2025.
 //
 
-#include <random>
 #include <unordered_map>
 
+#include "Random.h"
 #include "Crossover.h"
 
 namespace NEAT {
-    static std::mt19937 rng(std::random_device{}());
 
     const EdgeInfo& chooseOneMatchingEdge(const EdgeInfo& first, const EdgeInfo& second) {
         if (!first.isEnabled) return second;
         if (!second.isEnabled) return first;
-        return std::uniform_real_distribution<double>(0, 1)(rng) < 0.5 ? first : second;
+        return randomDouble(0, 1) < 0.5 ? first : second;
     }
 
     std::tuple<Edges, Edges, Edges> classifyEdges(const Edges& firstEdges, const Edges& secondEdges) {

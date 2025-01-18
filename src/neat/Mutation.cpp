@@ -3,25 +3,24 @@
 //
 
 #include <iostream>
-#include <random>
 
 #include "Mutation.h"
+#include "Random.h"
 
 
 namespace NEAT {
 
-    void Mutation::mutateAll(Genotype& genotype, HistoricalMarkings& markings) {
+    void mutateAll(Genotype& genotype, HistoricalMarkings& markings) {
         double mutate_node = MUTATE_NODE;
         double mutate_edge = MUTATE_EDGE;
         double mutate_enable = MUTATE_ENABLE;
         double mutate_disable = MUTATE_DISABLE;
         double mutate_weight = MUTATE_WEIGHT;
-        std::uniform_real_distribution<double> dist(0.0, 1.0);
 
         double p = mutate_weight;
 
         while (p > 0) {
-            double roll = dist(rng);
+            double roll = randomDouble(0, 1);
             if (roll < p) {
                 mutateWeight(genotype);
             }
@@ -30,7 +29,7 @@ namespace NEAT {
 
         p = mutate_edge;
         while (p > 0) {
-            double roll = dist(rng);
+            double roll = randomDouble(0, 1);
             if (roll < p) {
                 mutateEdge(genotype, markings);
             }
@@ -39,7 +38,7 @@ namespace NEAT {
 
         p = mutate_node;
         while (p > 0) {
-            double roll = dist(rng);
+            double roll = randomDouble(0, 1);
             if (roll < p) {
                 mutateNode(genotype, markings);
             }
@@ -48,7 +47,7 @@ namespace NEAT {
 
         p = mutate_enable;
         while (p > 0) {
-            double roll = dist(rng);
+            double roll = randomDouble(0, 1);
             if (roll < p) {
                 mutateEnable(genotype);
             }
@@ -57,7 +56,7 @@ namespace NEAT {
 
         p = mutate_disable;
         while (p > 0) {
-            double roll = dist(rng);
+            double roll = randomDouble(0, 1);
             if (roll < p) {
                 mutateDisable(genotype);
             }
@@ -65,7 +64,7 @@ namespace NEAT {
         }
     }
 
-    void Mutation::mutateEdge(Genotype& genotype, HistoricalMarkings& markings) {
+    void mutateEdge(Genotype& genotype, HistoricalMarkings& markings) {
         std::vector<EdgeInfo> potentialEdges;
         for (size_t i = 0; i < genotype.getNodesCount(); ++i) {
             for (size_t j = 0; j < genotype.getNodesCount(); ++j) {
@@ -88,28 +87,25 @@ namespace NEAT {
                 }
 
                 if (!edgeExists) {
-                    std::uniform_real_distribution<double> dist(-1.0, 1.0);
-                    double newWeight = dist(rng);
+                    double newWeight = randomDouble(-2.0, 2.0);
                     potentialEdges.emplace_back(i, j, newWeight, true, 0);
                 }
             }
         }
         if (!potentialEdges.empty()) {
-            std::uniform_int_distribution<size_t> dist(0, potentialEdges.size() - 1);
-            size_t idx = dist(rng);
+            size_t idx = randomDouble(0, potentialEdges.size() - 1);
             EdgeInfo mutation = potentialEdges[idx];
             mutation.innovation = markings.registerMarking(mutation);
             genotype.addEdge(potentialEdges[idx]);
         }
     }
 
-    void Mutation::mutateNode(NEAT::Genotype& genotype, HistoricalMarkings& markings) {
+    void mutateNode(NEAT::Genotype& genotype, HistoricalMarkings& markings) {
         if (genotype.getEdgesCount() == 0) {
             return;
         }
 
-        std::uniform_int_distribution<size_t> dist(0, genotype.getEdgesCount() - 1);
-        size_t idx = dist(rng);
+        size_t idx = randomDouble(0, genotype.getEdgesCount() - 1);
         EdgeInfo& edge = genotype.getEdge(idx);
         if (!edge.isEnabled) {
             return;
@@ -131,7 +127,7 @@ namespace NEAT {
         genotype.addEdge(edge2);
     }
 
-    void Mutation::mutateEnableDisable(NEAT::Genotype& genotype, bool enable) {
+    void mutateEnableDisable(NEAT::Genotype& genotype, bool enable) {
         std::vector<EdgeInfo*> potentialEdges;
         for (EdgeInfo& edge : genotype.getEdges()) {
             if (edge.isEnabled != enable) {
@@ -141,29 +137,28 @@ namespace NEAT {
         }
 
         if (!potentialEdges.empty()) {
-            std::uniform_int_distribution<size_t> dist(0, potentialEdges.size() - 1);
-            size_t idx = dist(rng);
+            size_t idx = randomDouble(0, potentialEdges.size() - 1);
             potentialEdges[idx]->isEnabled = enable;
         }
     }
 
-    void Mutation::mutateEnable(Genotype& genotype) {
+    void mutateEnable(Genotype& genotype) {
         mutateEnableDisable(genotype, true);
     }
 
-    void Mutation::mutateDisable(NEAT::Genotype& genotype) {
+    void mutateDisable(NEAT::Genotype& genotype) {
         mutateEnableDisable(genotype, false);
     }
 
-    void Mutation::mutateWeight(NEAT::Genotype& genotype) {
+    void mutateWeight(NEAT::Genotype& genotype) {
         if (genotype.getEdgesCount() == 0) {
             return;
         }
         int edgesCount = genotype.getEdgesCount();
-        int selection = std::uniform_int_distribution<int>(0, edgesCount - 1)(rng);
+        int selection = randomInt(0, edgesCount - 1);
         EdgeInfo& edge = genotype.getEdge(selection);
 
-        double roll = std::uniform_real_distribution<double>(0.0, 1.0)(rng);
+        double roll = randomDouble(0, 1);
         if (roll < PERTURBATION_CHANCE) {
             mutateWeightShift(edge, SHIFT_STEP);
         } else {
@@ -171,14 +166,12 @@ namespace NEAT {
         }
     }
 
-    void Mutation::mutateWeightShift(EdgeInfo& edge, double shiftStep) {
-        std::uniform_real_distribution<double> dist(-shiftStep/2, shiftStep/2);
-        edge.weight += dist(rng);
+    void mutateWeightShift(EdgeInfo& edge, double shiftStep) {
+        edge.weight += randomDouble(-shiftStep / 2, shiftStep / 2);
     }
 
-    void Mutation::mutateWeightRandom(EdgeInfo& edge) {
-        std::uniform_real_distribution<double> dist(-2.0, 2.0);
-        edge.weight = dist(rng);
+    void mutateWeightRandom(EdgeInfo& edge) {
+        edge.weight = randomDouble(-2.0, 2.0);
     }
 
 
