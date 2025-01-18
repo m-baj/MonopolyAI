@@ -70,6 +70,11 @@ add_executable(MonopolyAITests
         src/neat/Random.cpp
         src/neat/Random.h
         tests/TestSpecies.cpp
+        src/neat/speciationDistance.cpp
+        src/neat/speciationDistance.h
+        tests/TestSpeciationDistance.cpp
+        src/neat/Population.cpp
+        tests/TestPopulation.cpp
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
@@ -122,4 +127,7 @@ add_executable(MonopolyAI main.cpp
         src/neat/Species.cpp
         src/neat/Random.cpp
         src/neat/Random.h
+        src/neat/speciationDistance.cpp
+        src/neat/speciationDistance.h
+        src/neat/Population.cpp
 )
