@@ -4,6 +4,7 @@
 
 #include <gtest/gtest.h>
 #include "../src/neat/Phenotype.h"
+#include "../src/neat/sigmoid.h"
 
 using namespace NEAT;
 
@@ -72,10 +73,6 @@ TEST(TestPhenotype, TestPropagate)
     phenotype.setInputValues({1.0, 1.0});
     std::vector<double> outputs = phenotype.propagate();
     EXPECT_EQ(outputs.size(), 1);
-    EXPECT_EQ(outputs[0], 2.0);
+    double output = sigmoid(sigmoid(2.0));
+    EXPECT_EQ(outputs[0], output);
 }
-
-
-
-
-
