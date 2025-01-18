@@ -29,15 +29,23 @@ namespace NEAT {
     class Genotype {
     public:
         Genotype() = default;
+        Genotype(const Genotype& other) : nodes(other.nodes), edges(other.edges) {}
         void addNode(NodeInfo node);
         void addEdge(EdgeInfo edge);
         std::vector<NodeInfo> getNodes() const;
         std::vector<EdgeInfo> getEdges() const;
         size_t getNodesCount() const;
         size_t getEdgesCount() const;
+        void sortEdges();
+        void sortNodes();
 
         EdgeInfo& getEdge(int idx);
         std::vector<EdgeInfo>& getEdges();
+        void setEdges(const std::vector<EdgeInfo>& newEdges);
+        void addEdges(const std::vector<EdgeInfo>& newEdges);
+
+        void getInputAndOutputNodesFromParent(const Genotype& parent);
+        void updateHiddenNodes();
 
     private:
         std::vector<NodeInfo> nodes;
