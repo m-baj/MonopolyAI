@@ -69,6 +69,7 @@ add_executable(MonopolyAITests
         src/neat/Species.cpp
         src/neat/Random.cpp
         src/neat/Random.h
+        tests/TestSpecies.cpp
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)

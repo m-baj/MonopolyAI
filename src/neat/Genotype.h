@@ -10,7 +10,9 @@
 
 namespace NEAT {
     enum class NodeType {
-        INPUT, HIDDEN, OUTPUT
+        INPUT,
+        HIDDEN,
+        OUTPUT
     };
     struct NodeInfo {
         NodeType type;
@@ -22,20 +24,24 @@ namespace NEAT {
     struct EdgeInfo : public BaseEdge {
         int innovation = 0;
 
-        EdgeInfo(int sourceIdx, int destIdx, double weight, bool isEnabled, int innovation) :
-            BaseEdge(sourceIdx, destIdx, weight, isEnabled), innovation(innovation) {}
+        EdgeInfo(int sourceIdx, int destIdx, double weight, bool isEnabled, int innovation) : BaseEdge(sourceIdx, destIdx, weight, isEnabled), innovation(innovation) {}
     };
 
     class Genotype {
     public:
         Genotype() = default;
-        Genotype(const Genotype& other) : nodes(other.nodes), edges(other.edges) {}
+        Genotype(const Genotype& other)
+            : nodes(other.nodes), edges(other.edges), fitness(other.fitness), adjustedFitness(other.adjustedFitness) {}
         void addNode(NodeInfo node);
         void addEdge(EdgeInfo edge);
         std::vector<NodeInfo> getNodes() const;
         std::vector<EdgeInfo> getEdges() const;
         size_t getNodesCount() const;
         size_t getEdgesCount() const;
+        double getAdjustedFitness() const;
+        double getFitness() const;
+        void setAdjustedFitness(double newFitness);
+        void setFitness(double newFitness);
         void sortEdges();
         void sortNodes();
 
@@ -53,8 +59,7 @@ namespace NEAT {
 
         double fitness = 0;
         double adjustedFitness = 0;
-
     };
 
-}
-#endif // MONOPOLYAI_GENOTYPE_H
+}// namespace NEAT
+#endif// MONOPOLYAI_GENOTYPE_H

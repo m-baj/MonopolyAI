@@ -83,3 +83,16 @@ void Genotype::updateHiddenNodes() {
         }
     }
 }
+double Genotype::getAdjustedFitness() const {
+    return adjustedFitness;
+}
+void Genotype::setAdjustedFitness(double newFitness) {
+    adjustedFitness = newFitness;
+}
+double Genotype::getFitness() const {
+    return fitness;
+}
+
+void Genotype::setFitness(double newFitness) {
+    fitness = newFitness;
+}
