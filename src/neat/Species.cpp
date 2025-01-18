@@ -7,9 +7,11 @@
 #include "Mutation.h"
 #include "Random.h"
 #include "config.h"
+#include "speciationDistance.h"
 #include <algorithm>
 
 namespace NEAT {
+
     Genotype Species::breed(HistoricalMarkings& markings) {
         double roll = randomDouble(0, 1);
         if (roll < CROSSOVER_CHANCE && members.size() > 1) {
@@ -45,15 +47,22 @@ namespace NEAT {
         members.push_back(member);
     }
 
-    std::vector<Genotype>& Species::getMembers() {
+    const std::vector<Genotype>& Species::getMembers() const {
         return members;
     }
+
     void Species::calculateAdjustedFitnessSum() {
         fitnessSum = std::accumulate(members.begin(), members.end(), 0, [](double sum, const Genotype& genotype) {
             return sum + genotype.getAdjustedFitness();
         });
     }
+
     double Species::getFitnessSum() const {
         return fitnessSum;
+    }
+
+    bool Species::isCompatible(const Genotype& genotype) const {
+        double distance = calculateSpeciationDistance(members[0], genotype);
+        return distance < SPECIATION_THRESHOLD;
     }
 }

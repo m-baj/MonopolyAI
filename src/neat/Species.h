@@ -14,12 +14,15 @@ namespace NEAT {
     public:
         Species() = default;
         Genotype breed(HistoricalMarkings& markings);
+
+        bool isCompatible(const Genotype& genotype) const;
+
         void addMember(const Genotype& member);
         void calcAndSetAdjustedFitness();
         void sortByAdjustedFitness();
         void calculateAdjustedFitnessSum();
 
-        std::vector<Genotype>& getMembers();
+        const std::vector<Genotype>& getMembers() const;
         double getFitnessSum() const;
 
     private:

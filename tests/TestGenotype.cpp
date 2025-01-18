@@ -6,6 +6,14 @@
 
 #include "../src/neat/Genotype.h"
 
+TEST(TestGenotype, TestInitialize) {
+    NEAT::Genotype genotype;
+    genotype.initialize(2, 2);
+
+    EXPECT_EQ(genotype.getNodesCount(), 4);
+    EXPECT_EQ(genotype.getEdgesCount(), 1);
+}
+
 TEST(TestGenotype, TestGetInputAndOutputNodesFromParent) {
     NEAT::Genotype parent;
     parent.addNode(NEAT::NodeInfo(NEAT::NodeType::INPUT, 0));

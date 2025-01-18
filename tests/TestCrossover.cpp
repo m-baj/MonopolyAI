@@ -27,9 +27,10 @@ TEST(TestCrossover, TestClassifyEdgesAllMatching) {
             EdgeInfo(2, 3, 1.0, true, 2),
     };
 
-    auto [matchingEdges, disjointEdges, excessEdges] = classifyEdges(firstEdges, secondEdges);
+    auto [matchingEdgesFirst, matchingEdgesSecond, disjointEdges, excessEdges] = classifyEdges(firstEdges, secondEdges);
 
-    EXPECT_EQ(matchingEdges.size(), 3);
+    EXPECT_EQ(matchingEdgesFirst.size(), 3);
+    EXPECT_EQ(matchingEdgesSecond.size(), 3);
     EXPECT_EQ(disjointEdges.size(), 0);
     EXPECT_EQ(excessEdges.size(), 0);
 }
@@ -45,9 +46,10 @@ TEST(TestCrossover, TestClassifyEdgesOneDisjoint) {
             EdgeInfo(2, 3, 1.0, true, 2),
     };
 
-    auto [matchingEdges, disjointEdges, excessEdges] = classifyEdges(firstEdges, secondEdges);
+    auto [matchingEdgesFirst, matchingEdgesSecond, disjointEdges, excessEdges] = classifyEdges(firstEdges, secondEdges);
 
-    EXPECT_EQ(matchingEdges.size(), 2);
+    EXPECT_EQ(matchingEdgesFirst.size(), 2);
+    EXPECT_EQ(matchingEdgesSecond.size(), 2);
     EXPECT_EQ(disjointEdges.size(), 1);
     EXPECT_EQ(excessEdges.size(), 0);
     EXPECT_EQ(disjointEdges[0].sourceIdx, 1);
@@ -64,9 +66,10 @@ TEST(TestCrossover, TestClassifyEdgesOneExcess) {
             EdgeInfo(2, 3, 1.0, true, 2),
     };
 
-    auto [matchingEdges, disjointEdges, excessEdges] = classifyEdges(firstEdges, secondEdges);
+    auto [matchingEdgesFirst, matchingEdgesSecond, disjointEdges, excessEdges] = classifyEdges(firstEdges, secondEdges);
 
-    EXPECT_EQ(matchingEdges.size(), 2);
+    EXPECT_EQ(matchingEdgesFirst.size(), 2);
+    EXPECT_EQ(matchingEdgesSecond.size(), 2);
     EXPECT_EQ(disjointEdges.size(), 0);
     EXPECT_EQ(excessEdges.size(), 1);
     EXPECT_EQ(excessEdges[0].sourceIdx, 2);
@@ -84,9 +87,10 @@ TEST(TestCrossover, TestClassifyEdgesOneExcessOneDisjoint) {
             EdgeInfo(3, 4, 1.0, true, 3),
     };
 
-    auto [matchingEdges, disjointEdges, excessEdges] = classifyEdges(firstEdges, secondEdges);
+    auto [matchingEdgesFirst, matchingEdgesSecond, disjointEdges, excessEdges] = classifyEdges(firstEdges, secondEdges);
 
-    EXPECT_EQ(matchingEdges.size(), 2);
+    EXPECT_EQ(matchingEdgesFirst.size(), 2);
+    EXPECT_EQ(matchingEdgesSecond.size(), 2);
     EXPECT_EQ(disjointEdges.size(), 1);
     EXPECT_EQ(excessEdges.size(), 1);
     EXPECT_EQ(disjointEdges[0].sourceIdx, 1);
