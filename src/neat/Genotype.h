@@ -32,14 +32,18 @@ namespace NEAT {
         Genotype() = default;
         Genotype(const Genotype& other)
             : nodes(other.nodes), edges(other.edges), fitness(other.fitness), adjustedFitness(other.adjustedFitness) {}
+
+        void initialize(int inputsCount, int outputsCount);
         void addNode(NodeInfo node);
         void addEdge(EdgeInfo edge);
+
         std::vector<NodeInfo> getNodes() const;
         std::vector<EdgeInfo> getEdges() const;
         size_t getNodesCount() const;
         size_t getEdgesCount() const;
         double getAdjustedFitness() const;
         double getFitness() const;
+
         void setAdjustedFitness(double newFitness);
         void setFitness(double newFitness);
         void sortEdges();

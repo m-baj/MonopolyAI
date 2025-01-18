@@ -55,6 +55,7 @@ void Genotype::sortNodes() {
 void Genotype::setEdges(const std::vector<EdgeInfo>& newEdges) {
     edges = newEdges;
 }
+
 void Genotype::addEdges(const std::vector<EdgeInfo>& newEdges) {
     edges.insert(edges.end(), newEdges.begin(), newEdges.end());
 }
@@ -66,6 +67,7 @@ void Genotype::getInputAndOutputNodesFromParent(const NEAT::Genotype& parent) {
         }
     }
 }
+
 void Genotype::updateHiddenNodes() {
     std::unordered_set<int> existingNodes;
     for (const auto& node : nodes) {
@@ -83,16 +85,30 @@ void Genotype::updateHiddenNodes() {
         }
     }
 }
+
 double Genotype::getAdjustedFitness() const {
     return adjustedFitness;
 }
+
 void Genotype::setAdjustedFitness(double newFitness) {
     adjustedFitness = newFitness;
 }
+
 double Genotype::getFitness() const {
     return fitness;
 }
 
 void Genotype::setFitness(double newFitness) {
     fitness = newFitness;
+}
+
+void Genotype::initialize(int inputsCount, int outputsCount) {
+    nodes.reserve(inputsCount + outputsCount);
+    for (int i = 0; i < inputsCount; ++i) {
+        nodes.push_back(NodeInfo(NodeType::INPUT, i));
+    }
+    for (int i = 0; i < outputsCount; ++i) {
+        nodes.push_back(NodeInfo(NodeType::OUTPUT, i + inputsCount));
+    }
+    edges.emplace_back(0, inputsCount, 0, true, 0);
 }

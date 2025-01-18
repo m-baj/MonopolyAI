@@ -6,7 +6,7 @@
 #define MONOPOLYAI_CONFIG_H
 
 
-const int POPULATION_SIZE = 100;
+const int POPULATION_SIZE = 256;
 const int INPUTS_COUNT = 126;
 const int OUTPUTS_COUNT = 7;
 
@@ -20,5 +20,11 @@ const double PERTURBATION_CHANCE = 0.9;
 const double SHIFT_STEP = 0.1;
 
 const double CROSSOVER_CHANCE = 0.75;
+
+const double C1 = 1.0;
+const double C2 = 1.0;
+const double C3 = 0.4;
+
+const double SPECIATION_THRESHOLD = 1.0;
 
 #endif//MONOPOLYAI_CONFIG_H
