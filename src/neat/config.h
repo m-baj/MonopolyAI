@@ -19,4 +19,6 @@ const double MUTATE_NODE = 0.1;
 const double PERTURBATION_CHANCE = 0.9;
 const double SHIFT_STEP = 0.1;
 
+const double CROSSOVER_CHANCE = 0.75;
+
 #endif//MONOPOLYAI_CONFIG_H
