@@ -32,6 +32,7 @@ PlayerDecisionOutputs ConsoleDecisionSelector::receiveInput(std::istream& in, co
         if (decision == "pb")
         {
             this->printBoard();
+            this->printDecisions(possibleDecisions);
             continue;
         }
         if (decision_enum == STRING_TO_DECISION.end() || std::ranges::find(possibleDecisions, decision_enum->second) == possibleDecisions.end())
