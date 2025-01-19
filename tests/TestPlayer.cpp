@@ -12,14 +12,16 @@
 
 TEST(TestPlayer, InitPlayer)
 {
-    ConsolePlayer player("Player", 1000);
+    Board board;
+    ConsolePlayer player("Player", 1000, board);
     EXPECT_EQ(player.getName(), "Player");
     EXPECT_EQ(player.getMoney(), 1000);
 }
 
 TEST(TestPlayer, SetPosition)
 {
-    ConsolePlayer player("Player", 1000);
+    Board board;
+    ConsolePlayer player("Player", 1000, board);
     player.setPositionIdx(1);
     EXPECT_EQ(player.getPositionIdx(), 1);
 }
@@ -27,7 +29,7 @@ TEST(TestPlayer, SetPosition)
 TEST(TestPlayer, pushProperty)
 {
     Board board;
-    ConsolePlayer player("Player", 1000);
+    ConsolePlayer player("Player", 1000, board);
     auto property = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
     player.pushProperty(property);
     EXPECT_EQ(player.getProperties().size(), 1);
@@ -36,7 +38,8 @@ TEST(TestPlayer, pushProperty)
 
 TEST(TestPlayer, addMoney)
 {
-    ConsolePlayer player("Player", 1000);
+    Board board;
+    ConsolePlayer player("Player", 1000, board);
     player.addMoney(300);
     EXPECT_EQ(player.getMoney(), 1300);
 }
@@ -44,7 +47,7 @@ TEST(TestPlayer, addMoney)
 TEST(TestPlayerOwnsAllPropertiesOfColor, ownsAllPropertiesOfColor)
 {
     Board board;
-    auto player = std::make_unique<ConsolePlayer>("player", 1000);
+    auto player = std::make_unique<ConsolePlayer>("player", 1000, board);
     auto property1 = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
     auto property2 = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
     player->pushProperty(property1);
@@ -55,7 +58,7 @@ TEST(TestPlayerOwnsAllPropertiesOfColor, ownsAllPropertiesOfColor)
 TEST(TestPlayerOwnsAllPropertiesOfColor, ownsAllPropertiesOfColorFalse)
 {
     Board board;
-    auto player = std::make_unique<ConsolePlayer>("player", 1000);
+    auto player = std::make_unique<ConsolePlayer>("player", 1000, board);
     auto property1 = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
     player->pushProperty(property1);
     EXPECT_EQ(player->ownsAllPropertiesOf(Color::BROWN), false);
@@ -64,7 +67,7 @@ TEST(TestPlayerOwnsAllPropertiesOfColor, ownsAllPropertiesOfColorFalse)
 TEST(TestPlayerGetNumberOfTrains, getNumberOfTrains)
 {
     Board board;
-    auto player = std::make_unique<ConsolePlayer>("player", 1000);
+    auto player = std::make_unique<ConsolePlayer>("player", 1000, board);
     auto train1 = std::make_shared<Trains>("", board, 1);
     auto train2 = std::make_shared<Trains>("", board, 1);
     player->pushTrain(train1);
@@ -74,7 +77,8 @@ TEST(TestPlayerGetNumberOfTrains, getNumberOfTrains)
 
 TEST(TestPlayer, pushCurrentTurnMadeDecisions)
 {
-    ConsolePlayer player("Player", 1000);
+    Board board;
+    ConsolePlayer player("Player", 1000, board);
     player.saveTurnDecision(PlayerDecisionOutputs::NO_DECISION);
     EXPECT_EQ(player.getMadeTurnDecisions().size(), 1);
 }

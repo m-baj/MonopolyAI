@@ -10,6 +10,7 @@
 
 #include "./Decision/DecisionSelector.h"
 
+class Board;
 class Trains;
 class Utilities;
 class Property;
@@ -18,8 +19,8 @@ class Player {
 public:
     virtual ~Player() = default;
 
-    Player(const std::string& name, int startMoney)
-        : name(name), money(startMoney) {};
+    Player(const std::string& name, int startMoney, const Board& board)
+        : name(name), money(startMoney), board(board) {};
 
     std::string getName() const;
     int getMoney() const;
@@ -30,6 +31,7 @@ public:
     bool ownsAllPropertiesOf(Color color) const;
     int getNumberOfTrains() const;
     const std::vector<PlayerDecisionOutputs>& getMadeTurnDecisions() const;
+    const Board& getBoard() const;
 
     void setPositionIdx(int positionIdx);
     void pushProperty(std::shared_ptr<Property> property);
@@ -60,13 +62,14 @@ private:
     std::string name;
     int positionIdx = 0;
     bool isBankrupt = false;
+    const Board& board;
 };
 
 class ConsolePlayer final : public Player
 {
 public:
-    ConsolePlayer(const std::string& name, int startMoney)
-        : Player(name, startMoney)
+    ConsolePlayer(const std::string& name, int startMoney, const Board& board)
+        : Player(name, startMoney, board)
     {
     }
     ~ConsolePlayer() override = default;
@@ -77,8 +80,8 @@ public:
 class AiPlayer final : public Player
 {
 public:
-    AiPlayer(const std::string& name, int startMoney)
-        : Player(name, startMoney)
+    AiPlayer(const std::string& name, int startMoney, const Board& board)
+        : Player(name, startMoney, board)
     {
     }
     ~AiPlayer() override = default;

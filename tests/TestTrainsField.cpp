@@ -10,7 +10,7 @@
 TEST(TestCalculateRent, testCalculateRent)
 {
     Board board;
-    auto owner = std::make_unique<ConsolePlayer>("owner", 1000);
+    auto owner = std::make_unique<ConsolePlayer>("owner", 1000, board);
     auto train1 = std::make_shared<Trains>("", board, 100);
     auto train2 = std::make_shared<Trains>("", board, 100);
     train1->setOwner(owner.get());

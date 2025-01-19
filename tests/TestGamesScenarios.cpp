@@ -16,10 +16,10 @@ TEST(TestField, scenario0)
     Board board;
     Game game(board);
     BoardSetupCreator::createClassicBoard(board);
-    board.pushPlayer(std::make_unique<ConsolePlayer>("player0", 1000));
-    board.pushPlayer(std::make_unique<ConsolePlayer>("player1", 1000));
-    board.pushPlayer(std::make_unique<ConsolePlayer>("player2", 1000));
-    board.pushPlayer(std::make_unique<ConsolePlayer>("player3", 1000));
+    board.pushPlayer(std::make_unique<ConsolePlayer>("player0", 1000, board));
+    board.pushPlayer(std::make_unique<ConsolePlayer>("player1", 1000, board));
+    board.pushPlayer(std::make_unique<ConsolePlayer>("player2", 1000, board));
+    board.pushPlayer(std::make_unique<ConsolePlayer>("player3", 1000, board));
 
     std::stringstream myStringStream = std::stringstream("td\n-");
     ConsoleDecisionSelector::in_stream = &myStringStream;

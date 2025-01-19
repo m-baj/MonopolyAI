@@ -22,7 +22,7 @@ TEST_P(TestGetNewPosition, getNewPosition)
     {
         board.pushField(std::make_shared<Field>("", board));
     }
-    auto player = std::make_unique<ConsolePlayer>("", 1);
+    auto player = std::make_unique<ConsolePlayer>("", 1, board);
     player.get()->setPositionIdx(prevIdx);
     board.pushPlayer(std::move(player));
     board.setCurrentPlayerIndex(0);
@@ -55,7 +55,7 @@ TEST_P(TestWillMoveCrossStart, willMoveCrossStart)
     {
         board.pushField(std::make_shared<Field>("", board));
     }
-    auto player = std::make_unique<ConsolePlayer>("", 1);
+    auto player = std::make_unique<ConsolePlayer>("", 1, board);
     player.get()->setPositionIdx(prevIdx);
     board.pushPlayer(std::move(player));
     board.setCurrentPlayerIndex(0);

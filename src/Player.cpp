@@ -133,6 +133,11 @@ const std::vector<PlayerDecisionOutputs>& Player::getMadeTurnDecisions() const
     return decisionsMadeThisTurn;
 }
 
+const Board& Player::getBoard() const
+{
+    return board;
+}
+
 void Player::pushTrain(std::shared_ptr<Trains> train) {
     trains.push_back(train);
 }

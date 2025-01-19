@@ -10,7 +10,7 @@
 
 TEST(TestGetOwner, OwnerExists) {
     Board board;
-    auto owner = std::make_unique<ConsolePlayer>("owner", 1000);
+    auto owner = std::make_unique<ConsolePlayer>("owner", 1000, board);
     auto property = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
     property->setOwner(owner.get());
     EXPECT_EQ(property->getOwner(), owner.get());
@@ -24,8 +24,8 @@ TEST(TestGetOwner, testOwnerDoesNotExist) {
 
 TEST(TestOnPlayerEnter, PlayerPaysRent) {
     Board board;
-    auto player = std::make_unique<ConsolePlayer>("player", 1000);
-    auto owner = std::make_unique<ConsolePlayer>("owner", 1000);
+    auto player = std::make_unique<ConsolePlayer>("player", 1000, board);
+    auto owner = std::make_unique<ConsolePlayer>("owner", 1000, board);
     auto property = std::make_shared<Property>("", board, 1, 1, 1, Color::BROWN);
     property->setOwner(owner.get());
     board.pushField(property);
