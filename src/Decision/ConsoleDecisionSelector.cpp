@@ -7,10 +7,11 @@
 #include <iostream>
 #include <algorithm>
 
+#include "../Board.h"
 #include "../Player.h"
 
 std::istream* ConsoleDecisionSelector::in_stream = &std::cin;
-void ConsoleDecisionSelectorHelpers::printDecisions(const std::vector<PlayerDecisionOutputs>& possibleDecisions)
+void ConsoleDecisionSelector::printDecisions(const std::vector<PlayerDecisionOutputs>& possibleDecisions) const
 {
     for (auto decision : possibleDecisions)
     {
@@ -18,16 +19,21 @@ void ConsoleDecisionSelectorHelpers::printDecisions(const std::vector<PlayerDeci
     }
 }
 
-PlayerDecisionOutputs ConsoleDecisionSelectorHelpers::receiveInput(std::istream& in, const std::vector<PlayerDecisionOutputs>& possibleDecisions)
+PlayerDecisionOutputs ConsoleDecisionSelector::receiveInput(std::istream& in, const std::vector<PlayerDecisionOutputs>& possibleDecisions) const
 {
     std::string decision;
     std::map<std::string, PlayerDecisionOutputs>::const_iterator decision_enum;
 
     do
     {
-        std::cout << "Enter decision: ";
+        std::cout << "Enter decision ('pb' to print board): ";
         in >> decision;
         decision_enum = STRING_TO_DECISION.find(decision);
+        if (decision == "pb")
+        {
+            this->printBoard();
+            continue;
+        }
         if (decision_enum == STRING_TO_DECISION.end() || std::ranges::find(possibleDecisions, decision_enum->second) == possibleDecisions.end())
         {
             std::cout << "Invalid decision. Please try again." << std::endl;
@@ -35,6 +41,21 @@ PlayerDecisionOutputs ConsoleDecisionSelectorHelpers::receiveInput(std::istream&
     } while (decision_enum == STRING_TO_DECISION.end() || std::ranges::find(possibleDecisions, decision_enum->second) == possibleDecisions.end());
 
     return decision_enum->second;
+}
+
+void ConsoleDecisionSelector::printBoard() const
+{
+    for (const auto &field : player_.getBoard().getFields())
+    {
+        std::cout << field->getName() << std::endl;
+        for (auto player : field->getPlayersOnField())
+        {
+            if (player.has_value())
+            {
+                std::cout << player.value()->getName() << std::endl;
+            }
+        }
+    }
 }
 
 
@@ -49,8 +70,8 @@ void ConsoleDecisionSelector::requireSelection(const std::string& label,
         return;
     }
 
-    ConsoleDecisionSelectorHelpers::printDecisions(possibleDecisions);
-    PlayerDecisionOutputs decision = ConsoleDecisionSelectorHelpers::receiveInput(*ConsoleDecisionSelector::in_stream, possibleDecisions);
+    this->printDecisions(possibleDecisions);
+    PlayerDecisionOutputs decision = this->receiveInput(*this->in_stream, possibleDecisions);
     player_.saveTurnDecision(decision);
 
     switch (decision)

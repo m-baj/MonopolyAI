@@ -13,8 +13,17 @@
 #include "../Constants.h"
 
 
-namespace ConsoleDecisionSelectorHelpers
+class ConsoleDecisionSelector final : public DecisionSelector
 {
+public:
+    explicit ConsoleDecisionSelector(Player& player) : DecisionSelector(player) {};
+
+    void requireSelection(const std::string& label,
+                          const std::vector<PlayerDecisionOutputs>&
+                          possibleDecisions) override;
+
+    static std::istream* in_stream;
+
     const std::map<PlayerDecisionOutputs, std::string> DECISION_TO_STRING = {
         {PlayerDecisionOutputs::BUY_FIELD, "bf"},
         {PlayerDecisionOutputs::MORTGAGE_FIELD, "mo"},
@@ -54,20 +63,9 @@ namespace ConsoleDecisionSelectorHelpers
         {PlayerDecisionOutputs::THROW_DICE, std::format("Type '{}' to throw a dice", DECISION_TO_STRING.at(PlayerDecisionOutputs::THROW_DICE))},
     };
 
-    void printDecisions(const std::vector<PlayerDecisionOutputs>& possibleDecisions);
-    PlayerDecisionOutputs receiveInput(std::istream& in, const std::vector<PlayerDecisionOutputs>& possibleDecisions);
-}
-
-class ConsoleDecisionSelector final : public DecisionSelector
-{
-public:
-    explicit ConsoleDecisionSelector(Player& player) : DecisionSelector(player) {};
-
-    void requireSelection(const std::string& label,
-                          const std::vector<PlayerDecisionOutputs>&
-                          possibleDecisions) override;
-
-    static std::istream* in_stream;
+    void printDecisions(const std::vector<PlayerDecisionOutputs>& possibleDecisions) const;
+    PlayerDecisionOutputs receiveInput(std::istream& in, const std::vector<PlayerDecisionOutputs>& possibleDecisions) const;
+    void printBoard() const;
 };
 
 
