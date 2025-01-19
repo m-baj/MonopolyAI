@@ -45,16 +45,22 @@ PlayerDecisionOutputs ConsoleDecisionSelector::receiveInput(std::istream& in, co
 
 void ConsoleDecisionSelector::printBoard() const
 {
-    for (const auto &field : player_.getBoard().getFields())
+    for (int i = 0; i < player_.getBoard().getFields().size(); i++)
     {
-        std::cout << field->getName() << std::endl;
-        for (auto player : field->getPlayersOnField())
+        std::cout << i+1 << ": ";
+        auto& field = player_.getBoard().getFields()[i];
+
+        std::cout << "(" << field->getName() << ") ";
+        auto players = field->getPlayersOnField();
+        std::cout << "[ ";
+        for (auto& player : players)
         {
-            if (player.has_value())
+            if(player.has_value())
             {
-                std::cout << player.value()->getName() << std::endl;
+                std::cout << player.value()->getName() << " ";
             }
         }
+        std::cout << "] " << std::endl;
     }
 }
 
