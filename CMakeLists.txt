@@ -51,6 +51,10 @@ add_executable(MonopolyAITests
         src/Decision/ConsoleDecisionSelector.h
         src/Decision/AiDecisionSelector.cpp
         src/Decision/AiDecisionSelector.h
+        src/Decision/FieldVisitor.cpp
+        src/Decision/FieldVisitor.h
+        src/Decision/FieldBuyVisitor.cpp
+        src/Decision/FieldBuyVisitor.h
 )
 target_link_libraries(MonopolyAITests gtest_main)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
@@ -89,4 +93,8 @@ add_executable(MonopolyAI main.cpp
         src/Decision/ConsoleDecisionSelector.h
         src/Decision/AiDecisionSelector.cpp
         src/Decision/AiDecisionSelector.h
+        src/Decision/FieldVisitor.cpp
+        src/Decision/FieldVisitor.h
+        src/Decision/FieldBuyVisitor.cpp
+        src/Decision/FieldBuyVisitor.h
 )

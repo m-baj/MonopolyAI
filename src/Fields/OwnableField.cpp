@@ -29,6 +29,11 @@ bool OwnableField::canBuy(Player* player) const
     }
 }
 
+int OwnableField::getBaseBuyPrice() const
+{
+    return baseBuyPrice;
+}
+
 std::vector<PlayerDecisionOutputs> OwnableField::getFieldDecisions(Player* player) const
 {
     auto decisions = Field::getFieldDecisions(player);

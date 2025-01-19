@@ -7,8 +7,10 @@
 #include <iostream>
 #include <algorithm>
 
+#include "FieldBuyVisitor.h"
 #include "../Board.h"
 #include "../Player.h"
+#include "../Fields/OwnableField.h"
 
 std::istream* ConsoleDecisionSelector::in_stream = &std::cin;
 void ConsoleDecisionSelector::printDecisions(const std::vector<PlayerDecisionOutputs>& possibleDecisions) const
@@ -86,7 +88,11 @@ void ConsoleDecisionSelector::requireSelection(const std::string& label,
         case PlayerDecisionOutputs::NO_DECISION:
             break;
         case PlayerDecisionOutputs::BUY_FIELD:
-            break;
+            {
+                FieldBuyVisitor visitor;
+                player_.getBoard().getSteppedOnField()->accept(visitor);
+                break;
+            }
         case PlayerDecisionOutputs::MORTGAGE_FIELD:
             break;
         case PlayerDecisionOutputs::UNMORTGAGE_FIELD:

@@ -28,6 +28,7 @@ public:
     int rollDice() const;
     Field* getSteppedOnField() const;
 
+    void setRollDiceSeed(int seed);
     void setCurrentPlayerIndex(int index);
     void pushField(std::shared_ptr<Field> field);
     void pushPlayer(std::unique_ptr<Player> player);
@@ -35,6 +36,7 @@ public:
     void nextPlayer();
 
 private:
+    int rollDiceSeed = 0;
     std::vector<std::shared_ptr<Field>> fields = {};
     std::vector<std::unique_ptr<Player>> players = {};
     int currentPlayerIndex = 0;

@@ -10,7 +10,9 @@
 
 #include "../Constants.h"
 #include "../Player.h"
+#include "../Decision/FieldVisitor.h"
 
+class FieldVisitor;
 class Board;
 /*
  * Base class for all fields on the board.
@@ -26,6 +28,9 @@ public:
     std::string getName() const;
     std::vector<std::optional<Player*>> getPlayersOnField() const;
     int getFieldIdx() const;
+    const Board& getBoard() const;
+
+    virtual void accept(FieldVisitor& visitor) {visitor.visitField(*this);};
 
     /*
      * Method called when player enters the field.

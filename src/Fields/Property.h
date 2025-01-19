@@ -26,6 +26,8 @@ public:
     int calculateNextHousePrice() const;
     bool canBuyHouseHere(Player* player) const;
 
+    void accept(FieldVisitor& visitor) override {visitor.visitProperty(*this);};
+
     void setHasHotel(bool hasHotel);
     void setMortgaged(bool isMortgaged);
     void onPlayerEnter(Player* player) override;

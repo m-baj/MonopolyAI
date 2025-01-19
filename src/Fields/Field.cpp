@@ -43,6 +43,11 @@ int Field::getFieldIdx() const
     return -1;
 }
 
+const Board& Field::getBoard() const
+{
+    return board;
+}
+
 std::vector<PlayerDecisionOutputs> Field::getFieldDecisions(Player* player) const
 {
     std::vector<PlayerDecisionOutputs> baseDecisions = {};

@@ -32,6 +32,11 @@ Field* Board::getSteppedOnField() const
     return this->fields[this->getCurrentPlayer()->getPositionIdx()].get();
 }
 
+void Board::setRollDiceSeed(int seed)
+{
+    rollDiceSeed = seed;
+}
+
 Player* Board::getCurrentPlayer() const
 {
     return this->players[this->currentPlayerIndex].get();
@@ -40,6 +45,10 @@ Player* Board::getCurrentPlayer() const
 
 int Board::rollDice() const
 {
+    if (rollDiceSeed != 0)
+    {
+        return rollDiceSeed;
+    }
     return (std::rand() % 6 + 1) + (std::rand() % 6 + 1);
 }
 
