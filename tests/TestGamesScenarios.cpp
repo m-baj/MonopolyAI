@@ -46,5 +46,28 @@ TEST(TestGame, scenarioBuyField)
     game.nextTurn();
     EXPECT_EQ(board.getPlayers()[0].get()->getProperties()[0].get()->getName(), board.getFields()[3].get()->getName());
     EXPECT_EQ(board.getPlayers()[0].get()->getMoney(), 940);
+    EXPECT_EQ(board.getCurrentPlayer(), board.getPlayers()[1].get());
 }
+
+TEST(TestGame, scenarioPayRent)
+{
+    Board board;
+    Game game(board);
+    BoardSetupCreator::createClassicBoard(board);
+    board.pushPlayer(std::make_unique<ConsolePlayer>("player0", 1000, board));
+    board.pushPlayer(std::make_unique<ConsolePlayer>("player1", 1000, board));
+    board.pushPlayer(std::make_unique<ConsolePlayer>("player2", 1000, board));
+    board.pushPlayer(std::make_unique<ConsolePlayer>("player3", 1000, board));
+
+    board.setRollDiceSeed(3);
+    std::stringstream myStringStream = std::stringstream("td\nbf\n-\ntd\n-");
+    ConsoleDecisionSelector::in_stream = &myStringStream;
+    game.nextTurn();
+    game.nextTurn();
+    EXPECT_EQ(board.getPlayers()[0].get()->getProperties()[0].get()->getName(), board.getFields()[3].get()->getName());
+    EXPECT_EQ(board.getPlayers()[0].get()->getMoney(), 950);
+    EXPECT_EQ(board.getCurrentPlayer(), board.getPlayers()[2].get());
+    EXPECT_EQ(board.getPlayers()[1].get()->getMoney(), 990);
+}
+
 
