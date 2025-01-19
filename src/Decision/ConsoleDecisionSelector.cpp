@@ -11,6 +11,7 @@
 #include "../Board.h"
 #include "../Player.h"
 #include "../Fields/OwnableField.h"
+#include "../Fields/Property.h"
 
 std::istream* ConsoleDecisionSelector::in_stream = &std::cin;
 void ConsoleDecisionSelector::printDecisions(const std::vector<PlayerDecisionOutputs>& possibleDecisions) const
@@ -28,12 +29,18 @@ PlayerDecisionOutputs ConsoleDecisionSelector::receiveInput(std::istream& in, co
 
     do
     {
-        std::cout << "Enter decision ('pb' to print board): ";
+        std::cout << "Enter decision ('pb' to print board, 'pi' for player info): ";
         in >> decision;
         decision_enum = STRING_TO_DECISION.find(decision);
         if (decision == "pb")
         {
             this->printBoard();
+            this->printDecisions(possibleDecisions);
+            continue;
+        }
+        if (decision == "pi")
+        {
+            this->printPlayersInfo();
             this->printDecisions(possibleDecisions);
             continue;
         }
@@ -67,6 +74,26 @@ void ConsoleDecisionSelector::printBoard() const
     }
 }
 
+size_t ConsoleDecisionSelector::receiveListIndexInput(std::istream& in, size_t listSize) const
+{
+    int decision;
+    in >> decision;
+    while (decision < 0 || decision >= listSize)
+    {
+        std::cout << "Invalid decision. Please try again." << std::endl;
+        in >> decision;
+    }
+    return decision;
+}
+
+void ConsoleDecisionSelector::printPlayersInfo() const
+{
+    for (const auto& player : player_.getBoard().getPlayers())
+    {
+        std::cout << player->getName() << " has " << player->getMoney() << " money" << std::endl;
+    }
+}
+
 
 void ConsoleDecisionSelector::requireSelection(const std::string& label,
                                                const std::vector<PlayerDecisionOutputs>&
@@ -94,7 +121,26 @@ void ConsoleDecisionSelector::requireSelection(const std::string& label,
                 break;
             }
         case PlayerDecisionOutputs::MORTGAGE_FIELD:
-            break;
+            {
+                std::vector<Property*> mortgagableProperties;
+                for (auto& field : player_.getProperties())
+                {
+                    if (field->getOwner() == &player_ && !field->getIsMortgaged())
+                    {
+                        mortgagableProperties.push_back(field.get());
+                    }
+                }
+                int i = 0;
+                for (const auto& field : mortgagableProperties)
+                {
+                    std::cout << i++ << ": " << field->getName() << std::endl;
+                }
+                std::cout << "Which field do you want to mortgage?: " << std::endl;
+                int decision = this->receiveListIndexInput(*this->in_stream, mortgagableProperties.size());
+                std::cout << "Mortgaging " << mortgagableProperties[decision]->getName() << std::endl;
+                mortgagableProperties[decision]->mortgage();
+                break;
+            }
         case PlayerDecisionOutputs::UNMORTGAGE_FIELD:
             break;
         case PlayerDecisionOutputs::BUY_HOUSE:

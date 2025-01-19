@@ -53,3 +53,20 @@ TEST(TestGame, getDecisionsOnFieldCannotBuyFieldWhenItsBought)
     EXPECT_THAT(decisions, ::testing::UnorderedElementsAre(PlayerDecisionOutputs::NO_DECISION));
 }
 
+TEST(TestGame, getDecisionsOnFieldMortgageField)
+{
+    Board board;
+    Game game(board);
+    BoardSetupCreator::createClassicBoard(board);
+    board.pushPlayer(std::make_unique<ConsolePlayer>("player0", 1000, board));
+
+    board.setRollDiceSeed(3);
+    std::stringstream myStringStream = std::stringstream("td\nbf\n-");
+    ConsoleDecisionSelector::in_stream = &myStringStream;
+    game.nextTurn();
+
+    board.movePlayer(3);
+    auto decisions = board.getSteppedOnField()->getFieldDecisions(board.getCurrentPlayer());
+    EXPECT_EQ(decisions.size(), 3);
+    EXPECT_THAT(decisions, ::testing::UnorderedElementsAre(PlayerDecisionOutputs::NO_DECISION, PlayerDecisionOutputs::BUY_FIELD, PlayerDecisionOutputs::MORTGAGE_FIELD));
+}

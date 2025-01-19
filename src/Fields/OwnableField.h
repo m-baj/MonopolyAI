@@ -18,6 +18,12 @@ public:
     bool canBuy(Player* player) const;
     int getBaseBuyPrice() const;
 
+    void accept(FieldVisitor& visitor) override
+    {
+        visitor.visitOwnableField(*this);
+        Field::accept(visitor);
+    };
+
     virtual std::vector<PlayerDecisionOutputs> getFieldDecisions(Player* player) const;
 
 protected:

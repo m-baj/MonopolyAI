@@ -95,7 +95,7 @@ bool Field::canUnmortgageAnyField(Player* player) const
 {
     for (const auto& property : player->getProperties())
     {
-        if (property->getIsMortgaged())
+        if (!property->getIsMortgaged())
             continue;
 
         if (static_cast<int>(property->getMortgagePrice() * UNMORTGAGE_INTEREST_MULTIPLIER) < player->getMoney())

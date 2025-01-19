@@ -12,7 +12,6 @@
 #include "../Player.h"
 #include "../Decision/FieldVisitor.h"
 
-class FieldVisitor;
 class Board;
 /*
  * Base class for all fields on the board.

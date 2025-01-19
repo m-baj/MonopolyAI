@@ -14,7 +14,7 @@ int main()
     board.pushPlayer(std::make_unique<ConsolePlayer>("player1", 1000, board));
     board.pushPlayer(std::make_unique<ConsolePlayer>("player2", 1000, board));
     board.pushPlayer(std::make_unique<ConsolePlayer>("player3", 1000, board));
-
+    board.setRollDiceSeed(3);
     game.play();
 
     return 0;

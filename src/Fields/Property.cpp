@@ -52,6 +52,12 @@ bool Property::canBuyHouseHere(Player* player) const
     return true;
 }
 
+void Property::mortgage()
+{
+    isMortgaged = true;
+    owner->addMoney(mortgagePrice);
+}
+
 int Property::calculateNextHousePrice() const
 {
     if (numberOfHouses < MAX_NUMBER_OF_HOUSES - 1)

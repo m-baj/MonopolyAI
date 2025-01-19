@@ -25,8 +25,13 @@ public:
     bool getHasHotel() const;
     int calculateNextHousePrice() const;
     bool canBuyHouseHere(Player* player) const;
+    void mortgage();
 
-    void accept(FieldVisitor& visitor) override {visitor.visitProperty(*this);};
+    void accept(FieldVisitor& visitor) override
+    {
+        visitor.visitProperty(*this);
+        OwnableField::accept(visitor);
+    };
 
     void setHasHotel(bool hasHotel);
     void setMortgaged(bool isMortgaged);

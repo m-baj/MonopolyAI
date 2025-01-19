@@ -2,10 +2,12 @@
 // Created by adrwal on 1/19/25.
 //
 
+
 #ifndef FIELDVISITOR_H
 #define FIELDVISITOR_H
+#include <vector>
 
-
+class OwnableField;
 class TaxField;
 class GoToJailField;
 class Field;
@@ -24,6 +26,7 @@ public:
     virtual void visitField(Field& field) {};
     virtual void visitGoToJailField(GoToJailField& field) {};
     virtual void visitTaxField(TaxField& field) {};
+    virtual void visitOwnableField(OwnableField& field) {};
 };
 
 
