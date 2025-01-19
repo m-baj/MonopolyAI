@@ -21,11 +21,13 @@ public:
     Color getColor() const;
     bool getIsMortgaged() const;
     int getMortgagePrice() const;
+    int getUnmortgagePrice() const;
     int getNumberOfHouses() const;
     bool getHasHotel() const;
     int calculateNextHousePrice() const;
     bool canBuyHouseHere(Player* player) const;
     void mortgage();
+    void unmortgage();
 
     void accept(FieldVisitor& visitor) override
     {

@@ -58,6 +58,12 @@ void Property::mortgage()
     owner->addMoney(mortgagePrice);
 }
 
+void Property::unmortgage()
+{
+    isMortgaged = false;
+    owner->payToBank(getUnmortgagePrice());
+}
+
 int Property::calculateNextHousePrice() const
 {
     if (numberOfHouses < MAX_NUMBER_OF_HOUSES - 1)
@@ -91,6 +97,11 @@ bool Property::getIsMortgaged() const {
 
 int Property::getMortgagePrice() const {
     return mortgagePrice;
+}
+
+int Property::getUnmortgagePrice() const
+{
+    return mortgagePrice * UNMORTGAGE_INTEREST_MULTIPLIER;
 }
 
 int Property::getNumberOfHouses() const {

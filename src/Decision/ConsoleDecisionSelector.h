@@ -70,6 +70,7 @@ public:
     void printPlayersInfo() const;
     void handleMortageDecision();
     void handleBuyFieldDecision();
+    void handleUnmortageDecision();
 };
 
 

@@ -105,10 +105,10 @@ void ConsoleDecisionSelector::handleMortageDecision()
         }
     }
     int i = 0;
-    for (const auto& field : mortgagableProperties)
+    std::ranges::for_each(mortgagableProperties, [&i](auto& field)
     {
         std::cout << i++ << ": " << field->getName() << std::endl;
-    }
+    });
     std::cout << "Which field do you want to mortgage?: " << std::endl;
     int decision = this->receiveListIndexInput(*this->in_stream, mortgagableProperties.size());
     std::cout << "Mortgaging " << mortgagableProperties[decision]->getName() << std::endl;
@@ -119,6 +119,27 @@ void ConsoleDecisionSelector::handleBuyFieldDecision()
 {
     FieldBuyVisitor visitor;
     player_.getBoard().getSteppedOnField()->accept(visitor);
+}
+
+void ConsoleDecisionSelector::handleUnmortageDecision()
+{
+    std::vector<Property*> unmortgagableProperties;
+    for (auto& field : player_.getProperties())
+    {
+        if (field->getOwner() == &player_ && field->getIsMortgaged() && player_.getMoney() >= field->getUnmortgagePrice())
+        {
+            unmortgagableProperties.push_back(field.get());
+        }
+    }
+    int i = 0;
+    std::ranges::for_each(unmortgagableProperties, [&i](auto& field)
+    {
+        std::cout << i++ << ": " << field->getName() << std::endl;
+    });
+    std::cout << "Which field do you want to un-mortgage?: " << std::endl;
+    int decision = this->receiveListIndexInput(*this->in_stream, unmortgagableProperties.size());
+    std::cout << "Un-mortgaging " << unmortgagableProperties[decision]->getName() << std::endl;
+    unmortgagableProperties[decision]->unmortgage();
 }
 
 
@@ -148,6 +169,7 @@ void ConsoleDecisionSelector::requireSelection(const std::string& label,
             this->handleMortageDecision();
             break;
         case PlayerDecisionOutputs::UNMORTGAGE_FIELD:
+            this->handleUnmortageDecision();
             break;
         case PlayerDecisionOutputs::BUY_HOUSE:
             break;
