@@ -94,6 +94,33 @@ void ConsoleDecisionSelector::printPlayersInfo() const
     }
 }
 
+void ConsoleDecisionSelector::handleMortageDecision()
+{
+    std::vector<Property*> mortgagableProperties;
+    for (auto& field : player_.getProperties())
+    {
+        if (field->getOwner() == &player_ && !field->getIsMortgaged())
+        {
+            mortgagableProperties.push_back(field.get());
+        }
+    }
+    int i = 0;
+    for (const auto& field : mortgagableProperties)
+    {
+        std::cout << i++ << ": " << field->getName() << std::endl;
+    }
+    std::cout << "Which field do you want to mortgage?: " << std::endl;
+    int decision = this->receiveListIndexInput(*this->in_stream, mortgagableProperties.size());
+    std::cout << "Mortgaging " << mortgagableProperties[decision]->getName() << std::endl;
+    mortgagableProperties[decision]->mortgage();
+}
+
+void ConsoleDecisionSelector::handleBuyFieldDecision()
+{
+    FieldBuyVisitor visitor;
+    player_.getBoard().getSteppedOnField()->accept(visitor);
+}
+
 
 void ConsoleDecisionSelector::requireSelection(const std::string& label,
                                                const std::vector<PlayerDecisionOutputs>&
@@ -115,32 +142,11 @@ void ConsoleDecisionSelector::requireSelection(const std::string& label,
         case PlayerDecisionOutputs::NO_DECISION:
             break;
         case PlayerDecisionOutputs::BUY_FIELD:
-            {
-                FieldBuyVisitor visitor;
-                player_.getBoard().getSteppedOnField()->accept(visitor);
-                break;
-            }
+            this->handleBuyFieldDecision();
+            break;
         case PlayerDecisionOutputs::MORTGAGE_FIELD:
-            {
-                std::vector<Property*> mortgagableProperties;
-                for (auto& field : player_.getProperties())
-                {
-                    if (field->getOwner() == &player_ && !field->getIsMortgaged())
-                    {
-                        mortgagableProperties.push_back(field.get());
-                    }
-                }
-                int i = 0;
-                for (const auto& field : mortgagableProperties)
-                {
-                    std::cout << i++ << ": " << field->getName() << std::endl;
-                }
-                std::cout << "Which field do you want to mortgage?: " << std::endl;
-                int decision = this->receiveListIndexInput(*this->in_stream, mortgagableProperties.size());
-                std::cout << "Mortgaging " << mortgagableProperties[decision]->getName() << std::endl;
-                mortgagableProperties[decision]->mortgage();
-                break;
-            }
+            this->handleMortageDecision();
+            break;
         case PlayerDecisionOutputs::UNMORTGAGE_FIELD:
             break;
         case PlayerDecisionOutputs::BUY_HOUSE:

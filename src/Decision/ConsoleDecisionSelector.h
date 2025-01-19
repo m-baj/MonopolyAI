@@ -68,6 +68,8 @@ public:
     void printBoard() const;
     size_t receiveListIndexInput(std::istream& in, size_t listSize) const;
     void printPlayersInfo() const;
+    void handleMortageDecision();
+    void handleBuyFieldDecision();
 };
 
 
