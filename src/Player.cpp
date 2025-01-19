@@ -92,6 +92,7 @@ void Player::pay(int amount, Player* player)
             payed = true;
         }
         else {
+            // TODO: Check if player has anything to sell or mortgage
             createDecisionSelector()
                 ->requireSelection(
                     "You do not have enough money to pay. Sell something",
