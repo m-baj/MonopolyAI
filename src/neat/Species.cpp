@@ -2,17 +2,28 @@
 // Created by Maksymilian Baj on 16.01.2025.
 //
 
-#include "Species.h"
+#include <algorithm>
+#include <cmath>
+
 #include "Crossover.h"
 #include "Mutation.h"
 #include "Random.h"
+#include "Species.h"
 #include "config.h"
 #include "speciationDistance.h"
-#include <algorithm>
 
 namespace NEAT {
 
-    Genotype Species::breed(HistoricalMarkings& markings) {
+    std::vector<Genotype> Species::breed(int offspringCount, HistoricalMarkings& markings) {
+        std::vector<Genotype> offspring;
+        offspring.reserve(offspringCount);
+        for (int i = 0; i < offspringCount; ++i) {
+            offspring.push_back(breedOne(markings));
+        }
+        return offspring;
+    }
+
+    Genotype Species::breedOne(HistoricalMarkings& markings) {
         double roll = randomDouble(0, 1);
         if (roll < CROSSOVER_CHANCE && members.size() > 1) {
             int idx1 = randomInt(0, members.size() - 1);
@@ -20,7 +31,7 @@ namespace NEAT {
             while (idx1 == idx2) {
                 idx2 = randomInt(0, members.size() - 1);
             }
-            Genotype child =  crossover(members[idx1], members[idx2]);
+            Genotype child = crossover(members[idx1], members[idx2]);
             mutateAll(child, markings);
             return child;
         } else {
@@ -37,10 +48,15 @@ namespace NEAT {
         });
     }
 
-    void Species::calcAndSetAdjustedFitness() {
+    double Species::calcAndSetAdjustedFitness() {
+        double sum = 0;
         for (Genotype& member : members) {
-            member.setAdjustedFitness(member.getFitness() / members.size());
+            double adjustedFitness = member.getFitness() / members.size();
+            member.setAdjustedFitness(adjustedFitness);
+            sum += adjustedFitness;
         }
+        fitnessSum = sum;
+        return sum;
     }
 
     void Species::addMember(const Genotype& member) {
@@ -52,9 +68,10 @@ namespace NEAT {
     }
 
     void Species::calculateAdjustedFitnessSum() {
-        fitnessSum = std::accumulate(members.begin(), members.end(), 0, [](double sum, const Genotype& genotype) {
-            return sum + genotype.getAdjustedFitness();
-        });
+        fitnessSum = std::accumulate(
+                members.begin(), members.end(), 0, [](double sum, const Genotype& genotype) {
+                    return sum + genotype.getAdjustedFitness();
+                });
     }
 
     double Species::getFitnessSum() const {
@@ -65,4 +82,18 @@ namespace NEAT {
         double distance = calculateSpeciationDistance(members[0], genotype);
         return distance < SPECIATION_THRESHOLD;
     }
-}
+
+    int Species::calcNewNumberOfIndividuals(int populationSize, double populationFitnessSum) const {
+        int newIndividuals = static_cast<int>(std::round((fitnessSum / populationFitnessSum) * populationSize));
+        return std::max(1, newIndividuals);
+    }
+
+    void Species::removeWeakestMembers(double percentage) {
+        int toRemove = members.size() * percentage;
+        members.erase(members.end() - toRemove, members.end());
+    }
+
+    void Species::reduceMembersToOne() {
+        members.erase(members.begin() + 1, members.end());
+    }
+}// namespace NEAT

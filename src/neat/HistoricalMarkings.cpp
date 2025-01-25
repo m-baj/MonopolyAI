@@ -14,7 +14,6 @@ void HistoricalMarkings::registerBaseMarkings(int inputCount, int outputCount) {
     }
 }
 
-
 int HistoricalMarkings::registerMarking(EdgeInfo edge) {
     for (const auto& marking : markings) {
         if (marking.sourceIdx == edge.sourceIdx && marking.destIdx == edge.destIdx) {

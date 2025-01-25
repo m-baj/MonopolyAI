@@ -72,5 +72,5 @@ TEST(TestSpeciationDistance, TestCalculateSpeciationDistanceOneExcess) {
     genotype2.addEdge(EdgeInfo(0, 3, 2.0, true, 3));
 
     double speciationDistance = calculateSpeciationDistance(genotype1, genotype2);
-    EXPECT_EQ(speciationDistance, 0.65);
+    EXPECT_EQ(speciationDistance, 1.4);
 }

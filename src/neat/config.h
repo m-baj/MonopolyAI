@@ -26,5 +26,6 @@ const double C2 = 1.0;
 const double C3 = 0.4;
 
 const double SPECIATION_THRESHOLD = 1.0;
+const double PERCENTAGE_OF_WEAKEST_TO_REMOVE = 0.5;
 
 #endif//MONOPOLYAI_CONFIG_H
