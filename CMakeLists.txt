@@ -60,6 +60,30 @@ add_executable(MonopolyAITests
         src/Card.h
         src/AdvanceToCard.cpp
         src/AdvanceToCard.h
+        tests/TestPhenotype.cpp
+        src/neat/Genotype.cpp
+        src/neat/Genotype.h
+        src/neat/Phenotype.cpp
+        src/neat/Phenotype.h
+        src/neat/Mutation.cpp
+        src/neat/Mutation.h
+        tests/TestMutation.cpp
+        src/neat/HistoricalMarkings.cpp
+        src/neat/HistoricalMarkings.h
+        tests/TestHistoricalMarkings.cpp
+        src/neat/Crossover.cpp
+        src/neat/Crossover.h
+        tests/TestCrossover.cpp
+        tests/TestGenotype.cpp
+        src/neat/Species.cpp
+        src/neat/Random.cpp
+        src/neat/Random.h
+        tests/TestSpecies.cpp
+        src/neat/speciationDistance.cpp
+        src/neat/speciationDistance.h
+        tests/TestSpeciationDistance.cpp
+        src/neat/Population.cpp
+        tests/TestPopulation.cpp
 )
 target_link_libraries(MonopolyAITests gtest_main gtest gmock)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
@@ -98,6 +122,23 @@ add_executable(MonopolyAI main.cpp
         src/Decision/ConsoleDecisionSelector.h
         src/Decision/AiDecisionSelector.cpp
         src/Decision/AiDecisionSelector.h
+        src/neat/Genotype.cpp
+        src/neat/Genotype.h
+        src/neat/Phenotype.cpp
+        src/neat/Phenotype.h
+        src/neat/BaseEdge.h
+        src/neat/Mutation.cpp
+        src/neat/Mutation.h
+        src/neat/HistoricalMarkings.cpp
+        src/neat/HistoricalMarkings.h
+        src/neat/Crossover.cpp
+        src/neat/Crossover.h
+        src/neat/Species.cpp
+        src/neat/Random.cpp
+        src/neat/Random.h
+        src/neat/speciationDistance.cpp
+        src/neat/speciationDistance.h
+        src/neat/Population.cpp
         src/Decision/FieldVisitor.cpp
         src/Decision/FieldVisitor.h
         src/Decision/FieldBuyVisitor.cpp
