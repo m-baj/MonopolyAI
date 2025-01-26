@@ -11,6 +11,9 @@
 #include "Fields/TaxField.h"
 #include "Fields/Trains.h"
 #include "Fields/Utilities.h"
+#include "Card.h"
+#include "Constants.h"
+
 
 void BoardSetupCreator::createClassicBoard(Board& board)
 {
@@ -54,4 +57,17 @@ void BoardSetupCreator::createClassicBoard(Board& board)
     board.pushField(std::make_shared<Property>("PARK PLACE", board, 350, 100, 200, Color::BLUE));
     board.pushField(std::make_shared<TaxField>("LUXURY TAX", board));
     board.pushField(std::make_shared<Property>("BOARDWALK", board, 400, 100, 200, Color::BLUE));
+}
+
+void BoardSetupCreator::initCards(Board& board) {
+    board.pushChanceCard(std::make_unique<Card>(std::string("Advance to Start (Collect $200)"), [&board](Player* player) {
+        board.setCurrentPlayerIndex(START_FIELD_IDX);
+        player->addMoney(CROSSING_START_BONUS);
+    }));
+    board.pushChanceCard(std::make_unique<Card>(
+            std::string("Advance to Boardwalk, if you pass Start, collect $200"), [&board](Player* player) {
+                int steps = BOARDWALK_IDX - player->getPositionIdx();
+                board.movePlayer(steps);
+    }));
+
 }

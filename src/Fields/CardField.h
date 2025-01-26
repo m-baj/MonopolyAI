@@ -8,7 +8,7 @@
 #include "Field.h"
 
 
-class CardField final : public Field {
+class CardField : public Field {
 public:
     explicit CardField(const std::string& name, Board& board)
         : Field(name, board)

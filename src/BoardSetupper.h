@@ -11,6 +11,8 @@ class Board;
 class BoardSetupCreator {
 public:
     static void createClassicBoard(Board& board);
+private:
+    void initCards(Board& board);
 };
 
 

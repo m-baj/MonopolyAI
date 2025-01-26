@@ -8,6 +8,8 @@
 #include <vector>
 
 #include "Fields/Field.h"
+#include "Fields/CardField.h"
+#include "Card.h"
 #include "Player.h"
 
 /*
@@ -35,10 +37,15 @@ public:
     void movePlayer(int steps);
     void nextPlayer();
 
+    void pushChanceCard(std::unique_ptr<Card> card);
+    void pushCommunityChestCard(std::unique_ptr<Card> card);
+
 private:
     int rollDiceSeed = 0;
     std::vector<std::shared_ptr<Field>> fields = {};
     std::vector<std::unique_ptr<Player>> players = {};
+    std::vector<std::unique_ptr<Card>> chanceCards = {};
+    std::vector<std::unique_ptr<Card>> communityChestCards = {};
     int currentPlayerIndex = 0;
 };
 

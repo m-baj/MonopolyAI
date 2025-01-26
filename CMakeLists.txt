@@ -56,6 +56,10 @@ add_executable(MonopolyAITests
         src/Decision/FieldBuyVisitor.cpp
         src/Decision/FieldBuyVisitor.h
         tests/TestGetFieldDecisions.cpp
+        src/Card.cpp
+        src/Card.h
+        src/AdvanceToCard.cpp
+        src/AdvanceToCard.h
 )
 target_link_libraries(MonopolyAITests gtest_main gtest gmock)
 add_test(NAME MonopolyAITests COMMAND MonopolyAITests)
@@ -98,4 +102,8 @@ add_executable(MonopolyAI main.cpp
         src/Decision/FieldVisitor.h
         src/Decision/FieldBuyVisitor.cpp
         src/Decision/FieldBuyVisitor.h
+        src/Card.cpp
+        src/Card.h
+        src/AdvanceToCard.cpp
+        src/AdvanceToCard.h
 )

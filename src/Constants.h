@@ -43,6 +43,8 @@ const std::map<Color, int> COLOR_TO_FIELD_COUNT = {
 
 const int BASE_RENT_FOR_TRAIN = 25;
 const int CROSSING_START_BONUS = 200;
+const int START_FIELD_IDX = 0;
+const int BOARDWALK_IDX = 39;
 const double UNMORTGAGE_INTEREST_MULTIPLIER = 1.1;
 const int HOUSE_PRICE = 50;
 const int MAX_NUMBER_OF_HOUSES = 5;

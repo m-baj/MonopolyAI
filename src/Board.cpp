@@ -90,3 +90,10 @@ const std::vector<std::shared_ptr<Field>>& Board::getFields() const
 {
     return this->fields;
 }
+void Board::pushChanceCard(std::unique_ptr<Card> card) {
+    this->chanceCards.push_back(std::move(card));
+}
+
+void Board::pushCommunityChestCard(std::unique_ptr<Card> card) {
+    this->communityChestCards.push_back(std::move(card));
+}
